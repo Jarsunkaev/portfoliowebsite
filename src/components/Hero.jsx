@@ -1,4 +1,4 @@
-// Updated Hero.jsx with proper positioning
+// Updated Hero.jsx with better mobile positioning
 
 import React, { useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
@@ -13,11 +13,12 @@ const HeroSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 60px;
+  padding-top: 80px; /* Increased padding for navbar */
   
   @media (max-width: 768px) {
-    padding-top: 30px;
-    padding-bottom: 60px;
+    padding-top: 80px; /* Maintain consistent padding on mobile */
+    min-height: auto; /* Allow content to determine height */
+    padding-bottom: 80px; /* Add padding at the bottom */
   }
 `;
 
@@ -32,7 +33,7 @@ const HeroContent = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 1rem;
+    gap: 2rem; /* Increased gap between elements */
   }
 `;
 
@@ -41,8 +42,8 @@ const TextContainer = styled.div`
   z-index: 1;
   
   @media (max-width: 768px) {
-    padding: 1rem 1rem 0.5rem 1rem;
-    order: 2;
+    padding: 1rem;
+    order: 2; /* Text comes after image on mobile */
   }
 `;
 
@@ -50,12 +51,9 @@ const Title = styled.h1`
   font-size: 4.5rem;
   margin-bottom: 1rem;
   line-height: 1.1;
-  font-weight: 800; /* Extra bold for better visibility */
-  /* Very important: ensure full opacity and strong color */
+  font-weight: 800;
   color: var(--color-text); 
   opacity: 1 !important;
-  
-  /* Add text shadow for better contrast */
   text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
   
   @media (max-width: 768px) {
@@ -89,11 +87,11 @@ const Subtitle = styled(motion.div)`
   letter-spacing: 1px;
   position: relative;
   left: 0;
-  border-radius: 10px; /* Added rounded corners */
+  border-radius: 10px;
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
-    margin: 1rem 0 1.5rem;
+    margin: 1rem auto 1.5rem; /* Center on mobile */
     padding: 0.5rem 1.2rem;
   }
 `;
@@ -101,6 +99,9 @@ const Subtitle = styled(motion.div)`
 const HeroImage = styled(motion.div)`
   position: relative;
   height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   img {
     width: 100%;
@@ -108,8 +109,8 @@ const HeroImage = styled(motion.div)`
     object-fit: cover;
     border: var(--border-thick);
     box-shadow: var(--shadow-neobrutalist);
-    border-radius: 15px; /* Added rounded corners */
-    filter: brightness(0.75); /* Further reduce image brightness */
+    border-radius: 15px;
+    filter: brightness(0.85);
     transition: opacity 0.3s;
     opacity: 0.5;
   }
@@ -119,18 +120,18 @@ const HeroImage = styled(motion.div)`
   }
   
   @media (max-width: 768px) {
-    height: 300px;
-    margin: 0 auto;
+    height: 350px; /* Increased height */
+    margin: 2rem auto 0; /* Added top margin to push image down */
     max-width: 400px;
-    order: 1;
+    order: 1; /* Image comes first on mobile */
   }
   
   @media (max-width: 480px) {
-    height: 250px;
+    height: 300px; /* Increased height from original */
+    margin-bottom: 1rem;
   }
 `;
 
-// Added minimal scroll indicator
 const ScrollIndicator = styled(motion.div)`
   position: absolute;
   bottom: 2rem;
@@ -188,25 +189,44 @@ const ViewWorkButton = styled(motion.button)`
   font-family: var(--font-heading);
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  border-radius: 10px; /* Added rounded corners */
+  border-radius: 10px;
   
   &:hover {
     transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px 0px;
+    box-shadow: 8px 8px 0px 0px var(--shadow-color);
   }
   
   @media (max-width: 768px) {
     padding: 10px 24px;
     font-size: 1rem;
+    margin: 0 auto; /* Center on mobile */
+  }
+`;
+
+const Description = styled(motion.p)`
+  padding-top: 2.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--color-text);
+  
+  @media (max-width: 768px) {
+    padding-top: 2rem; /* Increased padding on mobile */
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding-top: 2.5rem; /* Even more padding on smaller screens */
   }
 `;
 
 const Hero = () => {
   const titleRef = useRef(null);
-  useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   
   useEffect(() => {
-    // Animate the title with GSAP - ensure it's fully visible
+    // Animate the title with GSAP
     gsap.from(titleRef.current.children, {
       y: 50,
       opacity: 0,
@@ -234,21 +254,13 @@ const Hero = () => {
             </Title>
           </div>
           
-          <motion.p
+          <Description
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            style={{ 
-              paddingTop: '2.5rem',
-              marginBottom: '2rem', 
-              fontSize: '1.1rem', 
-              lineHeight: 1.6,
-              fontWeight: 500,
-              color: 'var(--color-text)'
-            }}
           >
             I create eye-catching, functional websites with modern technologies and a focus on user experience.
-          </motion.p>
+          </Description>
           
           <motion.div
             initial={{ opacity: 0 }}
@@ -282,7 +294,6 @@ const Hero = () => {
         </HeroImage>
       </HeroContent>
       
-      {/* Removed scroll down button */}
       <Link to="about" spy={true} smooth={true} duration={500}>
         <ScrollIndicator
           initial={{ opacity: 0 }}
