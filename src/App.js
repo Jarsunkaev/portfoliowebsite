@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import GlobalStyles from './styles/GlobalStyles';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import ThemeToggle from './components/ThemeToggle';
+import AnimatedBackground from './components/AnimatedBackground';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <GlobalStyles />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key="main"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <AnimatedBackground />
+          <Navbar />
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+          <Footer />
+          <ThemeToggle />
+        </motion.div>
+      </AnimatePresence>
+    </>
   );
 }
 
