@@ -110,6 +110,12 @@ const HeroImage = styled(motion.div)`
     box-shadow: var(--shadow-neobrutalist);
     border-radius: 15px; /* Added rounded corners */
     filter: brightness(0.75); /* Further reduce image brightness */
+    transition: opacity 0.3s;
+    opacity: 0.5;
+  }
+  
+  img.loaded {
+    opacity: 1;
   }
   
   @media (max-width: 768px) {
@@ -265,7 +271,14 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          <img src="me.jpeg" alt="Juszuf Arsunkaev" />
+          <img 
+            src="me.jpeg" 
+            alt="Juszuf Arsunkaev" 
+            loading="lazy"
+            width="600"
+            height="800"
+            onLoad={(e) => e.target.classList.add('loaded')}
+          />
         </HeroImage>
       </HeroContent>
       
