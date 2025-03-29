@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfoliowebsite/static/css/main.793ac88b.css",
-    "main.js": "/portfoliowebsite/static/js/main.e296d4ff.js",
+    "main.js": "/portfoliowebsite/static/js/main.594abcf1.js",
     "static/media/CV2025.pdf": "/portfoliowebsite/static/media/CV2025.d85f03daec0f2d85e907.pdf",
     "static/media/inter-latin-ext-700-normal.woff": "/portfoliowebsite/static/media/inter-latin-ext-700-normal.149d81a49bd1ff0e6711.woff",
     "static/media/inter-latin-ext-300-normal.woff": "/portfoliowebsite/static/media/inter-latin-ext-300-normal.1230c922d601129d8b4c.woff",
@@ -85,10 +85,10 @@
     "static/media/space-grotesk-vietnamese-700-normal.woff2": "/portfoliowebsite/static/media/space-grotesk-vietnamese-700-normal.d961758c27eb1a21c68b.woff2",
     "index.html": "/portfoliowebsite/index.html",
     "main.793ac88b.css.map": "/portfoliowebsite/static/css/main.793ac88b.css.map",
-    "main.e296d4ff.js.map": "/portfoliowebsite/static/js/main.e296d4ff.js.map"
+    "main.594abcf1.js.map": "/portfoliowebsite/static/js/main.594abcf1.js.map"
   },
   "entrypoints": [
     "static/css/main.793ac88b.css",
-    "static/js/main.e296d4ff.js"
+    "static/js/main.594abcf1.js"
   ]
 }
