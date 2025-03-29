@@ -59,6 +59,8 @@ const ProjectCard = styled(motion.div)`
   overflow: hidden;
   width: 350px; /* Fixed width instead of percentage */
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
   
   &:hover {
     transform: translate(-3px, -3px);
@@ -67,15 +69,22 @@ const ProjectCard = styled(motion.div)`
 `;
 
 const ProjectImage = styled.div`
-  height: 250px;
+  height: 200px; /* Slightly reduced fixed height */
   overflow: hidden;
   border-bottom: var(--border-thick);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f5f5f5'};
   
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Changed from cover to contain */
+    object-position: center; /* Center the image */
     transition: transform 0.5s ease;
+    max-height: 200px; /* Ensure image doesn't exceed container */
   }
   
   ${ProjectCard}:hover & img {
@@ -85,6 +94,9 @@ const ProjectImage = styled.div`
 
 const ProjectContent = styled.div`
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Take up remaining space */
 `;
 
 const ProjectTitle = styled.h3`
@@ -98,6 +110,7 @@ const ProjectDescription = styled.p`
   margin-bottom: 1.5rem;
   color: var(--color-text);
   opacity: 0.8;
+  flex-grow: 1; /* This will push the tags and buttons to the bottom */
 `;
 
 const ProjectTags = styled.div`
@@ -152,8 +165,8 @@ const projectsData = [
     description: "A recipe recommender webapp that generates recipes based on uploaded images, with meal planner features.",
     image: "frigo.png",
     tags: ["React", "Node.js", "AI", "Image Recognition"],
-    github: "https://github.com/Jarsunkaev/frigo-app",
-    demo: "https://frigo_app.com/"
+    github: "https://github.com/Jarsunkaev/frigo_app",
+    demo: "https://frigo-app.com/"
   },
   {
     id: 2,
@@ -163,6 +176,14 @@ const projectsData = [
     tags: ["React", "Node.js", "MongoDB"],
     github: "https://github.com/Jarsunkaev/Camp-Finder",
     demo: "https://campfinder.fly.dev/"
+  },
+  {
+    id: 3,
+    title: "Zima Auto",
+    description: "Your One-Stop Solution for All Your Car Needs! ",
+    image: "zima.png",
+    tags: ["Wix"],
+    demo: "https://www.zima-auto.com/"
   }
 ];
 
@@ -184,7 +205,7 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: project.id * 0.1 }}
               theme={theme}
             >
-              <ProjectImage>
+              <ProjectImage theme={theme}>
                 <img src={project.image} alt={project.title} />
               </ProjectImage>
               
@@ -205,20 +226,26 @@ const Projects = () => {
                 </ProjectTags>
                 
                 <ProjectLinks>
-                  <ProjectLink 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    theme={theme}
-                  >
-                    <FaGithub /> GitHub
-                  </ProjectLink>
+                  {project.github && (
+                    <ProjectLink 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      theme={theme}
+                    >
+                      <FaGithub /> GitHub
+                    </ProjectLink>
+                  )}
                   <ProjectLink 
                     href={project.demo} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     primary
                     theme={theme}
+                    style={{ 
+                      flex: project.github ? '0 0 auto' : '1', 
+                      justifyContent: project.github ? 'flex-start' : 'center'
+                    }}
                   >
                     <FaExternalLinkAlt /> Live Demo
                   </ProjectLink>
