@@ -1,21 +1,41 @@
-// src/components/About.jsx - Updated for agency focus
+// src/components/About.jsx - Simple with just a faint electrical circuit background
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ThemeContext } from './ThemeContext';
+import { useLanguage } from './LanguageContext';
+import translations from '../translations';
 import { FaCheck, FaClock, FaCode, FaComments } from 'react-icons/fa';
 
 const AboutSection = styled.section`
   padding: 120px 0;
   background-color: var(--color-neutral);
+  position: relative;
+  background-image: url("/img/circuit-pattern-${props => props.theme === 'dark' ? 'dark' : 'light'}.svg");
+  background-size: 1200px;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-neutral);
+    opacity: ${props => props.theme === 'dark' ? 0.94 : 0.97};
+  }
 `;
 
 const AboutContainer = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  position: relative;
+  z-index: 1;
 `;
 
 const SectionTitle = styled.h2`
@@ -31,7 +51,7 @@ const SectionTitle = styled.h2`
 const AboutContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 3.5rem;
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -40,7 +60,7 @@ const AboutContent = styled.div`
 
 const AboutText = styled(motion.div)`
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     line-height: 1.8;
     font-size: 1.2rem;
     font-weight: 400;
@@ -55,59 +75,108 @@ const AboutText = styled(motion.div)`
 
 const AboutImage = styled(motion.div)`
   border: var(--border-thick);
-  border-radius: 12px;
-  box-shadow: var(--shadow-neobrutalist);
+  border-radius: 16px;
   overflow: hidden;
-  height: 450px;
+  height: 480px;
+  box-shadow: var(--shadow-neobrutalist);
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0px 0px var(--shadow-color);
+  }
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  
+  &:hover img {
+    transform: scale(1.05);
   }
   
   @media (max-width: 768px) {
-    height: 350px;
-    margin-top: 2rem;
+    height: 380px;
+    margin-top: 1rem;
   }
 `;
 
 const ValueProposition = styled(motion.div)`
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   background: ${props => props.theme === 'dark' ? '#2A2A2A' : 'white'};
   border: var(--border-thick);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 2.5rem;
   box-shadow: var(--shadow-neobrutalist);
+  width: calc(100% + 3.5rem + 100%); /* Makes it full width of the container */
+  max-width: 1200px; /* Same as container max-width */
+  margin-left: 0;
+  margin-right: 0;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0px 0px var(--shadow-color);
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ValueTitle = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   font-family: var(--font-heading);
   color: var(--color-text);
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent2);
+  }
 `;
 
 const ValueGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
   
-  @media (max-width: 480px) {
+  @media (max-width: 580px) {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 `;
 
 const ValueItem = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.2rem;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const ValueIcon = styled.div`
-  color: var(--color-accent2);
-  font-size: 1.5rem;
-  margin-top: 0.2rem;
+  color: white;
+  font-size: 1.2rem;
+  background: var(--color-accent2);
+  padding: 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
 `;
 
 const ValueContent = styled.div`
@@ -115,38 +184,58 @@ const ValueContent = styled.div`
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     color: var(--color-text);
+    font-family: var(--font-heading);
   }
   
   p {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     opacity: 0.9;
+    margin-bottom: 0 !important;
   }
 `;
 
 const WorkProcess = styled(motion.div)`
-  margin-top: 4rem;
+  margin-top: 5rem;
+  width: 100%;
 `;
 
 const ProcessTitle = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
   font-family: var(--font-heading);
   color: var(--color-text);
   text-align: center;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    width: 80px;
+    height: 3px;
+    background: var(--color-accent1);
+  }
 `;
 
 const ProcessSteps = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 580px) {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 `;
 
@@ -154,38 +243,73 @@ const ProcessStep = styled(motion.div)`
   background: ${props => props.theme === 'dark' ? '#2A2A2A' : 'white'};
   border: var(--border-thick);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   box-shadow: var(--shadow-neobrutalist);
+  transition: all 0.3s ease;
+  position: relative;
   
   &:hover {
-    transform: translateY(-5px);
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0px 0px var(--shadow-color);
+  }
+  
+  /* Connected line between steps */
+  @media (min-width: 993px) {
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 48px;
+      right: -30px;
+      width: 30px;
+      height: 2px;
+      background-color: var(--color-accent1);
+      z-index: 2;
+    }
+  }
+  
+  /* Make line appear below on tablet */
+  @media (min-width: 581px) and (max-width: 992px) {
+    &:nth-child(odd):not(:nth-last-child(-n+2))::after {
+      content: '';
+      position: absolute;
+      top: 48px;
+      right: -30px;
+      width: 30px;
+      height: 2px;
+      background-color: var(--color-accent1);
+      z-index: 2;
+    }
   }
 `;
 
 const StepNumber = styled.div`
   background: var(--color-accent1);
   color: white;
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  margin: 0 auto 1rem;
+  font-size: 1.4rem;
+  margin: 0 auto 1.5rem;
   border: 2px solid black;
+  position: relative;
+  z-index: 3;
 `;
 
 const StepTitle = styled.h4`
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
   color: var(--color-text);
+  font-family: var(--font-heading);
 `;
 
 const StepDescription = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
   opacity: 0.9;
 `;
 
@@ -196,85 +320,97 @@ const About = () => {
   });
   
   const { theme } = useContext(ThemeContext);
+  const { language } = useLanguage();
   
   // Define values and process steps
   const values = [
     {
       icon: <FaCode />,
-      title: "Quality Code",
-      description: "Clean, well-documented code that's built to last and easy to maintain."
+      title: translations.about.values.quality.title[language] || "Quality Code",
+      description: translations.about.values.quality.description[language] || "Clean, well-documented code that's built to last and easy to maintain."
     },
     {
       icon: <FaClock />,
-      title: "Timely Delivery",
-      description: "Projects delivered on schedule with regular updates throughout development."
+      title: translations.about.values.timely.title[language] || "Timely Delivery",
+      description: translations.about.values.timely.description[language] || "Projects delivered on schedule with regular updates throughout development."
     },
     {
       icon: <FaComments />,
-      title: "Clear Communication",
-      description: "Regular updates in plain language, with quick response times."
+      title: translations.about.values.communication.title[language] || "Clear Communication",
+      description: translations.about.values.communication.description[language] || "Regular updates in plain language, with quick response times."
     },
     {
       icon: <FaCheck />,
-      title: "Attention to Detail",
-      description: "Careful testing and polishing to ensure every aspect is perfect."
+      title: translations.about.values.attention.title[language] || "Attention to Detail",
+      description: translations.about.values.attention.description[language] || "Careful testing and polishing to ensure every aspect is perfect."
     }
   ];
   
   const processSteps = [
     {
       number: 1,
-      title: "Discovery",
-      description: "Understanding your business, goals, and specific project requirements."
+      title: translations.about.process.discovery.title[language] || "Discovery",
+      description: translations.about.process.discovery.description[language] || "Understanding your business, goals, and specific project requirements."
     },
     {
       number: 2,
-      title: "Planning",
-      description: "Creating a detailed roadmap with timeline, features, and technical specifications."
+      title: translations.about.process.planning.title[language] || "Planning",
+      description: translations.about.process.planning.description[language] || "Creating a detailed roadmap with timeline, features, and technical specifications."
     },
     {
       number: 3,
-      title: "Development",
-      description: "Building your website or application with regular progress updates."
+      title: translations.about.process.development.title[language] || "Development",
+      description: translations.about.process.development.description[language] || "Building your website or application with regular progress updates."
     },
     {
       number: 4,
-      title: "Launch & Support",
-      description: "Going live with your project and providing ongoing maintenance as needed."
+      title: translations.about.process.launch.title[language] || "Launch & Support",
+      description: translations.about.process.launch.description[language] || "Going live with your project and providing ongoing maintenance as needed."
     }
   ];
   
+  // Determine the appropriate title based on language
+  const sectionTitle = language === 'en' ? 'About Me' : 'Rólam';
+  
   return (
-    <AboutSection id="about" ref={ref}>
+    <AboutSection id="about" ref={ref} theme={theme}>
       <AboutContainer>
-        <SectionTitle>About <span>Me</span></SectionTitle>
+        <SectionTitle>
+          <span>{sectionTitle}</span>
+        </SectionTitle>
         
         <AboutContent>
           <AboutText
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p>
-              I'm a web developer specializing in creating custom websites and web applications for businesses across Hungary and Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions that help businesses stand out.
+              {translations.about.paragraph1[language] || 
+                "I'm a web developer specializing in creating custom websites and web applications for businesses across Hungary and Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions that help businesses stand out."}
             </p>
             <p>
-              My background in electrical engineering gives me a unique perspective on problem-solving and building efficient, well-structured applications. This technical foundation allows me to create solutions that not only look good but also perform exceptionally well.
+              {translations.about.paragraph2[language] || 
+                "My background in electrical engineering gives me a unique perspective on problem-solving and building efficient, well-structured applications. This technical foundation allows me to create solutions that not only look good but also perform exceptionally well."}
             </p>
             <p>
-              I take pride in developing tailored solutions for various industries, with particular expertise in healthcare, tourism, and small business sectors. Whether you need a multilingual website, a custom booking system, or an administrative dashboard, I can bring your vision to life.
+              {translations.about.paragraph3[language] || 
+                "I take pride in developing tailored solutions for various industries, with particular expertise in healthcare, tourism, and small business sectors. Whether you need a multilingual website, a custom booking system, or an administrative dashboard, I can bring your vision to life."}
             </p>
             
             <ValueProposition
               theme={theme}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <ValueTitle>What Sets Me Apart</ValueTitle>
+              <ValueTitle>{translations.about.valuesTitle[language] || "Mitől vagyok különleges"}</ValueTitle>
               <ValueGrid>
                 {values.map((value, index) => (
-                  <ValueItem key={index}>
+                  <ValueItem 
+                    key={index} 
+                    theme={theme}
+                  >
                     <ValueIcon>{value.icon}</ValueIcon>
                     <ValueContent>
                       <h4>{value.title}</h4>
@@ -300,16 +436,16 @@ const About = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <ProcessTitle>My Work Process</ProcessTitle>
+          <ProcessTitle>{translations.about.processTitle[language] || "Munkafolyamatom"}</ProcessTitle>
           <ProcessSteps>
             {processSteps.map((step, index) => (
               <ProcessStep 
                 key={index}
                 theme={theme}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                whileHover={{ y: -5 }}
+                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
               >
                 <StepNumber>{step.number}</StepNumber>
                 <StepTitle>{step.title}</StepTitle>

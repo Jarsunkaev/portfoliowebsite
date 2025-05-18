@@ -1,4 +1,4 @@
-// src/components/Pricing.jsx - Removed Enterprise tier & ensured translations
+// src/components/Pricing.jsx - Fixed currency position for Hungarian format
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -90,8 +90,7 @@ const PlanPrice = styled.div`
   
   .currency {
     font-size: 1.2rem;
-    vertical-align: super;
-    margin-right: 0.2rem;
+    margin-left: 0.2rem;
   }
 `;
 
@@ -260,8 +259,8 @@ const Pricing = () => {
           >
             <PlanName>{translations.pricing.basicPlan[language]}</PlanName>
             <PlanPrice>
-              <span className="currency">Ft</span>
               <span className="price">189.000</span>
+              <span className="currency">Ft</span>
             </PlanPrice>
             
             <MaintenanceFee theme={theme}>
@@ -269,7 +268,7 @@ const Pricing = () => {
                 <FaPlus size={12} />
                 <span>{translations.pricing.maintenance[language]}</span>
               </div>
-              <div className="maintenance-price">Ft 15.000 / {translations.pricing.month[language]}</div>
+              <div className="maintenance-price">15.000 Ft / {translations.pricing.month[language]}</div>
             </MaintenanceFee>
             
             <PlanDescription>
@@ -318,8 +317,8 @@ const Pricing = () => {
           >
             <PlanName>{translations.pricing.businessPlan[language]}</PlanName>
             <PlanPrice>
-              <span className="currency">Ft</span>
               <span className="price">349.000</span>
+              <span className="currency">Ft</span>
             </PlanPrice>
             
             <MaintenanceFee theme={theme}>
@@ -327,7 +326,7 @@ const Pricing = () => {
                 <FaPlus size={12} />
                 <span>{translations.pricing.maintenance[language]}</span>
               </div>
-              <div className="maintenance-price">Ft 29.000 / {translations.pricing.month[language]}</div>
+              <div className="maintenance-price">29.000 Ft / {translations.pricing.month[language]}</div>
             </MaintenanceFee>
             
             <PlanDescription>

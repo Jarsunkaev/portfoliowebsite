@@ -1,11 +1,11 @@
-// src/App.js - Updated to include Pricing component
+// src/App.js - Importing our enhanced Services component
 import React from 'react';
 import GlobalStyles from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
 import { LanguageProvider } from './components/LanguageContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Hero from './components/Hero';
-import Services from './components/Services';
+import Services from './components/Services'; // Using our enhanced Services component
 import Projects from './components/Projects';
 import Pricing from './components/Pricing';
 import About from './components/About';

@@ -1,6 +1,6 @@
-// src/translations.js - Complete with hero translations
+// src/translations.js - Updated with detailed service page translations
 const translations = {
-  // Navbar translations
+  // Navbar translations (preserved)
   navbar: {
     services: {
       hu: 'Szolgáltatások',
@@ -28,7 +28,7 @@ const translations = {
     }
   },
   
-  // Hero section translations with enhanced marketing copy
+  // Hero section translations with enhanced marketing copy (preserved)
   hero: {
     badge: {
       hu: 'Egyedi Webfejlesztés',
@@ -72,79 +72,305 @@ const translations = {
     }
   },
   
-  // Services section translations
+  // Services section translations - UPDATED AND EXPANDED
   services: {
-    title: {
+    mainTitle: { // Used from your existing services.title
       hu: 'Szolgáltatások',
       en: 'Services'
     },
-    subtitle: {
+    mainSubtitleAccent: { // Used from your existing services.subtitle
       hu: 'Amit Kínálunk',
       en: 'What We Offer'
     },
-    webDevelopment: {
-      title: {
-        hu: 'Egyedi Webfejlesztés',
-        en: 'Custom Web Development'
+    overallDescription: { 
+      hu: 'Csúcsminőségű digitális megoldásokat szállítunk, amelyek az Ön üzleti igényeire szabva javítják online jelenlétét és elősegítik a növekedést.',
+      en: 'We deliver cutting-edge digital solutions tailored to your business needs, enhancing your online presence and driving growth.' 
+    },
+    keyFeatures: { 
+      hu: 'Főbb Jellemzők', 
+      en: 'Key Features' 
+    },
+    learnMore: { 
+      hu: 'Tudj Meg Többet', 
+      en: 'Learn More' 
+    },
+    categories: {
+      all: { 
+        hu: 'Minden Szolgáltatás', 
+        en: 'All Services' 
       },
-      description: {
-        hu: 'Modern, reszponzív és gyors weboldalak és webalkalmások fejlesztése az Ön egyedi igényei szerint.',
-        en: 'Modern, responsive, and fast websites and web applications built to your specific requirements.'
+      websites: { 
+        hu: 'Weboldalak', 
+        en: 'Websites' 
+      },
+      ecommerce: { 
+        hu: 'E-kereskedelem', 
+        en: 'E-commerce' 
+      },
+      apps: { 
+        hu: 'Platformok és Alkalmazások', 
+        en: 'Platforms & Apps' 
+      },
+      general: { // Fallback category if needed
+        hu: 'Általános', 
+        en: 'General'
+      } 
+    },
+    customWebDevelopment: {
+      title: { 
+        hu: 'Egyedi Webfejlesztés', 
+        en: 'Custom Web Development' 
+      },
+      description: { 
+        hu: 'Egyedi, nagy teljesítményű weboldalakat és webalkalmazásokat készítünk, amelyek az Ön specifikus üzleti céljaihoz és márkaidentitásához igazodnak.', 
+        en: 'Crafting unique, high-performance websites and web applications tailored to your specific business goals and brand identity.' 
+      },
+      features: {
+        responsive: { 
+          hu: 'Teljesen Reszponzív Dizájn', 
+          en: 'Fully Responsive Design' 
+        },
+        seo: { 
+          hu: 'Keresőoptimalizált Struktúra', 
+          en: 'SEO Optimized Structure' 
+        },
+        performance: { 
+          hu: 'Villámgyors Teljesítmény', 
+          en: 'Blazing Fast Performance' 
+        },
+        cmsIntegration: { 
+          hu: 'CMS Integráció (pl. WordPress, Strapi)', 
+          en: 'CMS Integration (e.g., WordPress, Strapi)' 
+        },
+        customDesign: { 
+          hu: 'Testreszabott UI/UX Dizájn', 
+          en: 'Tailored UI/UX Design' 
+        },
+        scalability: { 
+          hu: 'Skálázható Architektúra', 
+          en: 'Scalable Architecture' 
+        }
       }
     },
-    ecommerce: {
-      title: {
-        hu: 'E-kereskedelmi Megoldások',
-        en: 'E-commerce Solutions'
+    ecommerceSolutions: {
+      title: { 
+        hu: 'E-kereskedelmi Megoldások', 
+        en: 'E-commerce Solutions' 
       },
-      description: {
-        hu: 'Teljes körű webshop megoldások fizetési rendszerekkel, készletkezeléssel és vevőszolgálati funkciókkal.',
-        en: 'Complete online store solutions with payment systems, inventory management, and customer service features.'
+      description: { 
+        hu: 'Robusztus online áruházakat építünk, amelyek növelik az eladásokat és zökkenőmentes vásárlói élményt nyújtanak.', 
+        en: 'Building robust online stores that drive sales and provide seamless customer experiences.' 
+      },
+      features: {
+        productManagement: { 
+          hu: 'Fejlett Termékmenedzsment', 
+          en: 'Advanced Product Management' 
+        },
+        secureCheckout: { 
+          hu: 'Biztonságos Fizetési Folyamat', 
+          en: 'Secure Checkout Process' 
+        },
+        inventoryTracking: { 
+          hu: 'Készletkövetés', 
+          en: 'Inventory Tracking' 
+        },
+        shippingIntegration: { 
+          hu: 'Szállítási Rendszer Integráció', 
+          en: 'Shipping System Integration' 
+        },
+        customerAccounts: { 
+          hu: 'Vásárlói Fiókok', 
+          en: 'Customer Accounts' 
+        },
+        salesAnalytics: { 
+          hu: 'Értékesítési Analitika', 
+          en: 'Sales Analytics' 
+        }
       }
     },
-    booking: {
-      title: {
-        hu: 'Foglalási Rendszerek',
-        en: 'Booking Systems'
+    paymentIntegration: {
+      title: { 
+        hu: 'Fizetési Rendszer Integráció', 
+        en: 'Payment Integration' 
       },
-      description: {
-        hu: 'Testreszabott foglalási rendszerek szolgáltatásokhoz, eseményekhez vagy találkozókhoz automatikus értesítésekkel.',
-        en: 'Custom booking systems for services, events, or appointments with automatic notifications.'
+      description: { 
+        hu: 'Biztonságosan integrálunk különböző fizetési átjárókat a zökkenőmentes tranzakciók érdekében online áruházakba és alkalmazásokba.', 
+        en: 'Securely integrate various payment gateways for smooth transactions in online stores and applications.' 
+      },
+      features: {
+        multipleGateways: { 
+          hu: 'Több Fizetési Átjáró (pl. Stripe, PayPal)', 
+          en: 'Multiple Gateways (e.g., Stripe, PayPal)' 
+        },
+        subscriptionBilling: { 
+          hu: 'Előfizetéses és Ismétlődő Fizetések', 
+          en: 'Subscription & Recurring Billing' 
+        },
+        pciCompliance: { 
+          hu: 'PCI DSS Kompatibilis Megoldások', 
+          en: 'PCI DSS Compliant Solutions' 
+        },
+        multiCurrency: { 
+          hu: 'Több Valuta Támogatása', 
+          en: 'Multi-currency Support' 
+        },
+        fraudDetection: { 
+          hu: 'Csalásfelderítési Eszközök', 
+          en: 'Fraud Detection Tools' 
+        },
+        seamlessCheckout: { 
+          hu: 'Zökkenőmentes Fizetési Élmény', 
+          en: 'Seamless Checkout Experience' 
+        }
       }
     },
-    multilingual: {
-      title: {
-        hu: 'Többnyelvű Weboldalak',
-        en: 'Multilingual Websites'
+    adminPlatforms: {
+      title: { 
+        hu: 'Admin Felületek és Irányítópultok', 
+        en: 'Admin Platforms & Dashboards' 
       },
-      description: {
-        hu: 'Többnyelvű weboldalak fejlesztése a nemzetközi célközönség eléréséhez, teljes fordítási támogatással.',
-        en: 'Multilingual websites to reach international audiences with full translation support.'
+      description: { 
+        hu: 'Hatékony adminisztrációs felületeket fejlesztünk az alkalmazások és adatok hatékony kezeléséhez, riportáláshoz és elemzéshez.', 
+        en: 'Develop powerful admin panels for managing your application and data effectively, including reporting and analytics.' 
+      },
+      features: {
+        userManagement: { 
+          hu: 'Felhasználókezelés', 
+          en: 'User Management' 
+        },
+        contentManagement: { 
+          hu: 'Tartalomkezelő Rendszerek (CMS)', 
+          en: 'Content Management Systems (CMS)' 
+        },
+        dataAnalytics: { 
+          hu: 'Adatanalitika és Vizualizáció', 
+          en: 'Data Analytics & Visualization' 
+        },
+        rolePermissions: { 
+          hu: 'Szerepkör Alapú Jogosultságkezelés', 
+          en: 'Role-based Access Control' 
+        },
+        reportingTools: { 
+          hu: 'Egyedi Riportkészítő Eszközök', 
+          en: 'Custom Reporting Tools' 
+        },
+        customDashboards: { 
+          hu: 'Személyre Szabott Irányítópultok', 
+          en: 'Personalized Dashboards' 
+        }
       }
     },
-    dashboard: {
-      title: {
-        hu: 'Admin Felületek',
-        en: 'Admin Dashboards'
+    websiteMaintenance: {
+      title: { 
+        hu: 'Weboldal Karbantartás és Támogatás', 
+        en: 'Website Maintenance & Support' 
       },
-      description: {
-        hu: 'Egyedi admin felületek és irányítópultok fejlesztése adatelemzéshez és üzleti folyamatok kezeléséhez.',
-        en: 'Custom admin interfaces and dashboards for data analysis and business process management.'
+      description: { 
+        hu: 'Proaktív karbantartási és támogatási szolgáltatásainkkal biztosítjuk weboldala zökkenőmentes működését és naprakészségét.', 
+        en: 'Keep your website running smoothly and up-to-date with our proactive maintenance and support services.' 
+      },
+      features: {
+        regularUpdates: { 
+          hu: 'Rendszeres Szoftver- és Biztonsági Frissítések', 
+          en: 'Regular Software & Security Updates' 
+        },
+        securityMonitoring: { 
+          hu: 'Biztonsági Monitorozás és Hibajavítás', 
+          en: 'Security Monitoring & Patching' 
+        },
+        backupSolutions: { 
+          hu: 'Automatizált Mentések és Visszaállítás', 
+          en: 'Automated Backups & Recovery' 
+        },
+        performanceOptimization: { 
+          hu: 'Teljesítményoptimalizálás', 
+          en: 'Performance Optimization' 
+        },
+        bugFixes: { 
+          hu: 'Gyors Hibajavítás és Problémamegoldás', 
+          en: 'Swift Bug Fixes & Troubleshooting' 
+        },
+        technicalSupport: { 
+          hu: 'Dedikált Technikai Támogatás', 
+          en: 'Dedicated Technical Support' 
+        }
       }
     },
-    maintenance: {
-      title: {
-        hu: 'Karbantartás és Támogatás',
-        en: 'Maintenance & Support'
+    bookingSystems: {
+      title: { 
+        hu: 'Foglalási és Időpontkezelő Rendszerek', 
+        en: 'Booking & Reservation Systems' 
       },
-      description: {
-        hu: 'Folyamatos karbantartás, frissítések és technikai támogatás a meglévő weboldalakhoz és alkalmazásokhoz.',
-        en: 'Ongoing maintenance, updates, and technical support for existing websites and applications.'
+      description: { 
+        hu: 'Testreszabott foglalási megoldások időpontokhoz, szolgáltatásokhoz és eseményekhez, automatizált értesítésekkel és fizetési lehetőségekkel.', 
+        en: 'Custom booking solutions for appointments, services, and events, with automated notifications and payment options.' 
+      },
+      features: {
+        realTimeAvailability: { 
+          hu: 'Valós Idejű Elérhetőségi Naptár', 
+          en: 'Real-time Availability Calendar' 
+        },
+        onlinePayments: { 
+          hu: 'Biztonságos Online Fizetés', 
+          en: 'Secure Online Payments' 
+        },
+        automatedReminders: { 
+          hu: 'Automatizált Email/SMS Emlékeztetők', 
+          en: 'Automated Email/SMS Reminders' 
+        },
+        calendarSync: { 
+          hu: 'Naptár Szinkronizáció (pl. Google, Outlook)', 
+          en: 'Calendar Synchronization (e.g., Google, Outlook)' 
+        },
+        customizableForms: { 
+          hu: 'Testreszabható Foglalási Űrlapok', 
+          en: 'Customizable Booking Forms' 
+        },
+        groupBookings: { 
+          hu: 'Csoportos Foglalások és Kezelés', 
+          en: 'Group Bookings & Management' 
+        }
+      }
+    },
+    multilingualSites: {
+      title: { 
+        hu: 'Többnyelvű Weboldalak Készítése', 
+        en: 'Multilingual Website Development' 
+      },
+      description: { 
+        hu: 'Bővítse elérését olyan weboldalakkal, amelyek az ügyfelei nyelvén szólnak, teljes körű fordítási és lokalizációs támogatással.', 
+        en: 'Expand your reach with websites that speak your customers\' language, including full translation and localization support.' 
+      },
+      features: {
+        contentTranslation: { 
+          hu: 'Professzionális Tartalomfordítás és Kezelés', 
+          en: 'Professional Content Translation & Management' 
+        },
+        languageSwitcher: { 
+          hu: 'Intuitív Nyelvválasztó', 
+          en: 'Intuitive Language Switcher' 
+        },
+        localizedSEO: { 
+          hu: 'Lokalizált SEO (hreflang, stb.)', 
+          en: 'Localized SEO (hreflang, etc.)' 
+        },
+        rtlSupport: { 
+          hu: 'RTL (Jobbról Balra) Nyelvi Támogatás', 
+          en: 'RTL (Right-to-Left) Language Support' 
+        },
+        regionalFormatting: { 
+          hu: 'Regionális Dátum/Szám/Valuta Formátumok', 
+          en: 'Regional Date/Number/Currency Formatting' 
+        },
+        easyManagement: { 
+          hu: 'Nyelvi Verziók Könnyű Kezelése', 
+          en: 'Easy Management of Language Versions' 
+        }
       }
     }
   },
   
-  // Projects section translations
+  // Projects section translations (preserved)
   projects: {
     title: {
       hu: 'Portfólió',
@@ -198,7 +424,7 @@ const translations = {
     }
   },
   
-  // Pricing section translations
+  // Pricing section translations (preserved)
   pricing: {
     title: {
       hu: 'Árak és',
@@ -334,7 +560,7 @@ const translations = {
     }
   },
   
-  // Contact section translations
+  // Contact section translations (preserved)
   contact: {
     title: {
       hu: 'Kapcsolat',
@@ -500,7 +726,7 @@ const translations = {
     }
   },
   
-  // Footer translations
+  // Footer translations (preserved)
   footer: {
     aboutText: {
       hu: 'Egyedi webes megoldásokat készítünk vállalkozásoknak, amelyek ki akarnak tűnni. Magyarországon székelve, európai ügyfeleket szolgálunk ki.',
@@ -552,7 +778,7 @@ const translations = {
     }
   },
   
-  // About section translations
+  // About section translations (preserved)
   about: {
     title: {
       hu: 'Rólam',
