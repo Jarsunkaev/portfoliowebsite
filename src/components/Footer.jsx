@@ -205,7 +205,7 @@ const Footer = () => {
     <FooterSection theme={theme}>
       <FooterContainer>
         <FooterColumn>
-          <Logo>NŌDUS</Logo>
+          <Logo>CyberNōde</Logo>
           <FooterText>
             {translations.footer.aboutText[language]}
           </FooterText>
@@ -288,7 +288,7 @@ const Footer = () => {
                 <FaEnvelope />
               </ContactIcon>
               <ContactText>
-                <a href="mailto:contact@yourdevworks.com">contact@yourdevworks.com</a>
+                <a href="mailto:contact@cybernode.dev">contact@cybernode.dev</a>
               </ContactText>
             </ContactItem>
             
@@ -314,7 +314,7 @@ const Footer = () => {
       </FooterContainer>
       
       <Copyright>
-        © {new Date().getFullYear()} DevWorks. {translations.footer.copyright[language]}
+        © {new Date().getFullYear()} CyberNōde. {translations.footer.copyright[language]}
       </Copyright>
       
       <Link to="home" spy={true} smooth={true} duration={500}>

@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx - Fixed order of styled components
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-scroll';
@@ -71,23 +71,39 @@ const Logo = styled(motion.div)`
   font-weight: 800;
   color: var(--color-text);
   position: relative;
+  display: inline-block;
   
   &::after {
     content: '';
     position: absolute;
     left: 0;
     bottom: -4px;
-    width: 40%;
+    width: ${props => {
+      // Start with 10% width at top of page, 100% at bottom
+      const minWidth = 0.1; // 10% of text width
+      const maxWidth = 1;   // 100% of text width
+      const width = minWidth + (maxWidth - minWidth) * (props.$scrollProgress || 0);
+      return `${width * 100}%`;
+    }};
     height: 3px;
     background: var(--color-accent1);
     border-radius: 2px;
-    transform-origin: left;
-    transform: scaleX(1);
-    transition: transform 0.3s ease;
+    /* Smoother transition with cubic-bezier timing function */
+    transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: width; /* Optimize for animation */
   }
   
+  // Keep hover effect when not scrolling
+  &:not(:hover)::after {
+    /* Slightly faster transition when scrolling */
+    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  // Hover effect overrides the scroll-based width
   &:hover::after {
-    transform: scaleX(1.3);
+    width: 100% !important;
+    /* Slightly slower, more deliberate hover transition */
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   @media (max-width: 768px) {
@@ -312,19 +328,43 @@ const overlayVariants = {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { language } = useLanguage();
+  const animationFrameRef = useRef(null);
   
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      // Calculate scroll progress (0 at top, 1 at bottom)
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const progress = Math.min(scrollY / documentHeight, 1);
+      
+      setScrollProgress(progress);
+      
+      // Update isScrolled state for other navbar effects
+      if (scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
     
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Initial call to set initial state
+    handleScroll();
+    
+    // Use passive scroll for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Store the current ref value in a variable for the cleanup
+    const animationId = animationFrameRef.current;
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationId) {
+        window.cancelAnimationFrame(animationId);
+      }
+    };
   }, []);
   
   // Close mobile menu when clicking outside
@@ -366,15 +406,18 @@ const Navbar = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           $isScrolled={isScrolled}
+          $scrollProgress={scrollProgress}
           onClick={() => {
             window.scrollTo({
               top: 0,
               behavior: 'smooth'
             });
+            // Reset scroll progress when clicking the logo to go to top
+            setScrollProgress(0);
           }}
           style={{ cursor: 'pointer' }}
         >
-          NŌDUS
+          CyberNōde
         </Logo>
         
         <MenuItems>
