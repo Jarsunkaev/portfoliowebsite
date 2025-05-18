@@ -1,13 +1,12 @@
-// src/components/Hero.jsx - Improved mobile layout
-import React, { useRef, useEffect, useContext } from 'react';
+// src/components/Hero.jsx - Fully mobile responsive with proper element order
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-scroll';
 import { useLanguage } from './LanguageContext';
-import { ThemeContext } from './ThemeContext';
 import translations from '../translations';
-import { FaArrowRight, FaRocket, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaLaptopCode, FaServer, FaMobileAlt, FaArrowRight } from 'react-icons/fa';
 
 // Enhanced styling for a more modern look
 const HeroSection = styled.section`
@@ -15,13 +14,14 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
-  padding-top: 160px;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding: 160px 0 120px;
+  width: 100%;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
-    padding-top: 100px; /* Reduced from 130px for better spacing with navbar */
+    padding: 100px 0 60px;
     min-height: auto;
-    padding-bottom: 80px;
   }
 `;
 
@@ -34,31 +34,38 @@ const HeroContent = styled.div`
   gap: 3rem;
   position: relative;
   z-index: 2;
-  align-items: flex-start;
+  align-items: center;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 1rem;
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 0; /* Removed gap for mobile - we'll control spacing with margins instead */
+    gap: 0;
   }
 `;
 
 const TextContainer = styled.div`
-  padding: 2rem;
+  padding: 2rem 2rem 0; /* Removed bottom padding */
   z-index: 1;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
-    padding: 1rem;
-    order: 1; /* Text comes first on mobile */
+    padding: 1rem 0.5rem 0; /* Removed bottom padding */
+    grid-area: text;
+    width: 100%;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 4.2rem;
+  font-size: clamp(2rem, 7vw, 4.2rem);
   line-height: 1.1;
   font-weight: 800;
   color: var(--color-text);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem; /* Reduced from 1.25rem */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
   .highlight {
     color: var(--color-accent2);
@@ -79,12 +86,12 @@ const Title = styled.h1`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 0.5rem; /* Reduced from 1rem */
   }
   
   @media (max-width: 480px) {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
 `;
 
@@ -95,72 +102,91 @@ const HeroImage = styled(motion.div)`
   justify-content: center;
   align-items: center;
   margin-top: -1rem;
+  width: 100%;
+  box-sizing: border-box;
   
   .main-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    object-fit: contain;
     border-radius: 20px;
-    box-shadow: var(--shadow-neobrutalist);
     position: relative;
     z-index: 1;
-    border: var(--border-thick);
+    padding: 1rem;
+    
+    /* Add some hover effect */
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
   }
   
   .floating-element {
     position: absolute;
     border-radius: 12px;
     background: var(--color-accent3);
-    padding: 12px;
+    padding: 8px 14px;
     box-shadow: var(--shadow-neobrutalist);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-weight: bold;
     color: var(--color-text);
     border: var(--border-thick);
     z-index: 2;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    max-width: 90%;
+    will-change: transform, opacity;
+    transition: transform 0.5s ease-in-out, box-shadow 0.3s ease;
+    
+    &:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    @media (max-width: 480px) {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
   }
   
   .element-1 {
-    top: -20px;
-    left: -20px;
+    top: 20px;
+    left: 20px;
   }
   
   .element-2 {
-    bottom: 40px;
-    right: -30px;
+    bottom: 60px;
+    right: 20px;
   }
   
   .element-3 {
-    bottom: -30px;
-    left: 80px;
+    bottom: 20px;
+    left: 20px;
   }
   
   @media (max-width: 768px) {
-    height: 300px;
-    margin: 2rem auto;  /* Equal margin top and bottom for spacing */
-    max-width: 400px;
-    order: 2; /* Image comes second on mobile */
-    
-    .floating-element {
-      padding: 8px;
-      font-size: 0.8rem;
-    }
+    height: 250px;
+    margin: 1rem auto;
+    max-width: 100%;
+    grid-area: image;
+    padding: 0 1rem;
     
     .element-1 {
-      top: -10px;
-      left: -10px;
+      top: 5px;
+      left: 20px;
     }
     
     .element-2 {
-      bottom: 20px;
-      right: -15px;
+      bottom: 40px;
+      right: 20px;
     }
     
     .element-3 {
-      bottom: -15px;
-      left: 50px;
+      bottom: 10px;
+      left: 20px;
     }
   }
   
@@ -172,19 +198,33 @@ const HeroImage = styled(motion.div)`
 const StyledLink = styled(Link)`
   display: inline-block;
   cursor: pointer;
+  margin-right: 1rem;
+  
+  @media (max-width: 768px) {
+    margin-right: 0;
+    width: 100%;
+    max-width: 200px;
+  }
 `;
 
 const ButtonContainer = styled(motion.div)`
   display: flex;
+  justify-content: flex-start;
+  margin: -0.5rem 0 0; /* Negative margin to pull buttons upward */
+  padding: 0 2rem;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
   gap: 1rem;
-  margin-top: 2rem;
+  position: relative; /* Added for z-index to work */
+  z-index: 2; /* Ensure buttons stay above other elements */
   
   @media (max-width: 768px) {
+    padding: 0 1.5rem;
     justify-content: center;
+    margin: -0.25rem 0 0; /* Slight negative margin on mobile too */
+    grid-area: button;
     flex-wrap: wrap;
-    gap: 1rem;
-    order: 3; /* Buttons come last on mobile */
-    margin-top: 1.5rem; /* Reduced space after image */
   }
 `;
 
@@ -203,6 +243,7 @@ const PrimaryButton = styled(motion.button)`
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
   
   svg {
     font-size: 1rem;
@@ -239,6 +280,7 @@ const SecondaryButton = styled(motion.button)`
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
   
   svg {
     font-size: 1rem;
@@ -265,60 +307,32 @@ const Description = styled(motion.p)`
   font-size: 1.3rem;
   line-height: 1.6;
   max-width: 540px;
-  margin-bottom: 2.5rem;
+  margin: 0; /* Removed bottom margin completely */
   color: var(--color-text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
   @media (max-width: 768px) {
-    margin: 0 auto 1rem; /* Reduced bottom margin since image comes next */
+    margin: 0; /* Removed all margins */
     font-size: 1.1rem;
+    padding: 0 0.5rem;
   }
 `;
 
-const Badge = styled(motion.div)`
-  display: inline-block;
-  background: var(--color-accent3);
-  color: var(--color-text);
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 6px 12px;
-  border-radius: 20px;
-  margin-bottom: 1rem;
-  border: 2px solid var(--color-text);
-  
-  @media (max-width: 768px) {
-    margin: 0 auto 1rem;
-  }
-`;
-
-// Shape decorations
-const DecorativeDot = styled(motion.div)`
-  width: ${props => props.size || '20px'};
-  height: ${props => props.size || '20px'};
-  border-radius: 50%;
-  background-color: ${props => props.color || 'var(--color-accent1)'};
-  position: absolute;
-  z-index: 0;
-  opacity: 0.5;
-`;
-
-const DecorativeCircle = styled(motion.div)`
-  width: ${props => props.size || '60px'};
-  height: ${props => props.size || '60px'};
-  border-radius: 50%;
-  border: 3px solid ${props => props.color || 'var(--color-accent2)'};
-  position: absolute;
-  z-index: 0;
-  opacity: 0.3;
-`;
+// No decorative elements
 
 // Mobile content wrapper to handle reordering
 const MobileContentWrapper = styled.div`
   display: contents;
   
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      "text"
+      "image"
+      "button";
     width: 100%;
+    gap: 1rem; /* Reduced from 1.5rem to bring components closer together */
   }
 `;
 
@@ -327,7 +341,6 @@ const Hero = () => {
   const titleRef = useRef(null);
   const floatingElementsRef = useRef(null);
   const { language } = useLanguage();
-  const { theme } = useContext(ThemeContext);
   
   // GSAP animations for title and floating elements
   useEffect(() => {
@@ -346,62 +359,52 @@ const Hero = () => {
       }
     );
     
-    // Animate floating elements around the image
-    if (floatingElementsRef.current) {
-      const floatingElements = floatingElementsRef.current.querySelectorAll('.floating-element');
-      
-      floatingElements.forEach((el, index) => {
-        // Create slight floating animation for each element
-        gsap.to(el, {
-          y: index % 2 === 0 ? "10" : "-10",
-          duration: 2 + index * 0.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: index * 0.3
-        });
-      });
-    }
+    // Title elements animation remains with GSAP
+    // Floating elements will be animated using Framer Motion's built-in animations
   }, [language]); // Re-run when language changes
   
   return (
-    <HeroSection id="home">
-      {/* Decorative elements */}
-      <DecorativeDot 
-        size="40px" 
-        color="var(--color-accent3)" 
-        style={{ top: '180px', left: '10%' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ delay: 2, duration: 1 }}
-      />
-      <DecorativeCircle 
-        size="80px" 
-        color="var(--color-accent1)" 
-        style={{ bottom: '100px', right: '10%' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
-        transition={{ delay: 2.2, duration: 1 }}
-      />
-      <DecorativeDot 
-        size="25px" 
-        color="var(--color-accent2)" 
-        style={{ top: '30%', right: '20%' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ delay: 2.4, duration: 1 }}
-      />
-      
+    <HeroSection id="home">      
       <HeroContent>
         <MobileContentWrapper>
           <TextContainer>
-            <Badge
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <motion.div 
+              className="floating-element element-badge"
+              style={{
+                background: 'var(--color-accent3)',
+                borderRadius: '20px',
+                padding: '8px 16px',
+                display: 'inline-block',
+                marginBottom: '1rem',
+                border: 'var(--border-thick)',
+                boxShadow: 'var(--shadow-neobrutalist)',
+                fontWeight: 'bold'
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1]
+                }
+              }}
+              transition={{ 
+                delay: 0.4,
+                duration: 0.8,
+                ease: "easeInOut"
+              }}
+              whileHover={{ 
+                y: -3,
+                transition: { 
+                  duration: 0.4,
+                  yoyo: Infinity,
+                  ease: "easeInOut"
+                } 
+              }}
             >
               {translations.hero.badge[language]}
-            </Badge>
+            </motion.div>
             
             <div ref={titleRef}>
               <Title>
@@ -427,38 +430,84 @@ const Hero = () => {
           >
             <img 
               className="main-image"
-              src="/img/hero-devices.png" 
-              alt="Responsive websites on multiple devices" 
-              loading="lazy"
+              src={`${process.env.PUBLIC_URL}/construction2.png`} 
+              alt="Under Construction" 
+              loading="eager"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                height: 'auto',
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                position: 'relative',
+                zIndex: 1
+              }}
+              onError={(e) => {
+                console.error('Failed to load image:', e);
+                console.log('Image path:', `${process.env.PUBLIC_URL}/aliens.svg`);
+              }}
             />
             
-            {/* Floating elements around the image */}
-            <motion.div 
+            <div 
               className="floating-element element-1"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.5 }}
+              style={{
+                opacity: 0,
+                animation: 'fadeIn 0.6s ease-out forwards, float 3s ease-in-out infinite',
+                animationDelay: '0.2s'
+              }}
             >
-              <FaLaptopCode /> {translations.hero.element1[language]}
-            </motion.div>
+              <FaLaptopCode style={{ fontSize: '1.1em' }} /> {translations.hero.element1[language]}
+            </div>
             
-            <motion.div 
+            <div 
               className="floating-element element-2"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.7 }}
+              style={{
+                opacity: 0,
+                animation: 'fadeIn 0.6s ease-out 0.3s forwards, float 3.5s ease-in-out 0.3s infinite',
+              }}
             >
-              <FaCode /> {translations.hero.element2[language]}
-            </motion.div>
+              <FaServer style={{ fontSize: '1.1em' }} /> {translations.hero.element2[language]}
+            </div>
             
-            <motion.div 
+            <div 
               className="floating-element element-3"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.9 }}
+              style={{
+                opacity: 0,
+                animation: 'fadeIn 0.6s ease-out 0.5s forwards, float 4s ease-in-out 0.5s infinite',
+              }}
             >
-              <FaRocket /> {translations.hero.element3[language]}
-            </motion.div>
+              <FaMobileAlt style={{ fontSize: '1.1em' }} /> {translations.hero.element3[language]}
+            </div>
+            
+            <style jsx global>{`
+              @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+              }
+              @keyframes fadeIn {
+                to { opacity: 1; }
+              }
+              .floating-element {
+                transition: transform 0.3s ease;
+                font-size: 0.85rem;
+                padding: 5px 10px;
+                line-height: 1.2;
+              }
+              .floating-element:hover {
+                transform: translateY(-3px) scale(1.03);
+              }
+              @media (max-width: 768px) {
+                .floating-element {
+                  font-size: 0.7rem;
+                  padding: 3px 8px;
+                  line-height: 1.1;
+                }
+                .floating-element svg {
+                  font-size: 0.8em !important;
+                  margin-right: 2px;
+                }
+            `}</style>
           </HeroImage>
           
           <ButtonContainer

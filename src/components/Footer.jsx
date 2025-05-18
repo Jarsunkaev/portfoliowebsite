@@ -205,7 +205,7 @@ const Footer = () => {
     <FooterSection theme={theme}>
       <FooterContainer>
         <FooterColumn>
-          <Logo>DevWorks.</Logo>
+          <Logo>NŌDUS</Logo>
           <FooterText>
             {translations.footer.aboutText[language]}
           </FooterText>

@@ -51,8 +51,8 @@ const translations = {
       en: 'Trusted by clients in <span>Healthcare</span>, <span>Tourism</span>, and <span>Small Business</span> industries'
     },
     primaryButton: {
-      hu: 'Kezdjünk Együtt',
-      en: 'Let\'s Get Started'
+      hu: 'Árajánlat kérése',
+      en: 'Get quote'
     },
     secondaryButton: {
       hu: 'Projektek Megtekintése',

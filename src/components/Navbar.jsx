@@ -374,7 +374,7 @@ const Navbar = () => {
           }}
           style={{ cursor: 'pointer' }}
         >
-          DevWorks.
+          NŌDUS
         </Logo>
         
         <MenuItems>
