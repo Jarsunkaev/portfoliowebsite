@@ -1,22 +1,26 @@
-// src/components/Hero.jsx - Updated for agency focus
+// src/components/Hero.jsx - Fully integrated with translations
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-scroll';
 import { useLanguage } from './LanguageContext';
+import { ThemeContext } from './ThemeContext';
+import { useContext } from 'react';
 import translations from '../translations';
+import { FaArrowRight, FaRocket, FaCode, FaLaptopCode } from 'react-icons/fa';
 
+// Enhanced styling for a more modern look
 const HeroSection = styled.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 120px; /* Increased padding to account for navbar */
+  padding-top: 160px; /* Reduced from 180px to move it up slightly */
   
   @media (max-width: 768px) {
-    padding-top: 100px; /* Adjusted for mobile */
+    padding-top: 130px; /* Reduced from 150px */
     min-height: auto;
     padding-bottom: 80px;
   }
@@ -28,7 +32,10 @@ const HeroContent = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+  align-items: flex-start; /* Align to top instead of center */
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -48,12 +55,29 @@ const TextContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
-  line-height: 1.2;
+  font-size: 4.2rem;
+  line-height: 1.1;
   font-weight: 800;
-  color: var(--color-text); 
-  margin-bottom: 1.5rem;
-  text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+  color: var(--color-text);
+  margin-bottom: 1.25rem; /* Reduced from 1.5rem */
+  
+  .highlight {
+    color: var(--color-accent2);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 100%;
+    height: 12px;
+    background-color: var(--color-accent3);
+    z-index: -1;
+    opacity: 0.5;
+  }
   
   @media (max-width: 768px) {
     font-size: 2.8rem;
@@ -65,23 +89,53 @@ const Title = styled.h1`
   }
 `;
 
-// Removed unused Subtitle component
-
 const HeroImage = styled(motion.div)`
   position: relative;
   height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -1rem; /* Move image up to align with badge */
   
-  img {
+  .main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border: var(--border-thick);
+    border-radius: 20px;
     box-shadow: var(--shadow-neobrutalist);
-    border-radius: 15px;
-    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    border: var(--border-thick);
+  }
+  
+  .floating-element {
+    position: absolute;
+    border-radius: 12px;
+    background: var(--color-accent3);
+    padding: 12px;
+    box-shadow: var(--shadow-neobrutalist);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--color-text);
+    border: var(--border-thick);
+    z-index: 2;
+  }
+  
+  .element-1 {
+    top: -20px;
+    left: -20px;
+  }
+  
+  .element-2 {
+    bottom: 40px;
+    right: -30px;
+  }
+  
+  .element-3 {
+    bottom: -30px;
+    left: 80px;
   }
   
   @media (max-width: 768px) {
@@ -89,6 +143,26 @@ const HeroImage = styled(motion.div)`
     margin: 2rem auto 0;
     max-width: 400px;
     order: 1;
+    
+    .floating-element {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+    
+    .element-1 {
+      top: -10px;
+      left: -10px;
+    }
+    
+    .element-2 {
+      bottom: 20px;
+      right: -15px;
+    }
+    
+    .element-3 {
+      bottom: -15px;
+      left: 50px;
+    }
   }
   
   @media (max-width: 480px) {
@@ -105,7 +179,6 @@ const StyledLink = styled(Link)`
 const ClientList = styled(motion.div)`
   margin-top: 2rem;
   font-size: 0.9rem;
-  opacity: 0.8;
   
   span {
     font-weight: 700;
@@ -125,13 +198,14 @@ const ButtonContainer = styled(motion.div)`
   @media (max-width: 768px) {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 `;
 
 const PrimaryButton = styled(motion.button)`
   background: var(--color-accent1);
   color: white;
-  padding: 12px 28px;
+  padding: 14px 28px;
   font-weight: bold;
   border: var(--border-thick);
   box-shadow: var(--shadow-neobrutalist);
@@ -139,15 +213,27 @@ const PrimaryButton = styled(motion.button)`
   font-family: var(--font-heading);
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  border-radius: 10px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  svg {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
   
   &:hover {
     transform: translate(-3px, -3px);
     box-shadow: 8px 8px 0px 0px var(--shadow-color);
+    
+    svg {
+      transform: translateX(4px);
+    }
   }
   
   @media (max-width: 768px) {
-    padding: 10px 24px;
+    padding: 12px 24px;
     font-size: 1rem;
   }
 `;
@@ -155,7 +241,7 @@ const PrimaryButton = styled(motion.button)`
 const SecondaryButton = styled(motion.button)`
   background: transparent;
   color: var(--color-text);
-  padding: 12px 28px;
+  padding: 14px 28px;
   font-weight: bold;
   border: var(--border-thick);
   box-shadow: var(--shadow-neobrutalist);
@@ -163,61 +249,167 @@ const SecondaryButton = styled(motion.button)`
   font-family: var(--font-heading);
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  border-radius: 10px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  svg {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
   
   &:hover {
     transform: translate(-3px, -3px);
     box-shadow: 8px 8px 0px 0px var(--shadow-color);
     background: var(--color-accent3);
+    
+    svg {
+      transform: translateX(4px);
+    }
   }
   
   @media (max-width: 768px) {
-    padding: 10px 24px;
+    padding: 12px 24px;
     font-size: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
 const Description = styled(motion.p)`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   max-width: 540px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased to account for removed client list */
   color: var(--color-text);
   
   @media (max-width: 768px) {
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 2rem; /* Increased bottom margin */
     font-size: 1.1rem;
   }
 `;
 
+const Badge = styled(motion.div)`
+  display: inline-block;
+  background: var(--color-accent3);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 1rem; /* Reduced from 1.5rem to tighten spacing */
+  border: 2px solid var(--color-text);
+  
+  @media (max-width: 768px) {
+    margin: 0 auto 1rem; /* Reduced from 1.5rem */
+  }
+`;
+
+// Shape decorations
+const DecorativeDot = styled(motion.div)`
+  width: ${props => props.size || '20px'};
+  height: ${props => props.size || '20px'};
+  border-radius: 50%;
+  background-color: ${props => props.color || 'var(--color-accent1)'};
+  position: absolute;
+  z-index: 0;
+  opacity: 0.5;
+`;
+
+const DecorativeCircle = styled(motion.div)`
+  width: ${props => props.size || '60px'};
+  height: ${props => props.size || '60px'};
+  border-radius: 50%;
+  border: 3px solid ${props => props.color || 'var(--color-accent2)'};
+  position: absolute;
+  z-index: 0;
+  opacity: 0.3;
+`;
+
+// Updated hero with floating elements, better animations
 const Hero = () => {
   const titleRef = useRef(null);
+  const floatingElementsRef = useRef(null);
   const { language } = useLanguage();
+  const { theme } = useContext(ThemeContext);
   
+  // GSAP animations for title and floating elements
   useEffect(() => {
-    gsap.from(titleRef.current.children, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power3.out",
-      onComplete: () => {
-        gsap.to(titleRef.current.children, {
-          opacity: 1,
-          duration: 0.1
-        });
+    const titleElements = titleRef.current.children;
+    
+    // Animate title elements
+    gsap.fromTo(
+      titleElements, 
+      { y: 50, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        stagger: 0.2, 
+        ease: "power3.out" 
       }
-    });
-  }, []);
+    );
+    
+    // Animate floating elements around the image
+    if (floatingElementsRef.current) {
+      const floatingElements = floatingElementsRef.current.querySelectorAll('.floating-element');
+      
+      floatingElements.forEach((el, index) => {
+        // Create slight floating animation for each element
+        gsap.to(el, {
+          y: index % 2 === 0 ? "10" : "-10",
+          duration: 2 + index * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: index * 0.3
+        });
+      });
+    }
+  }, [language]); // Re-run when language changes
   
   return (
     <HeroSection id="home">
+      {/* Decorative elements */}
+      <DecorativeDot 
+        size="40px" 
+        color="var(--color-accent3)" 
+        style={{ top: '180px', left: '10%' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        transition={{ delay: 2, duration: 1 }}
+      />
+      <DecorativeCircle 
+        size="80px" 
+        color="var(--color-accent1)" 
+        style={{ bottom: '100px', right: '10%' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ delay: 2.2, duration: 1 }}
+      />
+      <DecorativeDot 
+        size="25px" 
+        color="var(--color-accent2)" 
+        style={{ top: '30%', right: '20%' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        transition={{ delay: 2.4, duration: 1 }}
+      />
+      
       <HeroContent>
         <TextContainer>
+          <Badge
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {translations.hero.badge[language]}
+          </Badge>
+          
           <div ref={titleRef}>
             <Title>
               <div>{translations.hero.title[language]}</div>
-              <div style={{ color: 'var(--color-accent2)' }}>{translations.hero.subtitle[language]}</div>
+              <div className="highlight">{translations.hero.titleHighlight[language]}</div>
             </Title>
           </div>
           
@@ -229,33 +421,28 @@ const Hero = () => {
             {translations.hero.description[language]}
           </Description>
           
-          <ClientList
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-            dangerouslySetInnerHTML={{ __html: translations.hero.clients[language] }}
-          />
-          
           <ButtonContainer
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.4 }}
+            transition={{ delay: 1.3 }}
           >
             <StyledLink to="contact" spy={true} smooth={true} duration={500}>
               <PrimaryButton 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {translations.hero.primaryButton[language]}
+                <FaArrowRight />
               </PrimaryButton>
             </StyledLink>
             
             <StyledLink to="projects" spy={true} smooth={true} duration={500}>
               <SecondaryButton 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {translations.hero.secondaryButton[language]}
+                <FaArrowRight />
               </SecondaryButton>
             </StyledLink>
           </ButtonContainer>
@@ -265,12 +452,42 @@ const Hero = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
+          ref={floatingElementsRef}
         >
           <img 
+            className="main-image"
             src="/img/hero-devices.png" 
             alt="Responsive websites on multiple devices" 
             loading="lazy"
           />
+          
+          {/* Floating elements around the image */}
+          <motion.div 
+            className="floating-element element-1"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.5 }}
+          >
+            <FaLaptopCode /> {translations.hero.element1[language]}
+          </motion.div>
+          
+          <motion.div 
+            className="floating-element element-2"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.7 }}
+          >
+            <FaCode /> {translations.hero.element2[language]}
+          </motion.div>
+          
+          <motion.div 
+            className="floating-element element-3"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.9 }}
+          >
+            <FaRocket /> {translations.hero.element3[language]}
+          </motion.div>
         </HeroImage>
       </HeroContent>
     </HeroSection>

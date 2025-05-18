@@ -1,4 +1,4 @@
-// src/components/Pricing.jsx - Removed "Most Popular" banner
+// src/components/Pricing.jsx - Removed Enterprise tier & ensured translations
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -45,8 +45,10 @@ const SectionSubtitle = styled.p`
 
 const PricingGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* Changed from auto-fill to 2 equal columns */
   gap: 2rem;
+  max-width: 900px; /* Reduced max-width for 2 columns */
+  margin: 0 auto; /* Center the grid */
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -61,6 +63,9 @@ const PricingCard = styled(motion.div)`
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   
   &:hover {
     transform: translateY(-10px);
@@ -119,6 +124,7 @@ const PlanDescription = styled.p`
 const FeaturesList = styled.ul`
   list-style: none;
   margin-bottom: 2rem;
+  flex-grow: 1; /* Make the features list grow to fill space */
 `;
 
 const Feature = styled.li`
@@ -238,12 +244,11 @@ const Pricing = () => {
       
       <PricingContainer>
         <SectionTitle>
-          {translations.pricing?.title?.[language] || "Our"} <span>{translations.pricing?.titleHighlight?.[language] || "Pricing"}</span>
+          {translations.pricing.title[language]} <span>{translations.pricing.titleHighlight[language]}</span>
         </SectionTitle>
         
         <SectionSubtitle>
-          {translations.pricing?.subtitle?.[language] || 
-            "Choose a plan with one-time payment and maintenance that works best for your business."}
+          {translations.pricing.subtitle[language]}
         </SectionSubtitle>
         
         <PricingGrid>
@@ -253,7 +258,7 @@ const Pricing = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <PlanName>{translations.pricing?.basicPlan?.[language] || "Starter"}</PlanName>
+            <PlanName>{translations.pricing.basicPlan[language]}</PlanName>
             <PlanPrice>
               <span className="currency">Ft</span>
               <span className="price">189.000</span>
@@ -262,36 +267,35 @@ const Pricing = () => {
             <MaintenanceFee theme={theme}>
               <div className="maintenance-label">
                 <FaPlus size={12} />
-                <span>{translations.pricing?.maintenance?.[language] || "Maintenance"}</span>
+                <span>{translations.pricing.maintenance[language]}</span>
               </div>
-              <div className="maintenance-price">Ft 15.000 / {translations.pricing?.month?.[language] || "month"}</div>
+              <div className="maintenance-price">Ft 15.000 / {translations.pricing.month[language]}</div>
             </MaintenanceFee>
             
             <PlanDescription>
-              {translations.pricing?.basicDesc?.[language] || 
-                "Perfect for small businesses just starting their online presence."}
+              {translations.pricing.basicDesc[language]}
             </PlanDescription>
             
             <FeaturesList>
               <Feature>
                 <FaCheck />
-                <FeatureText>{translations.pricing?.responsive?.[language] || "Responsive Website (up to 5 pages)"}</FeatureText>
+                <FeatureText>{translations.pricing.responsive[language]}</FeatureText>
               </Feature>
               <Feature>
                 <FaCheck />
-                <FeatureText>{translations.pricing?.contentManagement?.[language] || "Basic CMS Integration"}</FeatureText>
+                <FeatureText>{translations.pricing.contentManagement[language]}</FeatureText>
               </Feature>
               <Feature>
                 <FaCheck />
-                <FeatureText>{translations.pricing?.seo?.[language] || "Basic SEO Setup"}</FeatureText>
+                <FeatureText>{translations.pricing.seo[language]}</FeatureText>
               </Feature>
               <Feature>
                 <FaCheck />
-                <FeatureText>{translations.pricing?.contact?.[language] || "Contact Form"}</FeatureText>
+                <FeatureText>{translations.pricing.contact[language]}</FeatureText>
               </Feature>
               <Feature>
                 <FaCheck />
-                <FeatureText>{translations.pricing?.designRevisions?.[language] || "2 Design Revisions"}</FeatureText>
+                <FeatureText>{translations.pricing.designRevisions[language]}</FeatureText>
               </Feature>
             </FeaturesList>
             
@@ -300,19 +304,19 @@ const Pricing = () => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {translations.pricing?.getStarted?.[language] || "Get Started"}
+                {translations.pricing.getStarted[language]}
               </CTAButton>
             </StyledLink>
           </PricingCard>
           
-          {/* Business Plan - No more "most popular" banner */}
+          {/* Business Plan */}
           <PricingCard
-            highlighted={true} // Still keep highlighted styling but no banner
+            highlighted={true}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <PlanName>{translations.pricing?.businessPlan?.[language] || "Professional"}</PlanName>
+            <PlanName>{translations.pricing.businessPlan[language]}</PlanName>
             <PlanPrice>
               <span className="currency">Ft</span>
               <span className="price">349.000</span>
@@ -321,40 +325,39 @@ const Pricing = () => {
             <MaintenanceFee theme={theme}>
               <div className="maintenance-label">
                 <FaPlus size={12} />
-                <span>{translations.pricing?.maintenance?.[language] || "Maintenance"}</span>
+                <span>{translations.pricing.maintenance[language]}</span>
               </div>
-              <div className="maintenance-price">Ft 29.000 / {translations.pricing?.month?.[language] || "month"}</div>
+              <div className="maintenance-price">Ft 29.000 / {translations.pricing.month[language]}</div>
             </MaintenanceFee>
             
             <PlanDescription>
-              {translations.pricing?.businessDesc?.[language] || 
-                "Ideal for growing businesses that need more advanced features."}
+              {translations.pricing.businessDesc[language]}
             </PlanDescription>
             
             <FeaturesList>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.responsiveBusiness?.[language] || "Premium Website (up to 10 pages)"}</FeatureText>
+                <FeatureText>{translations.pricing.responsiveBusiness[language]}</FeatureText>
               </Feature>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.multilingualBasic?.[language] || "Bilingual Support (HU/EN)"}</FeatureText>
+                <FeatureText>{translations.pricing.multilingualBasic[language]}</FeatureText>
               </Feature>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.bookingBasic?.[language] || "Basic Booking System"}</FeatureText>
+                <FeatureText>{translations.pricing.bookingBasic[language]}</FeatureText>
               </Feature>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.seoAdvanced?.[language] || "Advanced SEO Optimization"}</FeatureText>
+                <FeatureText>{translations.pricing.seoAdvanced[language]}</FeatureText>
               </Feature>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.analytics?.[language] || "Google Analytics Integration"}</FeatureText>
+                <FeatureText>{translations.pricing.analytics[language]}</FeatureText>
               </Feature>
               <Feature highlighted={true}>
                 <FaCheckCircle />
-                <FeatureText>{translations.pricing?.designRevisionsPlus?.[language] || "Unlimited Design Revisions"}</FeatureText>
+                <FeatureText>{translations.pricing.designRevisionsPlus[language]}</FeatureText>
               </Feature>
             </FeaturesList>
             
@@ -364,69 +367,7 @@ const Pricing = () => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {translations.pricing?.getStarted?.[language] || "Get Started"}
-              </CTAButton>
-            </StyledLink>
-          </PricingCard>
-          
-          {/* Enterprise Plan */}
-          <PricingCard
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <PlanName>{translations.pricing?.enterprisePlan?.[language] || "Enterprise"}</PlanName>
-            <PlanPrice>
-              <span className="currency">Ft</span>
-              <span className="price">649.000</span>
-            </PlanPrice>
-            
-            <MaintenanceFee theme={theme}>
-              <div className="maintenance-label">
-                <FaPlus size={12} />
-                <span>{translations.pricing?.maintenance?.[language] || "Maintenance"}</span>
-              </div>
-              <div className="maintenance-price">Ft 49.000 / {translations.pricing?.month?.[language] || "month"}</div>
-            </MaintenanceFee>
-            
-            <PlanDescription>
-              {translations.pricing?.enterpriseDesc?.[language] || 
-                "For businesses that need comprehensive digital solutions."}
-            </PlanDescription>
-            
-            <FeaturesList>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.responsiveEnterprise?.[language] || "Custom Web Application"}</FeatureText>
-              </Feature>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.multilingualFull?.[language] || "Multilingual Support (Up to 5 languages)"}</FeatureText>
-              </Feature>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.bookingFull?.[language] || "Advanced Booking System"}</FeatureText>
-              </Feature>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.adminDashboard?.[language] || "Custom Admin Dashboard"}</FeatureText>
-              </Feature>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.integration?.[language] || "Third-party Integrations"}</FeatureText>
-              </Feature>
-              <Feature>
-                <FaCheck />
-                <FeatureText>{translations.pricing?.training?.[language] || "Staff Training & Documentation"}</FeatureText>
-              </Feature>
-            </FeaturesList>
-            
-            <StyledLink to="contact" spy={true} smooth={true} duration={500}>
-              <CTAButton
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {translations.pricing?.getStarted?.[language] || "Get Started"}
+                {translations.pricing.getStarted[language]}
               </CTAButton>
             </StyledLink>
           </PricingCard>
@@ -434,18 +375,17 @@ const Pricing = () => {
         
         <CustomPricing>
           <CustomTitle>
-            {translations.pricing?.customTitle?.[language] || "Need a Custom Solution?"}
+            {translations.pricing.customTitle[language]}
           </CustomTitle>
           <CustomText>
-            {translations.pricing?.customText?.[language] || 
-              "We understand that every business has unique needs. Contact us for a personalized quote tailored to your specific requirements."}
+            {translations.pricing.customText[language]}
           </CustomText>
           <StyledLink to="contact" spy={true} smooth={true} duration={500}>
             <CustomButton 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              {translations.pricing?.contactUs?.[language] || "Contact Us"}
+              {translations.pricing.contactUs[language]}
             </CustomButton>
           </StyledLink>
         </CustomPricing>

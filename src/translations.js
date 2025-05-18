@@ -1,4 +1,4 @@
-// src/translations.js - Updated with pricing translations
+// src/translations.js - Complete with hero translations
 const translations = {
   // Navbar translations
   navbar: {
@@ -28,31 +28,47 @@ const translations = {
     }
   },
   
-  // Hero section translations
+  // Hero section translations with enhanced marketing copy
   hero: {
-    title: {
+    badge: {
       hu: 'Egyedi Webfejlesztés',
-      en: 'Custom Web Development'
+      en: 'Custom Web Solutions'
     },
-    subtitle: {
-      hu: 'Vállalkozásoknak, Amelyek Kitűnnek',
-      en: 'For Businesses That Want to Stand Out'
+    title: {
+      hu: 'Fejlessze Vállalkozását',
+      en: 'Elevate Your Business'
+    },
+    titleHighlight: {
+      hu: 'Digitális Megoldásokkal',
+      en: 'With Digital Innovation'
     },
     description: {
-      hu: 'Személyre szabott weboldalakat és webalkalmazásokat készítek foglalási rendszerekkel, admin felületekkel és többnyelvű támogatással magyarországi és európai vállalkozások számára.',
-      en: 'I create tailored websites and web applications with booking systems, admin dashboards, and multilingual support for businesses across Hungary and Europe.'
+      hu: 'Hozzon létre hatékony online jelenlétet egyedi weboldalakkal és alkalmazásokkal, amelyek lenyűgözik az ügyfeleit és fellendítik vállalkozását.',
+      en: 'Create a powerful online presence with custom websites and applications that impress your clients and drive business growth.'
     },
     clients: {
-      hu: 'Megbízható partnerek az <span>Egészségügy</span>, <span>Turizmus</span> és <span>Kisvállalkozások</span> területén',
-      en: 'Trusted by clients in <span>Healthcare</span>, <span>Tourism</span>, and <span>Small Business</span> sectors'
+      hu: 'Már bizalmat szavaztak nekünk az <span>Egészségügy</span>, <span>Turizmus</span> és <span>Kisvállalkozások</span> területén',
+      en: 'Trusted by clients in <span>Healthcare</span>, <span>Tourism</span>, and <span>Small Business</span> industries'
     },
     primaryButton: {
-      hu: 'Ingyenes Konzultáció Foglalása',
-      en: 'Book Free Consultation'
+      hu: 'Kezdjünk Együtt',
+      en: 'Let\'s Get Started'
     },
     secondaryButton: {
-      hu: 'Portfólió Megtekintése',
-      en: 'View Portfolio'
+      hu: 'Projektek Megtekintése',
+      en: 'View Projects'
+    },
+    element1: {
+      hu: 'Mobilra Optimalizált',
+      en: 'Mobile Optimized'
+    },
+    element2: {
+      hu: 'Egyedi Fejlesztés',
+      en: 'Custom Built'
+    },
+    element3: {
+      hu: 'Modern Technológiák',
+      en: 'Modern Stack'
     }
   },
   
@@ -176,20 +192,13 @@ const translations = {
       hu: 'Esettanulmány Megtekintése',
       en: 'View Case Study'
     },
-    items: {
-      /* Existing project items kept the same */
-    },
     viewCaseStudy: {
       hu: 'Esettanulmány megtekintése',
       en: 'View Case Study'
     }
   },
   
-  // About section translations
-  about: {
-    /* Existing about translations kept the same */
-  },
-  
+  // Pricing section translations
   pricing: {
     title: {
       hu: 'Árak és',
@@ -223,9 +232,9 @@ const translations = {
       hu: 'hónap',
       en: 'month'
     },
-    maintenanceTitle: {
-      hu: 'Opcionális karbantartás',
-      en: 'Optional maintenance'
+    maintenance: {
+      hu: 'Karbantartás',
+      en: 'Maintenance'
     },
     basicDesc: {
       hu: 'Tökéletes kisebb vállalkozásoknak, akik most kezdik online jelenlétüket.',
@@ -239,16 +248,72 @@ const translations = {
       hu: 'Vállalkozások számára, amelyeknek átfogó digitális megoldásokra van szükségük.',
       en: 'For businesses that need comprehensive digital solutions.'
     },
+    responsive: {
+      hu: 'Reszponzív Weboldal (max. 5 oldal)',
+      en: 'Responsive Website (up to 5 pages)'
+    },
+    responsiveBusiness: {
+      hu: 'Prémium Weboldal (max. 10 oldal)',
+      en: 'Premium Website (up to 10 pages)'
+    },
+    responsiveEnterprise: {
+      hu: 'Egyedi Webalkalmazás',
+      en: 'Custom Web Application'
+    },
+    contentManagement: {
+      hu: 'Alapszintű CMS integráció',
+      en: 'Basic CMS Integration'
+    },
+    multilingualBasic: {
+      hu: 'Kétnyelvű támogatás (HU/EN)',
+      en: 'Bilingual Support (HU/EN)'
+    },
+    multilingualFull: {
+      hu: 'Többnyelvű támogatás (max. 5 nyelv)',
+      en: 'Multilingual Support (Up to 5 languages)'
+    },
+    seo: {
+      hu: 'Alapszintű SEO beállítás',
+      en: 'Basic SEO Setup'
+    },
+    seoAdvanced: {
+      hu: 'Fejlett SEO optimalizálás',
+      en: 'Advanced SEO Optimization'
+    },
+    contact: {
+      hu: 'Kapcsolati űrlap',
+      en: 'Contact Form' 
+    },
+    analytics: {
+      hu: 'Google Analytics integráció',
+      en: 'Google Analytics Integration'
+    },
+    bookingBasic: {
+      hu: 'Alapszintű foglalási rendszer',
+      en: 'Basic Booking System'
+    },
+    bookingFull: {
+      hu: 'Fejlett foglalási rendszer',
+      en: 'Advanced Booking System'
+    },
     designRevisions: {
-      hu: '2 design módosítás',
+      hu: '2 dizájn módosítás',
       en: '2 Design Revisions'
     },
     designRevisionsPlus: {
-      hu: 'Korlátlan design módosítás',
+      hu: 'Korlátlan dizájn módosítás',
       en: 'Unlimited Design Revisions'
     },
+    adminDashboard: {
+      hu: 'Egyedi admin felület',
+      en: 'Custom Admin Dashboard'
+    },
+    integration: {
+      hu: 'Harmadik féltől származó integrációk',
+      en: 'Third-party Integrations'
+    },
     training: {
-      hu: 'Munkatársak betanítása és dokumentáció',
+      hu: 'Személyzeti képzés és dokumentáció',
       en: 'Staff Training & Documentation'
     },
     customTitle: {
@@ -258,6 +323,14 @@ const translations = {
     customText: {
       hu: 'Megértjük, hogy minden vállalkozásnak egyedi igényei vannak. Lépjen kapcsolatba velünk személyre szabott ajánlatért, amely az Ön speciális követelményeihez igazodik.',
       en: 'We understand that every business has unique needs. Contact us for a personalized quote tailored to your specific requirements.'
+    },
+    getStarted: {
+      hu: 'Kezdjük el',
+      en: 'Get Started'
+    },
+    contactUs: {
+      hu: 'Kapcsolat',
+      en: 'Contact Us'
     }
   },
   
@@ -476,6 +549,118 @@ const translations = {
     backToTop: {
       hu: 'Vissza a tetejére',
       en: 'Back to top'
+    }
+  },
+  
+  // About section translations
+  about: {
+    title: {
+      hu: 'Rólam',
+      en: 'About Me'
+    },
+    paragraph1: {
+      hu: 'Webfejlesztő vagyok, aki egyedi weboldalak és webalkalmazások készítésére specializálódott vállalkozások számára Magyarországon és Európában. Mind a front-end, mind a back-end fejlesztésben szaktudással rendelkezem, teljes digitális megoldásokat kínálva, amelyek segítenek a vállalkozásoknak kitűnni.',
+      en: 'I\'m a web developer specializing in creating custom websites and web applications for businesses across Hungary and Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions that help businesses stand out.'
+    },
+    paragraph2: {
+      hu: 'Az elektromérnöki hátterem egyedi perspektívát ad a problémamegoldásban és a hatékony, jól strukturált alkalmazások építésében. Ez a technikai alap lehetővé teszi számomra, hogy olyan megoldásokat hozzak létre, amelyek nemcsak jól néznek ki, hanem kivételesen jól is teljesítenek.',
+      en: 'My background in electrical engineering gives me a unique perspective on problem-solving and building efficient, well-structured applications. This technical foundation allows me to create solutions that not only look good but also perform exceptionally well.'
+    },
+    paragraph3: {
+      hu: 'Büszke vagyok arra, hogy testreszabott megoldásokat fejlesztek különböző iparágak számára, különös szaktudással az egészségügy, turizmus és kisvállalkozási szektorokban. Legyen szó többnyelvű weboldalról, egyedi foglalási rendszerről vagy adminisztrációs vezérlőpultról, életre tudom kelteni az Ön elképzelését.',
+      en: 'I take pride in developing tailored solutions for various industries, with particular expertise in healthcare, tourism, and small business sectors. Whether you need a multilingual website, a custom booking system, or an administrative dashboard, I can bring your vision to life.'
+    },
+    valuesTitle: {
+      hu: 'Mitől vagyok különleges',
+      en: 'What Sets Me Apart'
+    },
+    values: {
+      quality: {
+        title: {
+          hu: 'Minőségi Kód',
+          en: 'Quality Code'
+        },
+        description: {
+          hu: 'Tiszta, jól dokumentált kód, amely tartós és könnyen karbantartható.',
+          en: 'Clean, well-documented code that\'s built to last and easy to maintain.'
+        }
+      },
+      timely: {
+        title: {
+          hu: 'Időben Történő Szállítás',
+          en: 'Timely Delivery'
+        },
+        description: {
+          hu: 'Projektek ütemezett szállítása, rendszeres frissítésekkel a fejlesztés során.',
+          en: 'Projects delivered on schedule with regular updates throughout development.'
+        }
+      },
+      communication: {
+        title: {
+          hu: 'Világos Kommunikáció',
+          en: 'Clear Communication'
+        },
+        description: {
+          hu: 'Rendszeres frissítések egyszerű nyelven, gyors válaszidőkkel.',
+          en: 'Regular updates in plain language, with quick response times.'
+        }
+      },
+      attention: {
+        title: {
+          hu: 'Figyelem a Részletekre',
+          en: 'Attention to Detail'
+        },
+        description: {
+          hu: 'Gondos tesztelés és csiszolás, hogy minden aspektus tökéletes legyen.',
+          en: 'Careful testing and polishing to ensure every aspect is perfect.'
+        }
+      }
+    },
+    processTitle: {
+      hu: 'Munkafolyamatom',
+      en: 'My Work Process'
+    },
+    process: {
+      discovery: {
+        title: {
+          hu: 'Megismerés',
+          en: 'Discovery'
+        },
+        description: {
+          hu: 'Vállalkozása, céljai és konkrét projektkövetelményeinek megértése.',
+          en: 'Understanding your business, goals, and specific project requirements.'
+        }
+      },
+      planning: {
+        title: {
+          hu: 'Tervezés',
+          en: 'Planning'
+        },
+        description: {
+          hu: 'Részletes ütemterv készítése határidőkkel, funkciókkal és műszaki specifikációkkal.',
+          en: 'Creating a detailed roadmap with timeline, features, and technical specifications.'
+        }
+      },
+      development: {
+        title: {
+          hu: 'Fejlesztés',
+          en: 'Development'
+        },
+        description: {
+          hu: 'Weboldalának vagy alkalmazásának elkészítése rendszeres előrehaladási frissítésekkel.',
+          en: 'Building your website or application with regular progress updates.'
+        }
+      },
+      launch: {
+        title: {
+          hu: 'Indítás és Támogatás',
+          en: 'Launch & Support'
+        },
+        description: {
+          hu: 'Projektje élesítése és folyamatos karbantartás biztosítása szükség szerint.',
+          en: 'Going live with your project and providing ongoing maintenance as needed.'
+        }
+      }
     }
   }
 };
