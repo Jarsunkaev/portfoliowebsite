@@ -1,4 +1,4 @@
-// src/components/Footer.jsx - Updated for agency site
+// src/components/Footer.jsx - Updated to include pricing link
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import { useLanguage } from './LanguageContext';
 import translations from '../translations';
 
 const FooterSection = styled.footer`
-  background: ${props => props.theme === 'dark' ? '#121212' : 'black'};
+  background: ${props => props.theme === 'dark' ? 'var(--color-bg-dark)' : '#1a1e2a'};
   color: white;
   padding: 4rem 0 2rem;
   position: relative;
@@ -63,7 +63,7 @@ const SocialLinks = styled.div`
 
 const SocialLink = styled(motion.a)`
   background: ${props => props.bg || 'white'};
-  color: black;
+  color: #1a1e2a;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -75,6 +75,7 @@ const SocialLink = styled(motion.a)`
   
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -93,7 +94,7 @@ const FooterTitle = styled.h3`
     bottom: 0;
     width: 40px;
     height: 3px;
-    background: var(--color-accent1);
+    background: var(--color-accent3);
     
     @media (max-width: 768px) {
       left: 50%;
@@ -120,7 +121,7 @@ const FooterLink = styled.li`
     
     &:hover {
       opacity: 1;
-      color: var(--color-accent2);
+      color: var(--color-accent3);
       padding-left: 5px;
     }
   }
@@ -144,7 +145,7 @@ const ContactItem = styled.div`
 `;
 
 const ContactIcon = styled.div`
-  color: var(--color-accent1);
+  color: var(--color-accent3);
   font-size: 1rem;
   margin-top: 0.3rem;
 `;
@@ -158,7 +159,7 @@ const ContactText = styled.div`
     
     &:hover {
       opacity: 1;
-      color: var(--color-accent2);
+      color: var(--color-accent3);
     }
   }
 `;
@@ -259,6 +260,11 @@ const Footer = () => {
             <FooterLink>
               <Link to="projects" spy={true} smooth={true} duration={500}>
                 {translations.footer.portfolio[language]}
+              </Link>
+            </FooterLink>
+            <FooterLink>
+              <Link to="pricing" spy={true} smooth={true} duration={500}>
+                {translations.footer.pricing[language]}
               </Link>
             </FooterLink>
             <FooterLink>

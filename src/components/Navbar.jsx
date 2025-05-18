@@ -1,11 +1,9 @@
-// src/components/Navbar.jsx - Updated for agency site
+// src/components/Navbar.jsx - Updated to include pricing link
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// Removed resumePDF import as it's not needed for agency site
 import { Link } from 'react-scroll';
 import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-// Removed ThemeContext import as it's not needed.
 import { useLanguage } from './LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import translations from '../translations';
@@ -56,7 +54,7 @@ const MenuItems = styled.div`
 `;
 
 const MenuItem = styled(motion.div)`
-  margin: 0 1.5rem;
+  margin: 0 1.2rem;
   font-weight: 600;
   cursor: pointer;
   color: var(--color-text);
@@ -75,7 +73,7 @@ const MenuItem = styled(motion.div)`
       left: 0;
       bottom: 0;
       width: 0;
-      height: 3px;
+      height: 2px;
       background: var(--color-accent1);
       transition: width 0.3s ease;
     }
@@ -93,21 +91,21 @@ const MenuItem = styled(motion.div)`
 
 const ConsultButton = styled(motion.a)`
   background: var(--color-accent3);
-  color: #000000;
+  color: var(--color-text);
   padding: ${props => props.$isScrolled ? '8px 16px' : '10px 20px'};
   border: var(--border-thick) var(--border-color);
   font-weight: 700;
   box-shadow: var(--shadow-neobrutalist) var(--shadow-color);
   cursor: pointer;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: ${props => props.$isScrolled ? '0.9rem' : '1rem'};
   transition: all 0.3s ease;
   
   &:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 7px 7px 0px 0px var(--shadow-color);
-    background: #FFD600;
+    box-shadow: 5px 5px 0px 0px var(--shadow-color);
+    background: var(--color-accent3);
   }
   
   @media (max-width: 768px) {
@@ -176,8 +174,8 @@ const Navbar = () => {
       
       <MenuItems $isOpen={isMenuOpen}>
         <MenuItem
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           $isScrolled={isScrolled}
         >
           <Link 
@@ -192,8 +190,8 @@ const Navbar = () => {
         </MenuItem>
         
         <MenuItem
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           $isScrolled={isScrolled}
         >
           <Link 
@@ -208,8 +206,24 @@ const Navbar = () => {
         </MenuItem>
         
         <MenuItem
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          $isScrolled={isScrolled}
+        >
+          <Link 
+            to="pricing" 
+            spy={true} 
+            smooth={true} 
+            duration={500}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {translations.navbar.pricing[language]}
+          </Link>
+        </MenuItem>
+        
+        <MenuItem
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           $isScrolled={isScrolled}
         >
           <Link 
@@ -224,8 +238,8 @@ const Navbar = () => {
         </MenuItem>
         
         <MenuItem
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           $isScrolled={isScrolled}
         >
           <Link 

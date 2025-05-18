@@ -1,4 +1,4 @@
-// src/App.js - Updated for agency site
+// src/App.js - Updated to include Pricing component
 import React from 'react';
 import GlobalStyles from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
@@ -7,6 +7,7 @@ import { ThemeProvider } from './components/ThemeContext';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Projects from './components/Projects';
+import Pricing from './components/Pricing';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -33,6 +34,7 @@ function App() {
               <Hero />
               <Services />
               <Projects />
+              <Pricing />
               <About />
               <Contact />
               <Footer />
