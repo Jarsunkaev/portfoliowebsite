@@ -1,39 +1,40 @@
-// Updated Navbar.jsx with rounded borders
-import React, { useState, useEffect, useContext } from 'react';
+// src/components/Navbar.jsx - Updated for agency site
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// Update the import path to match your file structure
-import resumePDF from '../assets/resume/CV2025.pdf';
+// Removed resumePDF import as it's not needed for agency site
 import { Link } from 'react-scroll';
+import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { ThemeContext } from './ThemeContext';
+// Removed ThemeContext import as it's not needed.
+import { useLanguage } from './LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
+import translations from '../translations';
 
 const Nav = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: ${props => props.$isScrolled ? '0.8rem 2rem' : '1.5rem 2rem'};
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
-  background: ${props => props.isScrolled ? 
+  background: ${props => props.$isScrolled ? 
     'var(--color-bg)' : 
-    props.theme === 'dark' ? 
-      'rgba(18, 18, 18, 0.95)' : 
-      'rgba(255, 255, 255, 0.95)'
+    'rgba(255, 255, 255, 0.95)'
   };
   backdrop-filter: blur(10px);
   border-bottom: var(--border-thick) var(--border-color);
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
+  height: ${props => props.$isScrolled ? '70px' : '90px'};
 `;
 
 const Logo = styled(motion.div)`
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: ${props => props.$isScrolled ? '1.5rem' : '1.8rem'};
   font-weight: 800;
   color: var(--color-text);
-  text-shadow: ${props => props.theme === 'dark' ? '0 0 5px rgba(255,255,255,0.5)' : 'none'};
+  transition: font-size 0.3s ease;
 `;
 
 const MenuItems = styled.div`
@@ -44,7 +45,7 @@ const MenuItems = styled.div`
     position: fixed;
     flex-direction: column;
     top: 0;
-    right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    right: ${({ $isOpen }) => ($isOpen ? '0' : '-100%')};
     width: 100%;
     height: 100vh;
     background: var(--color-bg);
@@ -59,13 +60,14 @@ const MenuItem = styled(motion.div)`
   font-weight: 600;
   cursor: pointer;
   color: var(--color-text);
+  font-size: ${props => props.$isScrolled ? '0.9rem' : '1rem'};
+  transition: font-size 0.3s ease;
   
   a {
     color: var(--color-text);
     text-decoration: none;
     padding: 0.5rem 0;
     position: relative;
-    text-shadow: ${props => props.theme === 'dark' ? '0 0 4px rgba(255,255,255,0.3)' : 'none'};
     
     &:after {
       content: '';
@@ -85,28 +87,33 @@ const MenuItem = styled(motion.div)`
   
   @media (max-width: 768px) {
     margin: 1.5rem 0;
+    font-size: 1rem;
   }
 `;
 
-const ResumeButton = styled(motion.a)`
+const ConsultButton = styled(motion.a)`
   background: var(--color-accent3);
   color: #000000;
-  padding: 10px 20px;
+  padding: ${props => props.$isScrolled ? '8px 16px' : '10px 20px'};
   border: var(--border-thick) var(--border-color);
   font-weight: 700;
   box-shadow: var(--shadow-neobrutalist) var(--shadow-color);
   cursor: pointer;
   text-decoration: none;
-  border-radius: 10px; /* Added rounded corners */
+  border-radius: 10px;
+  font-size: ${props => props.$isScrolled ? '0.9rem' : '1rem'};
+  transition: all 0.3s ease;
   
   &:hover {
     transform: translate(-2px, -2px);
     box-shadow: 7px 7px 0px 0px var(--shadow-color);
-    background: ${props => props.theme === 'dark' ? '#FFEA80' : '#FFD600'};
+    background: #FFD600;
   }
   
   @media (max-width: 768px) {
     margin-top: 1.5rem;
+    padding: 10px 20px;
+    font-size: 1rem;
   }
 `;
 
@@ -125,7 +132,7 @@ const MenuToggle = styled.div`
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const { language } = useLanguage();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -149,8 +156,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      isScrolled={isScrolled}
-      theme={theme}
+      $isScrolled={isScrolled}
       style={{ 
         boxShadow: isScrolled ? '0 4px 6px var(--shadow-color)' : 'none' 
       }}
@@ -159,36 +165,36 @@ const Navbar = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        theme={theme}
+        $isScrolled={isScrolled}
       >
-        Juszuf.
+        DevWorks.
       </Logo>
       
       <MenuToggle onClick={toggleMenu}>
         {isMenuOpen ? <FaTimes /> : <FaBars />}
       </MenuToggle>
       
-      <MenuItems isOpen={isMenuOpen}>
+      <MenuItems $isOpen={isMenuOpen}>
         <MenuItem
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          theme={theme}
+          $isScrolled={isScrolled}
         >
           <Link 
-            to="about" 
+            to="services" 
             spy={true} 
             smooth={true} 
             duration={500} 
             onClick={() => setIsMenuOpen(false)}
           >
-            About
+            {translations.navbar.services[language]}
           </Link>
         </MenuItem>
         
         <MenuItem
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          theme={theme}
+          $isScrolled={isScrolled}
         >
           <Link 
             to="projects" 
@@ -197,14 +203,30 @@ const Navbar = () => {
             duration={500}
             onClick={() => setIsMenuOpen(false)}
           >
-            Projects
+            {translations.navbar.portfolio[language]}
           </Link>
         </MenuItem>
         
         <MenuItem
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          theme={theme}
+          $isScrolled={isScrolled}
+        >
+          <Link 
+            to="about" 
+            spy={true} 
+            smooth={true} 
+            duration={500}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {translations.navbar.about[language]}
+          </Link>
+        </MenuItem>
+        
+        <MenuItem
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          $isScrolled={isScrolled}
         >
           <Link 
             to="contact" 
@@ -213,19 +235,20 @@ const Navbar = () => {
             duration={500}
             onClick={() => setIsMenuOpen(false)}
           >
-            Contact
+            {translations.navbar.contact[language]}
           </Link>
         </MenuItem>
         
-        <ResumeButton 
-          href={resumePDF} 
-          theme={theme}
-          download="Juszuf_Arsunkaev_Resume.pdf"
+        <ConsultButton 
+          href="#contact" 
+          $isScrolled={isScrolled}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Download CV
-        </ResumeButton>
+          {translations.navbar.consultation[language]}
+        </ConsultButton>
+        
+        <LanguageSwitcher />
       </MenuItems>
     </Nav>
   );

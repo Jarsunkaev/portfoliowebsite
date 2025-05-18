@@ -1,11 +1,11 @@
-// Updated Hero.jsx with better mobile positioning
-
-import React, { useEffect, useRef, useContext } from 'react';
+// src/components/Hero.jsx - Updated for agency focus
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-scroll';
-import { ThemeContext } from './ThemeContext';
+import { useLanguage } from './LanguageContext';
+import translations from '../translations';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -13,12 +13,12 @@ const HeroSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 80px; /* Increased padding for navbar */
+  padding-top: 120px; /* Increased padding to account for navbar */
   
   @media (max-width: 768px) {
-    padding-top: 80px; /* Maintain consistent padding on mobile */
-    min-height: auto; /* Allow content to determine height */
-    padding-bottom: 80px; /* Add padding at the bottom */
+    padding-top: 100px; /* Adjusted for mobile */
+    min-height: auto;
+    padding-bottom: 80px;
   }
 `;
 
@@ -33,7 +33,7 @@ const HeroContent = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem; /* Increased gap between elements */
+    gap: 2rem;
   }
 `;
 
@@ -43,22 +43,21 @@ const TextContainer = styled.div`
   
   @media (max-width: 768px) {
     padding: 1rem;
-    order: 2; /* Text comes after image on mobile */
+    order: 2;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 4.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.1;
+  font-size: 4rem;
+  line-height: 1.2;
   font-weight: 800;
   color: var(--color-text); 
-  opacity: 1 !important;
+  margin-bottom: 1.5rem;
   text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
   
   @media (max-width: 768px) {
     font-size: 2.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
   
   @media (max-width: 480px) {
@@ -66,35 +65,7 @@ const Title = styled.h1`
   }
 `;
 
-const StrongTitle = styled.div`
-  color: var(--color-accent2);
-  opacity: 1 !important;
-  position: relative;
-  display: inline-block;
-`;
-
-const Subtitle = styled(motion.div)`
-  background: var(--color-accent1);
-  color: white;
-  display: inline-block;
-  padding: 0.7rem 1.5rem;
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 1.5rem 0 2rem;
-  border: var(--border-thick);
-  box-shadow: var(--shadow-neobrutalist);
-  letter-spacing: 1px;
-  position: relative;
-  left: 0;
-  border-radius: 10px;
-  
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-    margin: 1rem auto 1.5rem; /* Center on mobile */
-    padding: 0.5rem 1.2rem;
-  }
-`;
+// Removed unused Subtitle component
 
 const HeroImage = styled(motion.div)`
   position: relative;
@@ -110,75 +81,54 @@ const HeroImage = styled(motion.div)`
     border: var(--border-thick);
     box-shadow: var(--shadow-neobrutalist);
     border-radius: 15px;
-    filter: brightness(0.85);
-    transition: opacity 0.3s;
-    opacity: 0.5;
-  }
-  
-  img.loaded {
-    opacity: 1;
+    transition: transform 0.3s ease;
   }
   
   @media (max-width: 768px) {
-    height: 350px; /* Increased height */
-    margin: 2rem auto 0; /* Added top margin to push image down */
+    height: 350px;
+    margin: 2rem auto 0;
     max-width: 400px;
-    order: 1; /* Image comes first on mobile */
+    order: 1;
   }
   
   @media (max-width: 480px) {
-    height: 300px; /* Increased height from original */
+    height: 300px;
     margin-bottom: 1rem;
   }
 `;
 
-const ScrollIndicator = styled(motion.div)`
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 50px;
-  border: 2px solid var(--color-text);
-  border-radius: 15px;
-  opacity: 0.6;
+const StyledLink = styled(Link)`
+  display: inline-block;
+  cursor: pointer;
+`;
+
+const ClientList = styled(motion.div)`
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    background-color: var(--color-text);
-    border-radius: 50%;
-    transform: translateX(-50%);
-    animation: scrollAnim 2s infinite;
-  }
-  
-  @keyframes scrollAnim {
-    0% { top: 8px; opacity: 1; }
-    100% { top: 32px; opacity: 0; }
+  span {
+    font-weight: 700;
+    color: var(--color-accent2);
   }
   
   @media (max-width: 768px) {
-    bottom: 1rem;
-    width: 24px;
-    height: 40px;
-    
-    &::before {
-      width: 4px;
-      height: 4px;
-    }
-    
-    @keyframes scrollAnim {
-      0% { top: 6px; opacity: 1; }
-      100% { top: 26px; opacity: 0; }
-    }
+    margin-top: 1.5rem;
   }
 `;
 
-const ViewWorkButton = styled(motion.button)`
+const ButtonContainer = styled(motion.div)`
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;
+
+const PrimaryButton = styled(motion.button)`
   background: var(--color-accent1);
   color: white;
   padding: 12px 28px;
@@ -199,34 +149,52 @@ const ViewWorkButton = styled(motion.button)`
   @media (max-width: 768px) {
     padding: 10px 24px;
     font-size: 1rem;
-    margin: 0 auto; /* Center on mobile */
+  }
+`;
+
+const SecondaryButton = styled(motion.button)`
+  background: transparent;
+  color: var(--color-text);
+  padding: 12px 28px;
+  font-weight: bold;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-neobrutalist);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
+  
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px 0px var(--shadow-color);
+    background: var(--color-accent3);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 10px 24px;
+    font-size: 1rem;
   }
 `;
 
 const Description = styled(motion.p)`
-  padding-top: 2.5rem;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
-  font-weight: 500;
+  max-width: 540px;
+  margin-bottom: 2rem;
   color: var(--color-text);
   
   @media (max-width: 768px) {
-    padding-top: 2rem; /* Increased padding on mobile */
-    margin-bottom: 1.5rem;
-  }
-  
-  @media (max-width: 480px) {
-    padding-top: 2.5rem; /* Even more padding on smaller screens */
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
   }
 `;
 
 const Hero = () => {
   const titleRef = useRef(null);
-  const { theme } = useContext(ThemeContext);
+  const { language } = useLanguage();
   
   useEffect(() => {
-    // Animate the title with GSAP
     gsap.from(titleRef.current.children, {
       y: 50,
       opacity: 0,
@@ -234,7 +202,6 @@ const Hero = () => {
       stagger: 0.2,
       ease: "power3.out",
       onComplete: () => {
-        // Force full opacity after animation completes
         gsap.to(titleRef.current.children, {
           opacity: 1,
           duration: 0.1
@@ -249,8 +216,8 @@ const Hero = () => {
         <TextContainer>
           <div ref={titleRef}>
             <Title>
-              <div>Hi, I am</div>
-              <StrongTitle>Juszuf Arsunkaev</StrongTitle>
+              <div>{translations.hero.title[language]}</div>
+              <div style={{ color: 'var(--color-accent2)' }}>{translations.hero.subtitle[language]}</div>
             </Title>
           </div>
           
@@ -259,23 +226,39 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
           >
-            I create eye-catching, functional websites with modern technologies and a focus on user experience.
+            {translations.hero.description[language]}
           </Description>
           
-          <motion.div
+          <ClientList
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3 }}
+            dangerouslySetInnerHTML={{ __html: translations.hero.clients[language] }}
+          />
+          
+          <ButtonContainer
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4 }}
           >
-            <Link to="projects" spy={true} smooth={true} duration={500}>
-              <ViewWorkButton 
+            <StyledLink to="contact" spy={true} smooth={true} duration={500}>
+              <PrimaryButton 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View My Work
-              </ViewWorkButton>
-            </Link>
-          </motion.div>
+                {translations.hero.primaryButton[language]}
+              </PrimaryButton>
+            </StyledLink>
+            
+            <StyledLink to="projects" spy={true} smooth={true} duration={500}>
+              <SecondaryButton 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {translations.hero.secondaryButton[language]}
+              </SecondaryButton>
+            </StyledLink>
+          </ButtonContainer>
         </TextContainer>
         
         <HeroImage
@@ -284,24 +267,12 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <img 
-            src="me.jpeg" 
-            alt="Juszuf Arsunkaev" 
+            src="/img/hero-devices.png" 
+            alt="Responsive websites on multiple devices" 
             loading="lazy"
-            width="600"
-            height="800"
-            onLoad={(e) => e.target.classList.add('loaded')}
           />
         </HeroImage>
       </HeroContent>
-      
-      <Link to="about" spy={true} smooth={true} duration={500}>
-        <ScrollIndicator
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ delay: 2 }}
-          whileHover={{ opacity: 0.9 }}
-        />
-      </Link>
     </HeroSection>
   );
 };
