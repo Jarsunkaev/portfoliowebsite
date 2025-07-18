@@ -1,38 +1,41 @@
-// src/components/Services.jsx - Enhanced with sequential fade-in animations and text wrapping
-import React, { useContext, useState } from 'react';
+// src/components/Services.jsx - Modern, sleek design with wider mobile cards
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
-import translations from '../translations'; // Make sure this path is correct
+import translations from '../translations';
 import {
   FaDesktop,
   FaCalendarAlt,
-  FaGlobe,
   FaShoppingCart,
   FaCog,
   FaCheck,
-  FaArrowRight,
   FaCreditCard,
   FaUserCog
 } from 'react-icons/fa';
 
-// Enhanced styling for a more interactive and visually appealing layout
+// Enhanced styling for a more modern and sleek layout
 const ServicesSection = styled.section`
-  padding: 140px 0 120px;
+  padding: 80px 0;
   background-color: var(--color-neutral);
   position: relative;
-  overflow: hidden; /* Keep this to contain decorative elements and animations */
+  overflow: hidden;
 `;
 
 const ServicesContainer = styled.div`
-  width: 90%;
-  max-width: 1300px;
+  width: 95%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
   position: relative;
   z-index: 2;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 10px;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -67,311 +70,206 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const SectionSubtitle = styled.p`
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 4rem;
-  font-size: 1.2rem;
-  opacity: 0.9;
-  line-height: 1.6;
-  
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
-  }
-`;
 
-const ServiceCategories = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-  
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-  }
-`;
 
-const CategoryTab = styled.button`
-  padding: 0.8rem 1.5rem;
-  background: ${props => props.active ? 'var(--color-accent1)' : 'transparent'};
-  color: ${props => props.active ? 'white' : 'var(--color-text)'};
-  border: var(--border-thick);
-  border-radius: 30px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: var(--font-heading);
-  
-  &:hover {
-    background: ${props => props.active ? 'var(--color-accent1)' : 'var(--color-accent3)'};
-    transform: translateY(-3px);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-  }
-`;
 
-// Services grid layout - now a motion component for staggering children
-const ServicesGrid = styled(motion.div)` // Changed to styled(motion.div)
+
+
+
+// Modern grid layout - wider spacing and full-width on mobile
+const ServicesGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
   
-  @media (max-width: 1200px) {
-    grid-template-columns: 1fr;
-  }
-  
-  @media (max-width: 768px) {
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+  }
 `;
 
-// ServiceCard is already styled(motion.div) from your original code
+// Modern, sleek service card - less card-like, more content-focused
 const ServiceCard = styled(motion.div)`
-  background: ${props => props.theme === 'dark' ? '#2A2A2A' : 'white'};
-  border: var(--border-thick);
-  border-radius: 16px;
+  background: ${props => props.theme === 'dark' 
+    ? 'linear-gradient(135deg, rgba(42, 42, 42, 0.4) 0%, rgba(30, 30, 30, 0.6) 100%)' 
+    : 'linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(248, 250, 252, 0.8) 100%)'};
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow-neobrutalist);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.03)'};
   
   &:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 10px 10px 0px 0px var(--shadow-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   }
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: var(--color-accent1);
+  @media (max-width: 768px) {
+    border-radius: 16px;
+    margin: 0 5px;
+    
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 `;
 
 const CardInner = styled.div`
   display: flex;
-  flex-direction: row;
-  height: 100%; // Allows content to define height of the card
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
   
   @media (max-width: 768px) {
-    flex-direction: column;
+    padding: 1.2rem 1rem;
   }
 `;
 
-const CardSidebar = styled.div`
-  width: 200px;
-  background: ${props => props.theme === 'dark' ? 'rgba(79, 109, 122, 0.1)' : 'rgba(79, 109, 122, 0.05)'};
-  padding: 2rem;
+const CardHeader = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center; // Better aligns icon and tag if content is short
-  border-right: 1px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'};
+  margin-bottom: 1rem;
+  gap: 0.8rem;
+  min-height: 3rem;
   
   @media (max-width: 768px) {
-    width: 100%;
-    padding: 1.5rem;
-    border-right: none;
-    border-bottom: 1px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'};
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 1.5rem;
+    margin-bottom: 0.8rem;
   }
 `;
 
 const ServiceIcon = styled.div`
-  font-size: 2.5rem;
-  color: var(--color-accent2);
-  background: ${props => props.theme === 'dark' ? 'rgba(130, 144, 217, 0.15)' : 'rgba(113, 126, 195, 0.1)'};
-  width: 80px;
-  height: 80px;
-  border-radius: 14px;
+  font-size: 1.5rem;
+  color: var(--color-accent1);
+  background: ${props => props.theme === 'dark' 
+    ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.05) 100%)' 
+    : 'linear-gradient(135deg, rgba(113, 126, 195, 0.1) 0%, rgba(113, 126, 195, 0.03) 100%)'};
+  width: 3rem;
+  height: 3rem;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  border: 1px solid ${props => props.theme === 'dark' ? 'rgba(130, 144, 217, 0.2)' : 'rgba(113, 126, 195, 0.15)'};
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  
+  ${ServiceCard}:hover & {
+    transform: scale(1.05);
+    background: ${props => props.theme === 'dark' 
+      ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.25) 0%, rgba(130, 144, 217, 0.1) 100%)' 
+      : 'linear-gradient(135deg, rgba(113, 126, 195, 0.15) 0%, rgba(113, 126, 195, 0.05) 100%)'};
+  }
   
   @media (max-width: 768px) {
-    width: 60px;
-    height: 60px;
-    font-size: 1.8rem;
-    margin-bottom: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.4rem;
   }
 `;
 
-const CategoryTag = styled.div`
-  background: var(--color-accent3);
-  color: var(--color-text);
-  font-size: 0.8rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: 2px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
-  margin-top: 1rem;
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    margin-top: 0;
-  }
-`;
-
-const CardContent = styled.div`
-  flex-grow: 1;
-  padding: 2rem;
+const HeaderContent = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
+  justify-content: center;
+  min-height: 100%;
 `;
 
-const ServiceTitle = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  font-family: var(--font-heading);
+
+
+const CardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+`;
+
+const CardTitle = styled.h3`
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--color-text);
-  position: relative;
-  line-height: 1.3; // Added for better control if title wraps
-  
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 60px;
-    height: 3px;
-    background: var(--color-accent2);
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
+  margin: 0;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
 `;
 
 const ServiceDescription = styled.p`
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  opacity: 0.9;
-  overflow-wrap: break-word; // Added for better text wrapping
+  margin: 0 0 2rem 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-size: 1rem;
+  opacity: 0.85;
+  overflow-wrap: break-word;
 
   @media (max-width: 768px) {
     font-size: 1rem;
     margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 `;
 
-const FeaturesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; // Adjusted gap slightly
-  margin-top: auto; // Pushes features to the bottom if card content is sparse
-`;
-
-const FeaturesTitle = styled.h4`
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-text);
-`;
-
-const FeaturesList = styled.div`
+const FeaturesList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  font-size: 0.85rem;
 `;
 
-const Feature = styled.div`
+const Feature = styled.li`
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  align-items: flex-start;
+  gap: 0.4rem;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  opacity: 0.9;
   
-  svg {
+  .feature-icon {
     color: var(--color-accent1);
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
     flex-shrink: 0;
   }
-`;
-
-const FeatureText = styled.span`
-  font-size: 0.95rem;
-  line-height: 1.4;
-  overflow-wrap: break-word; // Added for better text wrapping
-`;
-
-const LearnMoreButton = styled(motion.button)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.5rem;
-  background: var(--color-accent1);
-  color: white;
-  border: var(--border-thick);
-  font-weight: 600;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-heading);
-  margin-top: 2rem;
-  align-self: flex-start;
   
-  svg {
+  .button-icon {
     transition: transform 0.3s ease;
+    color: var(--color-accent1);
+    font-size: 0.8rem;
   }
   
   &:hover {
-    background: var(--color-accent2);
+    background: ${props => props.theme === 'dark' 
+      ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.08) 100%)' 
+      : 'linear-gradient(135deg, rgba(113, 126, 195, 0.1) 0%, rgba(113, 126, 195, 0.05) 100%)'};
+    transform: translateY(-2px);
+    border-color: var(--color-accent1);
     
-    svg {
-      transform: translateX(5px);
+    .button-icon {
+      transform: translateX(4px);
     }
   }
   
   @media (max-width: 768px) {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    margin-top: 1.5rem; // Adjusted slightly
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
   }
 `;
 
-const DecorativeCircle = styled.div`
-  position: absolute;
-  border-radius: 50%;
-  background: ${props => props.theme === 'dark' 
-    ? 'rgba(95, 136, 160, 0.05)' 
-    : 'rgba(79, 109, 122, 0.05)'
-  };
-  width: ${props => props.size || '400px'};
-  height: ${props => props.size || '400px'};
-  z-index: 1;
-  top: ${props => props.top || 'auto'};
-  left: ${props => props.left || 'auto'};
-  right: ${props => props.right || 'auto'};
-  bottom: ${props => props.bottom || 'auto'};
-`;
-
-const categories = [
-  { id: 'all', nameKey: 'all' },
-  { id: 'websites', nameKey: 'websites' },
-  { id: 'ecommerce', nameKey: 'ecommerce' },
-  { id: 'apps', nameKey: 'apps' }
-];
 
 const servicesData = [
   {
@@ -398,10 +296,7 @@ const servicesData = [
     id: 6, icon: <FaCalendarAlt />, titleKey: 'bookingSystems.title', descriptionKey: 'bookingSystems.description', categories: ['apps', 'websites'],
     features: ['bookingSystems.features.realTimeAvailability', 'bookingSystems.features.onlinePayments', 'bookingSystems.features.automatedReminders', 'bookingSystems.features.calendarSync', 'bookingSystems.features.customizableForms', 'bookingSystems.features.groupBookings']
   },
-  {
-    id: 7, icon: <FaGlobe />, titleKey: 'multilingualSites.title', descriptionKey: 'multilingualSites.description', categories: ['websites', 'ecommerce'],
-    features: ['multilingualSites.features.contentTranslation', 'multilingualSites.features.languageSwitcher', 'multilingualSites.features.localizedSEO', 'multilingualSites.features.rtlSupport', 'multilingualSites.features.regionalFormatting', 'multilingualSites.features.easyManagement']
-  }
+
 ];
 
 const getTranslation = (path, language, translationsData) => {
@@ -420,82 +315,70 @@ const getTranslation = (path, language, translationsData) => {
   }
 };
 
-// Variants for the grid container to stagger children
+// Animation variants
 const servicesGridVariants = {
-  initial: {}, // Can be empty or { opacity: 0 } if grid itself fades
+  initial: {},
   animate: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.07, // Time between each card animation start
+      staggerChildren: 0.08,
     }
   },
 };
 
-// Variants for individual cards, used by stagger and AnimatePresence
 const cardItemVariants = {
-  initial: { opacity: 0, y: -20 }, // Animate from top
+  initial: { opacity: 0, y: -20 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: "easeOut" } // Faster animation for each card
+    transition: { duration: 0.4, ease: "easeOut" }
   },
   exit: {
     opacity: 0,
-    y: 20, // Example exit: to bottom
-    transition: { duration: 0.25, ease: "easeIn" }
+    y: 20,
+    transition: { duration: 0.3, ease: "easeIn" }
   }
 };
 
 const ServiceCardComponent = ({ service, theme, language }) => {
-  const primaryCategoryKey = service.categories.length > 0 ? service.categories[0] : 'general';
-
+  // Skip rendering the multilingual website service
+  if (service.titleKey === 'multilingualWebsites.title') {
+    return null;
+  }
+  
   return (
-    <ServiceCard // This is already styled(motion.div)
+    <ServiceCard 
       theme={theme}
       variants={cardItemVariants}
-      // AnimatePresence and parent stagger will manage initial/animate/exit
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      layout
     >
       <CardInner>
-        <CardSidebar theme={theme}>
+        <CardHeader>
           <ServiceIcon theme={theme}>
             {service.icon}
           </ServiceIcon>
-          <CategoryTag theme={theme}>
-            {getTranslation(`services.categories.${primaryCategoryKey}`, language, translations)}
-          </CategoryTag>
-        </CardSidebar>
-        
+          <HeaderContent>
+            <CardTitle>{getTranslation(`services.${service.titleKey}`, language, translations)}</CardTitle>
+          </HeaderContent>
+        </CardHeader>
         <CardContent>
-          <ServiceTitle>
-            {getTranslation(`services.${service.titleKey}`, language, translations)}
-          </ServiceTitle>
-          
           <ServiceDescription>
             {getTranslation(`services.${service.descriptionKey}`, language, translations)}
           </ServiceDescription>
-          
-          <FeaturesContainer>
-            <FeaturesTitle>
-              {getTranslation('services.keyFeatures', language, translations)}
-            </FeaturesTitle>
-            
+          {service.features && service.features.length > 0 && (
             <FeaturesList>
-              {service.features.map((featureKey, idx) => (
-                <Feature key={idx}>
-                  <FaCheck />
-                  <FeatureText>{getTranslation(`services.${featureKey}`, language, translations)}</FeatureText>
+              {service.features.map((feature, index) => (
+                <Feature key={index} theme={theme}>
+                  <FaCheck className="feature-icon" />
+                  <span>{getTranslation(`services.${feature}`, language, translations)}</span>
                 </Feature>
               ))}
             </FeaturesList>
-          </FeaturesContainer>
-          
-          <LearnMoreButton
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            {getTranslation('services.learnMore', language, translations)}
-            <FaArrowRight />
-          </LearnMoreButton>
+          )}
+
         </CardContent>
       </CardInner>
     </ServiceCard>
@@ -505,62 +388,33 @@ const ServiceCardComponent = ({ service, theme, language }) => {
 const Services = () => {
   const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all');
   
   const { ref: sectionRef, inView: sectionInView } = useInView({
     triggerOnce: true,
-    threshold: 0.1, // Section considered in view when 10% is visible
+    threshold: 0.1,
   });
   
-  const filteredServices = activeCategory === 'all'
-    ? servicesData
-    : servicesData.filter(service => service.categories.includes(activeCategory));
+  // Remove the multilingual websites service
+  const filteredServices = servicesData.filter(service => service.titleKey !== 'multilingualWebsites.title');
   
   const titleVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }, // Slight delay adjustment
-  };
-
-  const subtitleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }, // Slight delay adjustment
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } },
   };
   
   return (
-    <ServicesSection id="services" ref={sectionRef}> {/* Ref for section-level inView */}
-      <DecorativeCircle size="600px" top="-300px" left="-200px" theme={theme} />
-      <DecorativeCircle size="400px" bottom="-150px" right="-100px" theme={theme} />
-      
+    <ServicesSection id="services" ref={sectionRef}>
       <ServicesContainer>
         <motion.div initial="hidden" animate={sectionInView ? "visible" : "hidden"} variants={titleVariants}>
           <SectionTitle>
-            {getTranslation('services.mainTitle', language, translations)}{' '} 
-            <span>{getTranslation('services.mainSubtitleAccent', language, translations)}</span>
+            {language === 'hu' ? 'Szolgáltatások' : 'Services'}
           </SectionTitle>
         </motion.div>
         
-        <motion.div initial="hidden" animate={sectionInView ? "visible" : "hidden"} variants={subtitleVariants}>
-          <SectionSubtitle>
-            {getTranslation('services.overallDescription', language, translations)}
-          </SectionSubtitle>
-        </motion.div>
-        
-        <ServiceCategories>
-          {categories.map(category => (
-            <CategoryTab
-              key={category.id}
-              active={activeCategory === category.id}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {getTranslation(`services.categories.${category.nameKey}`, language, translations)}
-            </CategoryTab>
-          ))}
-        </ServiceCategories>
-        
-        <ServicesGrid // This is styled(motion.div)
+        <ServicesGrid
           variants={servicesGridVariants}
-          initial="initial" // Can be "hidden" if grid itself has opacity variant
-          animate={sectionInView ? "animate" : "initial"} // Trigger stagger when section is in view
+          initial="initial"
+          animate={sectionInView ? "animate" : "initial"}
         >
           <AnimatePresence mode="wait">
             {filteredServices.map(service => (

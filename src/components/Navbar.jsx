@@ -9,27 +9,36 @@ import LanguageSwitcher from './LanguageSwitcher';
 import translations from '../translations';
 
 // Floating nav container with dynamic properties based on scroll
+// Debounce function to optimize scroll performance
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
 const NavContainer = styled(motion.div)`
   position: fixed;
-  top: ${props => props.$isScrolled ? '16px' : '24px'};
-  left: 50%;
-  transform: translateX(-50%);
-  width: ${props => props.$isScrolled ? '95%' : '90%'};
-  max-width: 1400px;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: ${props => props.$isScrolled ? '16px' : '24px'} ${props => props.$isScrolled ? '2.5%' : '5%'};
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, padding, background, backdrop-filter;
+  pointer-events: none;
   
   @media (max-width: 768px) {
-    top: ${props => props.$isScrolled ? '10px' : '16px'};
-    width: 94%;
+    padding: ${props => props.$isScrolled ? '10px' : '16px'} 3%;
   }
   
-  /* Ensure navbar is at the top on mobile */
   @media (max-width: 480px) {
-    top: 0;
-    width: 100%;
-    left: 0;
-    transform: none;
+    padding: 0;
   }
 `;
 
@@ -37,31 +46,40 @@ const Nav = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${props => props.$isScrolled ? '0.6rem 1.5rem' : '0.8rem 2rem'};
-  border-radius: ${props => props.$isScrolled ? '16px' : '24px'};
+  padding: ${props => props.$isScrolled ? '0.8rem 1.5rem' : '1rem 2rem'};
+  border-radius: ${props => props.$isScrolled ? '16px' : '0 0 24px 24px'};
   background: ${props => 
-    props.$isScrolled ? 
-    'var(--color-bg)' : 
-    'rgba(255, 255, 255, 0.85)'
+    props.$isScrolled 
+      ? 'rgba(255, 255, 255, 0.85)' 
+      : 'rgba(255, 255, 255, 0)'
   };
-  backdrop-filter: blur(10px);
-  border: var(--border-thick) var(--border-color);
+  backdrop-filter: ${props => props.$isScrolled ? 'blur(12px) saturate(180%)' : 'none'};
+  -webkit-backdrop-filter: ${props => props.$isScrolled ? 'blur(12px) saturate(180%)' : 'none'};
+  border: ${props => props.$isScrolled ? '2px solid rgba(255, 255, 255, 0.6)' : 'none'};
+  border-top: none;
   box-shadow: ${props => 
-    props.$isScrolled ? 
-    '0 4px 20px rgba(0, 0, 0, 0.1)' : 
-    '0 8px 32px rgba(0, 0, 0, 0.08)'
+    props.$isScrolled 
+      ? '0 4px 30px rgba(0, 0, 0, 0.1)' 
+      : 'none'
   };
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.3s ease-out,
+              backdrop-filter 0.3s ease-out,
+              -webkit-backdrop-filter 0.3s ease-out,
+              box-shadow 0.3s ease-out;
   height: ${props => props.$isScrolled ? '64px' : '80px'};
+  will-change: transform, height, padding, border-radius, background, backdrop-filter, box-shadow;
+  pointer-events: auto;
   
   @media (max-width: 768px) {
-    padding: ${props => props.$isScrolled ? '0.5rem 1.2rem' : '0.6rem 1.5rem'};
+    padding: ${props => props.$isScrolled ? '0.6rem 1.2rem' : '0.8rem 1.5rem'};
     height: ${props => props.$isScrolled ? '60px' : '70px'};
   }
   
   @media (max-width: 480px) {
-    border-radius: ${props => props.$isScrolled ? '0 0 16px 16px' : '0 0 20px 20px'};
-    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 0.8rem 1.2rem;
+    height: 60px;
   }
 `;
 
@@ -331,18 +349,39 @@ const Navbar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const { language } = useLanguage();
   const animationFrameRef = useRef(null);
-  
+  const isScrolledState = useRef(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate scroll progress (0 at top, 1 at bottom)
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== isScrolledState.current) {
+        setIsScrolled(isScrolled);
+        isScrolledState.current = isScrolled;
+      }
+    };
+
+    // Add passive: true for better scroll performance
+    const options = { passive: true };
+    const debouncedScroll = debounce(handleScroll, 10);
+    
+    window.addEventListener('scroll', debouncedScroll, options);
+    
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', debouncedScroll, options);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const progress = Math.min(scrollY / documentHeight, 1);
       
       setScrollProgress(progress);
-      
-      // Update isScrolled state for other navbar effects
       if (scrollY > 50) {
         setIsScrolled(true);
       } else {

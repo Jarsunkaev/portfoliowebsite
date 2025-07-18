@@ -160,13 +160,11 @@ const ProjectImage = styled.div`
   height: 420px;
   border-radius: 16px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s ease;
     border-radius: 16px;
   }
   
@@ -177,15 +175,6 @@ const ProjectImage = styled.div`
     border-radius: 16px;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     pointer-events: none;
-  }
-  
-  ${ProjectRow}:hover & {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-    
-    img {
-      transform: scale(1.05);
-    }
   }
   
   @media (max-width: 768px) {
@@ -380,7 +369,7 @@ const projectsData = [
       en: "Modern tourism website featuring custom design and an interactive contact form for a travel agency specializing in unique Hungarian experiences.",
       hu: "Modern turisztikai weboldal egyedi dizájnnal és interaktív kapcsolatfelvételi űrlappal egy utazási iroda számára, amely egyedi magyar élményekre specializálódott."
     },
-    image: "/img/projects/buviptur.jpg",
+    image: " http://localhost:3000/portfoliowebsite/buviptur.png",
     category: "tourism",
     icon: <FaPlane />,
     categoryName: {
@@ -409,7 +398,7 @@ const projectsData = [
       en: "Comprehensive website for a business offering airport parking, car wash, tire service, and car maintenance with a fully interactive real-time booking system.",
       hu: "Átfogó weboldal egy vállalkozás számára, amely reptéri parkolást, autómosást, gumiszervízt és autókarbantartást kínál teljes mértékben interaktív, valós idejű foglalási rendszerrel."
     },
-    image: "/img/projects/zima-auto.jpg",
+    image: " http://localhost:3000/portfoliowebsite/zima.png",
     category: "automotive",
     icon: <FaCar />,
     categoryName: {
@@ -424,9 +413,9 @@ const projectsData = [
       en: "Designed a sophisticated booking system with real-time availability, service time calculations, and automated confirmations.",
       hu: "Kifinomult foglalási rendszer tervezése valós idejű elérhetőséggel, szolgáltatási időszámításokkal és automatizált visszaigazolásokkal."
     },
-    technologies: ["Svelte", "Node.js", "MongoDB", "WebSockets", "JWT"],
+    technologies: ["Svelte", "Node.js", "Google Sheets", "i18n", "Google Calendar"],
     features: ["Real-time Booking", "Service Management", "Customer Dashboard", "Admin Panel"],
-    demoUrl: "https://zimaauto.hu"
+    demoUrl: "https://zima-auto.com"
   },
   {
     id: 3,
@@ -438,7 +427,7 @@ const projectsData = [
       en: "Innovative web application that generates personalized recipes based on available ingredients, helping users reduce food waste and discover new dishes.",
       hu: "Innovatív webalkalmazás, amely személyre szabott recepteket generál a rendelkezésre álló hozzávalók alapján, segítve a felhasználókat az élelmiszer-pazarlás csökkentésében és új ételek felfedezésében."
     },
-    image: "/img/projects/frigo.jpg",
+    image: " http://localhost:3000/portfoliowebsite/frigo.png",
     category: "webapp",
     icon: <FaUtensils />,
     categoryName: {
@@ -489,7 +478,7 @@ const Projects = () => {
       
       <ProjectsContainer>
         <SectionTitle>
-          {language === 'hu' ? 'Munkáink' : 'My'} <span>{language === 'hu' ? '' : 'Portfolio'}</span>
+          {language === 'hu' ? 'Munkáim' : 'My'} <span>{language === 'hu' ? '' : 'Portfolio'}</span>
         </SectionTitle>
         <SectionSubtitle>
           {translations.projects.subtitle[language]}

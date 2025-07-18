@@ -415,12 +415,12 @@ const translations = {
       en: 'Solution'
     },
     viewCaseStudyButton: {
-      hu: 'Esettanulmány Megtekintése',
-      en: 'View Case Study'
+      hu: 'Oldal Megtekintése',
+      en: 'View Website'
     },
     viewCaseStudy: {
-      hu: 'Esettanulmány megtekintése',
-      en: 'View Case Study'
+      hu: 'Oldal Megtekintése',
+      en: 'View Website'
     }
   },
   

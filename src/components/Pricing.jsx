@@ -45,13 +45,15 @@ const SectionSubtitle = styled.p`
 
 const PricingGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Changed from auto-fill to 2 equal columns */
-  gap: 2rem;
-  max-width: 900px; /* Reduced max-width for 2 columns */
-  margin: 0 auto; /* Center the grid */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    padding: 0 10px;
   }
 `;
 
@@ -59,23 +61,23 @@ const PricingCard = styled(motion.div)`
   background: ${props => props.highlighted ? 'var(--color-accent3)' : 'var(--color-neutral)'};
   border: ${props => props.highlighted ? '2px solid var(--color-accent1)' : 'var(--border-thick) var(--border-color)'};
   border-radius: 8px;
-  padding: 2.5rem;
+  padding: 1.8rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
   
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const PlanName = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
   color: var(--color-text);
 `;
 
@@ -83,9 +85,10 @@ const PlanPrice = styled.div`
   margin-bottom: 1rem;
   
   .price {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--color-accent1);
+    line-height: 1.2;
   }
   
   .currency {

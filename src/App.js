@@ -11,7 +11,7 @@ import Pricing from './components/Pricing';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ThemeToggle from './components/ThemeToggle';
+import BackToTopButton from './components/BackToTopButton';
 import AnimatedBackground from './components/AnimatedBackground';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -38,7 +38,7 @@ function App() {
               <About />
               <Contact />
               <Footer />
-              <ThemeToggle />
+              <BackToTopButton />
             </motion.div>
           </AnimatePresence>
         </LanguageProvider>
