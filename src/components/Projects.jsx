@@ -1,94 +1,229 @@
-import React, { useContext } from 'react';
+// src/components/Projects.jsx - Updated with real projects and Hungarian support
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaUtensils, FaCar, FaPlane, FaCodeBranch, FaCalendarAlt, FaGlobe } from 'react-icons/fa';
 import { ThemeContext } from './ThemeContext';
+import { useLanguage } from './LanguageContext';
+import translations from '../translations';
 
 const ProjectsSection = styled.section`
-  padding: 100px 0;
-  position: relative; /* Ensure proper stacking context */
-  z-index: 1; /* Place above background but below other elements that need to be on top */
-  
-  /* Remove background color completely to let animated background show through */
-  background-color: transparent;
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+`;
+
+const BackgroundAccent = styled.div`
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: ${props => props.theme === 'dark' ? 'rgba(95, 136, 160, 0.05)' : 'rgba(79, 109, 122, 0.05)'};
+  top: ${props => props.top || '0'};
+  left: ${props => props.left || 'auto'};
+  right: ${props => props.right || 'auto'};
+  bottom: ${props => props.bottom || 'auto'};
+  z-index: -1;
 `;
 
 const ProjectsContainer = styled.div`
   width: 90%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center align everything in container */
-  position: relative; /* Create stacking context */
-  z-index: 2; /* Place content above section background */
+  position: relative;
+  z-index: 2;
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 3rem;
-  margin-bottom: 3rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
   text-align: center;
-  border-bottom: var(--border-thick);
-  padding-bottom: 1rem;
   
   span {
     color: var(--color-accent2);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 5px;
+      width: 100%;
+      height: 8px;
+      background-color: var(--color-accent3);
+      z-index: -1;
+      opacity: 0.5;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
   }
 `;
 
-// Use flex instead of grid for more control over centering
-const ProjectGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Center the cards */
-  gap: 3rem;
-  width: 100%;
+const SectionSubtitle = styled.p`
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  line-height: 1.6;
 `;
 
-const ProjectCard = styled(motion.div)`
-  border: var(--border-thick);
-  border-radius: 12px;
-  background: ${props => props.theme === 'dark' ? 
-    'rgba(42, 42, 42, 0.9)' : /* Slightly more opaque for readability */
-    'rgba(255, 255, 255, 0.9)'
-  };
-  box-shadow: ${props => props.theme === 'dark' ? '5px 5px 10px rgba(100,100,100,0.2)' : '5px 5px 10px rgba(0,0,0,0.1)'};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  width: 350px; /* Fixed width instead of percentage */
-  max-width: 100%;
+const FilterContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem;
+`;
+
+const FilterButton = styled.button`
+  padding: 0.6rem 1.2rem;
+  background: ${props => props.active ? 'var(--color-accent1)' : 'transparent'};
+  color: ${props => props.active ? 'white' : 'var(--color-text)'};
+  border: var(--border-thick);
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  svg {
+    font-size: 1rem;
+  }
   
   &:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: ${props => props.theme === 'dark' ? '6px 6px 12px rgba(100,100,100,0.3)' : '6px 6px 12px rgba(0,0,0,0.15)'};
+    background: ${props => props.active ? 'var(--color-accent1)' : 'var(--color-accent3)'};
+    transform: translateY(-3px);
   }
+`;
+
+// Improved staggered layout styling
+const ProjectsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+`;
+
+const ProjectRow = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  position: relative;
+  padding: 2rem 0;
+  
+  &:nth-child(even) {
+    direction: rtl;
+  }
+  
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -3rem;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'},
+      transparent
+    );
+  }
+  
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    text-align: left;
+    direction: ltr;
+    gap: 3rem;
+    padding: 1.5rem 0;
+  }
+`;
+
+const ProjectImageContainer = styled.div`
+  position: relative;
+  direction: ltr;
+  z-index: 1;
+  padding: 0;
+  transition: all 0.4s ease;
 `;
 
 const ProjectImage = styled.div`
-  height: 200px; /* Slightly reduced fixed height */
   overflow: hidden;
-  border-bottom: var(--border-thick);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f5f5f5'};
+  height: 420px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Changed from cover to contain */
-    object-position: center; /* Center the image */
-    transition: transform 0.5s ease;
-    max-height: 200px; /* Ensure image doesn't exceed container */
+    object-fit: cover;
+    border-radius: 16px;
   }
   
-  ${ProjectCard}:hover & img {
-    transform: scale(1.05);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+`;
+
+const CategoryTag = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 100px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  
+  svg {
+    font-size: 1.2rem;
+    color: var(--color-accent1);
+  }
+  
+  ${ProjectRow}:hover & {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  ${ProjectRow}:nth-child(even) & {
+    left: auto;
+    right: 20px;
+  }
+  
+  @media (max-width: 992px) {
+    left: 20px;
+    right: auto;
+    
+    ${ProjectRow}:nth-child(even) & {
+      left: 20px;
+      right: auto;
+    }
   }
 `;
 
@@ -96,164 +231,323 @@ const ProjectContent = styled.div`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex: 1; /* Take up remaining space */
+  text-align: left;
+  direction: ltr;
+  align-self: center;
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
   font-family: var(--font-heading);
   color: var(--color-text);
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 80px;
+    height: 4px;
+    background: var(--color-accent2);
+  }
 `;
 
 const ProjectDescription = styled.p`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   color: var(--color-text);
-  opacity: 0.8;
-  flex-grow: 1; /* This will push the tags and buttons to the bottom */
+  opacity: 0.9;
+  line-height: 1.7;
+  font-size: 1.1rem;
 `;
 
-const ProjectTags = styled.div`
+const ProjectChallenge = styled.div`
+  margin-bottom: 2rem;
+  position: relative;
+  padding: 1.5rem;
+  background: ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.02)'};
+  border-radius: 16px;
+  border-left: 4px solid var(--color-accent1);
+  transition: all 0.3s ease;
+  
+  ${ProjectRow}:hover & {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
+  }
+  
+  h4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    svg {
+      color: var(--color-accent1);
+    }
+  }
+  
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const TechnologiesList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
 `;
 
-const Tag = styled.span`
-  background: ${props => `var(--color-${props.color || 'accent1'})`};
-  padding: 0.3rem 0.8rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 2px solid ${props => props.theme === 'dark' ? 'white' : 'black'};
-  border-radius: 6px;
-  color: ${props => {
-    if (props.color === 'accent1') return 'white';
-    return props.theme === 'dark' ? 'black' : 'black';
+const Technology = styled.span`
+  display: inline-block;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  background: ${props => {
+    if (props.color === 'accent1') return 'var(--color-accent1)';
+    if (props.color === 'accent2') return 'var(--color-accent2)';
+    return 'var(--color-accent3)';
   }};
-`;
-
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const ProjectLink = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: ${props => props.theme === 'dark' ? 'white' : 'black'};
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border: 2px solid ${props => props.theme === 'dark' ? 'white' : 'black'};
+  border: 2px solid black;
   border-radius: 6px;
-  background: ${props => props.primary ? 'var(--color-accent2)' : 'transparent'};
+  color: ${props => props.color === 'accent1' ? 'white' : 'black'};
   transition: all 0.2s ease;
   
   &:hover {
-    background: ${props => props.primary ? 'var(--color-accent1)' : 'var(--color-accent3)'};
-    transform: translateY(-2px);
-    color: ${props => props.primary ? 'white' : 'black'};
+    transform: translateY(-3px);
   }
 `;
 
+const ViewButton = styled(motion.a)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  width: fit-content;
+  border: var(--border-thick);
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--font-heading);
+  
+  &:hover {
+    background: var(--color-accent3);
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-neobrutalist);
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover svg {
+    transform: translateX(5px);
+  }
+`;
+
+// New Projects Data with more realistic images
 const projectsData = [
   {
     id: 1,
-    title: "Frigo App",
-    description: "A recipe recommender webapp that generates recipes based on uploaded images, with meal planner features.",
-    image: "frigo.png",
-    tags: ["React", "Node.js", "AI", "Image Recognition"],
-    github: "https://github.com/Jarsunkaev/frigo_app",
-    demo: "https://frigo-app.com/"
+    title: {
+      en: "BuvipTur Tourism Website",
+      hu: "BuvipTur Turisztikai Weboldal"
+    },
+    description: {
+      en: "Modern tourism website featuring custom design and an interactive contact form for a travel agency specializing in unique Hungarian experiences.",
+      hu: "Modern turisztikai weboldal egyedi dizájnnal és interaktív kapcsolatfelvételi űrlappal egy utazási iroda számára, amely egyedi magyar élményekre specializálódott."
+    },
+    image: " http://localhost:3000/portfoliowebsite/buviptur.png",
+    category: "tourism",
+    icon: <FaPlane />,
+    categoryName: {
+      en: "Tourism",
+      hu: "Turizmus"
+    },
+    problem: {
+      en: "Creating an attractive digital presence that effectively showcases tour packages while making it easy for international tourists to inquire about services.",
+      hu: "Vonzó digitális jelenlét létrehozása, amely hatékonyan mutatja be az utazási csomagokat, miközben megkönnyíti a nemzetközi turisták számára a szolgáltatások iránti érdeklődést."
+    },
+    solution: {
+      en: "Developed a sleek, responsive website with visually appealing tour presentations and a streamlined, multilingual contact system.",
+      hu: "Elegáns, reszponzív weboldal fejlesztése vizuálisan vonzó túrabemutatókkal és egyszerűsített, többnyelvű kapcsolattartási rendszerrel."
+    },
+    technologies: ["Svelte", "Node.js", "Express", "i18n", "GSAP"],
+    features: ["Custom Design", "Responsive Interface", "Contact Form", "SEO Optimization"],
+    demoUrl: "https://buviptur.com"
   },
   {
     id: 2,
-    title: "CampFinder",
-    description: "A platform for discovering and reviewing camping sites across the country.",
-    image: "campfinder.png",
-    tags: ["React", "Node.js", "MongoDB"],
-    github: "https://github.com/Jarsunkaev/Camp-Finder",
-    demo: "https://campfinder.fly.dev/"
+    title: {
+      en: "Zima Auto Services",
+      hu: "Zima Autó Szolgáltatások"
+    },
+    description: {
+      en: "Comprehensive website for a business offering airport parking, car wash, tire service, and car maintenance with a fully interactive real-time booking system.",
+      hu: "Átfogó weboldal egy vállalkozás számára, amely reptéri parkolást, autómosást, gumiszervízt és autókarbantartást kínál teljes mértékben interaktív, valós idejű foglalási rendszerrel."
+    },
+    image: " http://localhost:3000/portfoliowebsite/zima.png",
+    category: "automotive",
+    icon: <FaCar />,
+    categoryName: {
+      en: "Automotive",
+      hu: "Autós Szolgáltatások"
+    },
+    problem: {
+      en: "Managing complex service scheduling across multiple service types while preventing double-bookings and optimizing staff resource allocation.",
+      hu: "Komplex szolgáltatásütemezés kezelése több szolgáltatástípuson keresztül, a dupla foglalások megelőzése és a személyzeti erőforrások optimalizálása mellett."
+    },
+    solution: {
+      en: "Designed a sophisticated booking system with real-time availability, service time calculations, and automated confirmations.",
+      hu: "Kifinomult foglalási rendszer tervezése valós idejű elérhetőséggel, szolgáltatási időszámításokkal és automatizált visszaigazolásokkal."
+    },
+    technologies: ["Svelte", "Node.js", "Google Sheets", "i18n", "Google Calendar"],
+    features: ["Real-time Booking", "Service Management", "Customer Dashboard", "Admin Panel"],
+    demoUrl: "https://zima-auto.com"
   },
   {
     id: 3,
-    title: "Zima Auto",
-    description: "Your One-Stop Solution for All Your Car Needs! ",
-    image: "zima.png",
-    tags: ["Wix"],
-    demo: "https://www.zima-auto.com/"
+    title: {
+      en: "Frigo Recipe Generator",
+      hu: "Frigo Receptgenerátor"
+    },
+    description: {
+      en: "Innovative web application that generates personalized recipes based on available ingredients, helping users reduce food waste and discover new dishes.",
+      hu: "Innovatív webalkalmazás, amely személyre szabott recepteket generál a rendelkezésre álló hozzávalók alapján, segítve a felhasználókat az élelmiszer-pazarlás csökkentésében és új ételek felfedezésében."
+    },
+    image: " http://localhost:3000/portfoliowebsite/frigo.png",
+    category: "webapp",
+    icon: <FaUtensils />,
+    categoryName: {
+      en: "Web Application",
+      hu: "Webalkalmazás"
+    },
+    problem: {
+      en: "Helping users decide what to cook with ingredients they already have at home, reducing food waste and inspiring culinary creativity.",
+      hu: "Segítség a felhasználóknak abban, hogy mit főzzenek az otthon már meglévő hozzávalókból, csökkentve az élelmiszer-pazarlást és inspirálva a konyhai kreativitást."
+    },
+    solution: {
+      en: "Created an intelligent recipe suggestion system that matches available ingredients with possible recipes and offers premium subscription options.",
+      hu: "Intelligens receptajánló rendszer létrehozása, amely összehangolja a rendelkezésre álló hozzávalókat a lehetséges receptekkel, és prémium előfizetési lehetőségeket kínál."
+    },
+    technologies: ["Next.js", "Firebase", "Stripe", "Recipe API", "Auth0"],
+    features: ["Ingredient Scanning", "Recipe Filtering", "Favorites Collection", "Premium Subscription"],
+    demoUrl: "https://frigo-recipes.com"
   }
 ];
 
+// Define category display names and their respective icons
+const categories = [
+  { id: "all", icon: <FaGlobe />, name: { en: "All Projects", hu: "Összes Projekt" } },
+  { id: "tourism", icon: <FaPlane />, name: { en: "Tourism", hu: "Turizmus" } },
+  { id: "automotive", icon: <FaCar />, name: { en: "Automotive", hu: "Autós" } },
+  { id: "webapp", icon: <FaCodeBranch />, name: { en: "Web Applications", hu: "Webalkalmazások" } }
+];
+
 const Projects = () => {
+  const [filter, setFilter] = useState("all");
   const { theme } = useContext(ThemeContext);
+  const { language } = useLanguage();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+  
+  // Filter projects based on selected category
+  const filteredProjects = filter === "all" 
+    ? projectsData 
+    : projectsData.filter(project => project.category === filter);
   
   return (
-    <ProjectsSection id="projects" theme={theme}>
+    <ProjectsSection id="projects" ref={ref}>
+      {/* Background accents */}
+      <BackgroundAccent theme={theme} top="-250px" left="5%" />
+      <BackgroundAccent theme={theme} bottom="100px" right="5%" />
+      
       <ProjectsContainer>
-        <SectionTitle>My <span>Projects</span></SectionTitle>
+        <SectionTitle>
+          {language === 'hu' ? 'Munkáim' : 'My'} <span>{language === 'hu' ? '' : 'Portfolio'}</span>
+        </SectionTitle>
+        <SectionSubtitle>
+          {translations.projects.subtitle[language]}
+        </SectionSubtitle>
         
-        <ProjectGrid>
-          {projectsData.map((project) => (
-            <ProjectCard
+        <FilterContainer>
+          {categories.map(category => (
+            <FilterButton
+              key={category.id}
+              active={filter === category.id}
+              onClick={() => setFilter(category.id)}
+            >
+              {category.icon} <span style={{ marginLeft: '8px' }}>{category.name[language]}</span>
+            </FilterButton>
+          ))}
+        </FilterContainer>
+        
+        <ProjectsWrapper>
+          {filteredProjects.map((project, index) => (
+            <ProjectRow
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: project.id * 0.1 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: index * 0.2 }}
               theme={theme}
             >
-              <ProjectImage theme={theme}>
-                <img src={project.image} alt={project.title} />
-              </ProjectImage>
+              <ProjectImageContainer>
+                <CategoryTag>
+                  {project.icon} {project.categoryName[language]}
+                </CategoryTag>
+                <ProjectImage>
+                  <img src={project.image} alt={project.title[language]} />
+                </ProjectImage>
+              </ProjectImageContainer>
               
               <ProjectContent>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
+                <ProjectTitle>{project.title[language]}</ProjectTitle>
+                <ProjectDescription>{project.description[language]}</ProjectDescription>
                 
-                <ProjectTags>
-                  {project.tags.map((tag, index) => (
-                    <Tag 
+                <ProjectChallenge theme={theme}>
+                  <h4><FaCalendarAlt /> {translations.projects.challengeSolutionTitle[language]}</h4>
+                  <p><strong>{translations.projects.problemLabel[language]}:</strong> {project.problem[language]}</p>
+                  <p><strong>{translations.projects.solutionLabel[language]}:</strong> {project.solution[language]}</p>
+                </ProjectChallenge>
+                
+                <TechnologiesList>
+                  {project.technologies.map((tech, index) => (
+                    <Technology 
                       key={index}
                       color={index % 3 === 0 ? 'accent1' : index % 3 === 1 ? 'accent2' : 'accent3'}
-                      theme={theme}
                     >
-                      {tag}
-                    </Tag>
+                      {tech}
+                    </Technology>
                   ))}
-                </ProjectTags>
+                </TechnologiesList>
                 
-                <ProjectLinks>
-                  {project.github && (
-                    <ProjectLink 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      theme={theme}
-                    >
-                      <FaGithub /> GitHub
-                    </ProjectLink>
-                  )}
-                  <ProjectLink 
-                    href={project.demo} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    primary
-                    theme={theme}
-                    style={{ 
-                      flex: project.github ? '0 0 auto' : '1', 
-                      justifyContent: project.github ? 'flex-start' : 'center'
-                    }}
-                  >
-                    <FaExternalLinkAlt /> Live Demo
-                  </ProjectLink>
-                </ProjectLinks>
+                <ViewButton 
+                  href={project.demoUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {translations.projects.viewCaseStudy[language]} <FaExternalLinkAlt />
+                </ViewButton>
               </ProjectContent>
-            </ProjectCard>
+            </ProjectRow>
           ))}
-        </ProjectGrid>
+        </ProjectsWrapper>
       </ProjectsContainer>
     </ProjectsSection>
   );

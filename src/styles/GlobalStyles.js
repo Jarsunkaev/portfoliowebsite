@@ -1,27 +1,27 @@
-// src/styles/GlobalStyles.js - Super bright light mode
+// src/styles/GlobalStyles.js - Refined professional color palette
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    /* Light theme variables - balanced brightness */
+    /* Light theme variables - sophisticated palette */
     --color-bg-light: #ffffff;
-    --color-text-light: #121212; /* Dark gray for good readability without harshness */
-    --color-accent1-light: #FF3366;
-    --color-accent2-light: #00B8D4;
-    --color-accent3-light: #FFD600;
-    --color-neutral-light: #FAFAFA; /* Very light gray for subtle distinction */
+    --color-text-light: #2D3142; /* Deep blue-gray for text */
+    --color-accent1-light: #4F6D7A; /* Muted teal blue */
+    --color-accent2-light: #717EC3; /* Soft purple blue */
+    --color-accent3-light: #EFC88B; /* Warm gold */
+    --color-neutral-light: #F7F7F9; /* Very light gray for subtle distinction */
     
-    /* Dark theme variables - enhanced for better contrast */
-    --color-bg-dark: #121212;
-    --color-text-dark: #FFFFFF;
-    --color-accent1-dark: #FF5C8A; /* Brighter in dark mode */
-    --color-accent2-dark: #25E6FF; /* Brighter in dark mode */
-    --color-accent3-dark: #FFEA80; /* Brighter in dark mode */
-    --color-neutral-dark: #1E1E1E;
+    /* Dark theme variables - refined for better contrast */
+    --color-bg-dark: #1A1E2A;
+    --color-text-dark: #F7F7F9;
+    --color-accent1-dark: #5F88A0; /* Lighter teal in dark mode */
+    --color-accent2-dark: #8290D9; /* Lighter purple blue in dark mode */
+    --color-accent3-dark: #F0D4A2; /* Softer gold in dark mode */
+    --color-neutral-dark: #262A39;
     
     /* Shared properties */
-    --border-thick: 3px solid;
-    --shadow-neobrutalist: 6px 6px 0px 0px;
+    --border-thick: 2px solid;
+    --shadow-neobrutalist: 4px 4px 0px 0px;
     
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -33,8 +33,8 @@ const GlobalStyles = createGlobalStyle`
     --color-accent2: var(--color-accent2-light);
     --color-accent3: var(--color-accent3-light);
     --color-neutral: var(--color-neutral-light);
-    --border-color: #000000;
-    --shadow-color: rgba(0,0,0,0.7);
+    --border-color: var(--color-text-light);
+    --shadow-color: rgba(45, 49, 66, 0.2);
   }
   
   /* Apply dark theme variables when body has data-theme="dark" */
@@ -45,8 +45,8 @@ const GlobalStyles = createGlobalStyle`
     --color-accent2: var(--color-accent2-dark);
     --color-accent3: var(--color-accent3-dark);
     --color-neutral: var(--color-neutral-dark);
-    --border-color: #FFFFFF;
-    --shadow-color: rgba(255,255,255,0.8);
+    --border-color: var(--color-text-dark);
+    --shadow-color: rgba(247, 247, 249, 0.2);
   }
   
   * {
@@ -67,7 +67,6 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     font-weight: 400;
     line-height: 1.6;
-    /* Removed brightness filter */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -83,6 +82,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0 15px;
   }
   
+  /* Refined box styling with more subtle shadows */
   .neobrutalist-box {
     border: var(--border-thick) var(--border-color);
     background-color: var(--color-neutral);
@@ -92,16 +92,17 @@ const GlobalStyles = createGlobalStyle`
                 border-color 0.3s ease;
     
     &:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 9px 9px 0px 0px var(--shadow-color);
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0px 0px var(--shadow-color);
     }
   }
   
+  /* More polished button styling */
   .btn {
     display: inline-block;
     padding: 12px 28px;
     background: var(--color-accent1);
-    color: ${props => props.theme === 'dark' ? '#121212' : 'white'};
+    color: ${props => props.theme === 'dark' ? '#F7F7F9' : '#FFFFFF'};
     font-weight: bold;
     border: var(--border-thick) var(--border-color);
     box-shadow: var(--shadow-neobrutalist) var(--shadow-color);
@@ -111,13 +112,14 @@ const GlobalStyles = createGlobalStyle`
     font-family: var(--font-heading);
     font-size: 1.1rem;
     letter-spacing: 0.5px;
+    border-radius: 4px;
     transition: transform 0.2s ease, box-shadow 0.2s ease, 
                 background-color 0.3s ease, color 0.3s ease,
                 border-color 0.3s ease;
     
     &:hover {
       transform: translate(-3px, -3px);
-      box-shadow: 8px 8px 0px 0px var(--shadow-color);
+      box-shadow: 6px 6px 0px 0px var(--shadow-color);
     }
   }
 
@@ -133,19 +135,19 @@ const GlobalStyles = createGlobalStyle`
 
   /* Better focus styles for accessibility */
   a:focus, button:focus, input:focus, textarea:focus {
-    outline: 3px solid var(--color-accent1);
+    outline: 2px solid var(--color-accent2);
     outline-offset: 2px;
   }
   
   /* Enhance text selection styles */
   ::selection {
-    background-color: var(--color-accent1);
+    background-color: var(--color-accent2);
     color: var(--color-bg);
   }
   
   /* Scrollbar styling */
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
   }
   
   ::-webkit-scrollbar-track {
@@ -155,7 +157,7 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: var(--color-accent1);
     border: 2px solid var(--color-bg);
-    border-radius: 6px;
+    border-radius: 5px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
