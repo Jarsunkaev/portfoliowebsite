@@ -277,7 +277,7 @@ const Contact = () => {
     <ContactSection id="contact">
       <ContactContainer>
         <SectionTitle>
-          {translations.contact.title[language]} <span>Me</span>
+          {translations.contact.title[language]} 
         </SectionTitle>
         <SectionSubtitle>
           {translations.contact.subtitle[language]}
@@ -305,17 +305,17 @@ const Contact = () => {
               <ContactLinks>
                 <ContactLink>
                   <FaEnvelope />
-                  <a href="mailto:contact@yourdevworks.com">contact@yourdevworks.com</a>
+                  <a href="mailto:juszuf_1@icloud.com">juszuf_1@icloud.com</a>
                 </ContactLink>
                 
                 <ContactLink>
                   <FaPhone />
-                  <a href="tel:+36201234567">+36 20 123 4567</a>
+                  <a href="tel:+36308749724">+36 30 874 9724</a>
                 </ContactLink>
                 
                 <ContactLink>
                   <FaLinkedin />
-                  <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/juszuf-arsunkaev/" target="_blank" rel="noopener noreferrer">
                     LinkedIn Profile
                   </a>
                 </ContactLink>
@@ -414,41 +414,6 @@ const Contact = () => {
                     <option value="multilingual">{translations.contact.projectTypeOptions.multilingual[language]}</option>
                     <option value="maintenance">{translations.contact.projectTypeOptions.maintenance[language]}</option>
                     <option value="other">{translations.contact.projectTypeOptions.other[language]}</option>
-                  </FormSelect>
-                </FormGroup>
-                
-                <FormGroup>
-                  <FormLabel htmlFor="budget">{translations.contact.budget[language]}</FormLabel>
-                  <FormSelect
-                    id="budget"
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    theme={theme}
-                  >
-                    <option value="">{translations.contact.budgetOptions.select[language]}</option>
-                    <option value="small">{translations.contact.budgetOptions.small[language]}</option>
-                    <option value="medium">{translations.contact.budgetOptions.medium[language]}</option>
-                    <option value="large">{translations.contact.budgetOptions.large[language]}</option>
-                    <option value="enterprise">{translations.contact.budgetOptions.enterprise[language]}</option>
-                    <option value="flexible">{translations.contact.budgetOptions.flexible[language]}</option>
-                  </FormSelect>
-                </FormGroup>
-                
-                <FormGroup>
-                  <FormLabel htmlFor="timeline">{translations.contact.timeline[language]}</FormLabel>
-                  <FormSelect
-                    id="timeline"
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    theme={theme}
-                  >
-                    <option value="">{translations.contact.timelineOptions.select[language]}</option>
-                    <option value="urgent">{translations.contact.timelineOptions.urgent[language]}</option>
-                    <option value="standard">{translations.contact.timelineOptions.standard[language]}</option>
-                    <option value="relaxed">{translations.contact.timelineOptions.relaxed[language]}</option>
-                    <option value="planning">{translations.contact.timelineOptions.planning[language]}</option>
                   </FormSelect>
                 </FormGroup>
                 

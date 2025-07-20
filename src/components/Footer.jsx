@@ -288,7 +288,7 @@ const Footer = () => {
                 <FaEnvelope />
               </ContactIcon>
               <ContactText>
-                <a href="mailto:contact@cybernode.dev">contact@cybernode.dev</a>
+                <a href="mailto:juszuf_1@icloud.com">juszuf_1@icloud.com</a>
               </ContactText>
             </ContactItem>
             
@@ -297,7 +297,7 @@ const Footer = () => {
                 <FaPhone className="fas fa-phone-alt" />
               </ContactIcon>
               <ContactText>
-                <a href="tel:+36201234567">+36 20 123 4567</a>
+                <a href="tel:+36308749724">+36 30 874 9724</a>
               </ContactText>
             </ContactItem>
             

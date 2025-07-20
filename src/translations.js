@@ -567,7 +567,7 @@ const translations = {
       en: 'Contact'
     },
     subtitle: {
-      hu: 'Lépjen Kapcsolatba Velünk',
+      hu: 'Elérhetőségeim',
       en: 'Get In Touch'
     },
     infoTitle: {
@@ -784,6 +784,10 @@ const translations = {
       hu: 'Rólam',
       en: 'About Me'
     },
+    description: {
+      hu: 'Webfejlesztő vagyok, egyedi weboldalakra és webalkalmazásokra szakosodva magyar és európai vállalkozások számára. Front-end és back-end fejlesztésben egyaránt jártas vagyok, teljeskörű digitális megoldásokat kínálva.\n\nMérnöki hátterem révén hatékony, jól strukturált és nagy teljesítményű megoldásokat nyújtok. Kiemelt tapasztalattal rendelkezem az egészségügy, turizmus és kisvállalkozások területén – legyen szó többnyelvű weboldalról, egyedi foglalási rendszerről vagy adminfelületetről.',
+      en: 'I\'m a web developer specializing in custom websites and web applications for businesses in Hungary and across Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions.\n\nMy engineering background allows me to create efficient, well-structured, high-performance applications. I have strong experience in sectors like healthcare, tourism, and small businesses—whether it\'s a multilingual website, custom booking system, or admin dashboard.'
+    },
     paragraph1: {
       hu: 'Webfejlesztő vagyok, aki egyedi weboldalak és webalkalmazások készítésére specializálódott vállalkozások számára Magyarországon és Európában. Mind a front-end, mind a back-end fejlesztésben szaktudással rendelkezem, teljes digitális megoldásokat kínálva, amelyek segítenek a vállalkozásoknak kitűnni.',
       en: 'I\'m a web developer specializing in creating custom websites and web applications for businesses across Hungary and Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions that help businesses stand out.'
@@ -813,11 +817,11 @@ const translations = {
       },
       timely: {
         title: {
-          hu: 'Időben Történő Szállítás',
+          hu: 'Időben Történő Átadás',
           en: 'Timely Delivery'
         },
         description: {
-          hu: 'Projektek ütemezett szállítása, rendszeres frissítésekkel a fejlesztés során.',
+          hu: 'Projektek határidőre történő átadása, rendszeres frissítésekkel a fejlesztés során.',
           en: 'Projects delivered on schedule with regular updates throughout development.'
         }
       },

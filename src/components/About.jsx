@@ -46,6 +46,10 @@ const SectionTitle = styled.h2`
   span {
     color: var(--color-accent1);
   }
+  
+  @media (max-width: 768px) {
+    grid-area: title;
+  }
 `;
 
 const AboutContent = styled.div`
@@ -55,6 +59,10 @@ const AboutContent = styled.div`
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    grid-template-areas: 
+      "title"
+      "image"
+      "content";
   }
 `;
 
@@ -71,15 +79,31 @@ const AboutText = styled(motion.div)`
   p:last-child {
     margin-bottom: 0;
   }
+  
+  @media (max-width: 768px) {
+    grid-area: content;
+  }
 `;
 
 const AboutImage = styled(motion.div)`
   border: var(--border-thick);
   border-radius: 16px;
   overflow: hidden;
-  height: 480px;
+  height: 450px;
+  max-width: 400px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: var(--shadow-neobrutalist);
   transition: transform 0.3s ease;
+  
+  @media (max-width: 768px) {
+    grid-area: image;
+    margin: 0 auto 2.5rem;
+    height: 350px;
+    max-width: 300px;
+  }
   
   &:hover {
     transform: translate(-5px, -5px);
@@ -87,18 +111,19 @@ const AboutImage = styled(motion.div)`
   }
   
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     transition: transform 0.8s ease;
   }
   
   &:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
   
   @media (max-width: 768px) {
-    height: 380px;
+    height: 340px;
     margin-top: 1rem;
   }
 `;
@@ -385,18 +410,14 @@ const About = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p>
-              {translations.about.paragraph1[language] || 
-                "I'm a web developer specializing in creating custom websites and web applications for businesses across Hungary and Europe. With expertise in both front-end and back-end development, I deliver complete digital solutions that help businesses stand out."}
-            </p>
-            <p>
-              {translations.about.paragraph2[language] || 
-                "My background in electrical engineering gives me a unique perspective on problem-solving and building efficient, well-structured applications. This technical foundation allows me to create solutions that not only look good but also perform exceptionally well."}
-            </p>
-            <p>
-              {translations.about.paragraph3[language] || 
-                "I take pride in developing tailored solutions for various industries, with particular expertise in healthcare, tourism, and small business sectors. Whether you need a multilingual website, a custom booking system, or an administrative dashboard, I can bring your vision to life."}
-            </p>
+            {translations.about.description[language]
+              .split('\n\n')
+              .map((paragraph, index) => (
+                <p key={index}>
+                  {paragraph}
+                </p>
+              ))
+            }
             
             <ValueProposition
               theme={theme}
@@ -427,7 +448,7 @@ const About = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <img src="/img/about-agency.jpg" alt="Web developer working" />
+            <img src="http://localhost:3000/portfoliowebsite/me.jpeg" alt="Web developer working" />
           </AboutImage>
         </AboutContent>
         
