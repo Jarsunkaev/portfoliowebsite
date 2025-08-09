@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-scroll';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLanguage } from './LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -348,6 +349,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const { language } = useLanguage();
+  const location = useLocation();
   const animationFrameRef = useRef(null);
   const isScrolledState = useRef(false);
 
@@ -425,11 +427,11 @@ const Navbar = () => {
   
   // Navigation items
   const navItems = [
-    { name: translations.navbar.services[language], target: "services" },
-    { name: translations.navbar.portfolio[language], target: "projects" },
-    { name: translations.navbar.pricing[language], target: "pricing" },
-    { name: translations.navbar.about[language], target: "about" },
-    { name: translations.navbar.contact[language], target: "contact" }
+    { name: translations.navbar.services[language], target: 'services' },
+    { name: translations.navbar.portfolio[language], target: 'projects' },
+    { name: translations.navbar.pricing[language], target: 'pricing' },
+    { name: translations.navbar.about[language], target: 'about' },
+    { name: translations.navbar.contact[language], target: 'contact' }
   ];
   
   return (
@@ -471,14 +473,20 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.1 }}
             >
-              <Link 
-                to={item.target} 
-                spy={true} 
-                smooth={true} 
-                duration={500}
-              >
-                {item.name}
-              </Link>
+              {location.pathname === '/' ? (
+                <Link 
+                  to={item.target} 
+                  spy={true} 
+                  smooth={true} 
+                  duration={500}
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <RouterLink to="/" state={{ scrollTo: item.target }}>
+                  {item.name}
+                </RouterLink>
+              )}
             </MenuItem>
           ))}
           
@@ -555,15 +563,21 @@ const Navbar = () => {
                   key={index}
                   variants={menuItemVariants}
                 >
-                  <Link 
-                    to={item.target} 
-                    spy={true} 
-                    smooth={true} 
-                    duration={500}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
+                  {location.pathname === '/' ? (
+                    <Link 
+                      to={item.target} 
+                      spy={true} 
+                      smooth={true} 
+                      duration={500}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <RouterLink to="/" state={{ scrollTo: item.target }} onClick={() => setIsMenuOpen(false)}>
+                      {item.name}
+                    </RouterLink>
+                  )}
                 </MobileMenuItem>
               ))}
               

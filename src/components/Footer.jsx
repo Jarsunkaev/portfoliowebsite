@@ -3,7 +3,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link as RouterLink } from 'react-router-dom';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
@@ -176,27 +177,6 @@ const Copyright = styled.div`
   margin: 3rem auto 0;
 `;
 
-const ScrollToTop = styled(motion.div)`
-  position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  width: 45px;
-  height: 45px;
-  background: var(--color-accent1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 2px solid white;
-  color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  
-  &:hover {
-    background: var(--color-accent2);
-  }
-`;
-
 const Footer = () => {
   const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
@@ -253,29 +233,34 @@ const Footer = () => {
               </Link>
             </FooterLink>
             <FooterLink>
-              <Link to="services" spy={true} smooth={true} duration={500}>
+              <RouterLink to="/" state={{ scrollTo: 'services' }}>
                 {translations.footer.services[language]}
-              </Link>
+              </RouterLink>
             </FooterLink>
             <FooterLink>
-              <Link to="projects" spy={true} smooth={true} duration={500}>
+              <RouterLink to="/" state={{ scrollTo: 'projects' }}>
                 {translations.footer.portfolio[language]}
-              </Link>
+              </RouterLink>
             </FooterLink>
             <FooterLink>
-              <Link to="pricing" spy={true} smooth={true} duration={500}>
+              <RouterLink to="/" state={{ scrollTo: 'pricing' }}>
                 {translations.footer.pricing[language]}
-              </Link>
+              </RouterLink>
             </FooterLink>
             <FooterLink>
-              <Link to="about" spy={true} smooth={true} duration={500}>
+              <RouterLink to="/" state={{ scrollTo: 'about' }}>
                 {translations.footer.about[language]}
-              </Link>
+              </RouterLink>
             </FooterLink>
             <FooterLink>
-              <Link to="contact" spy={true} smooth={true} duration={500}>
+              <RouterLink to="/" state={{ scrollTo: 'contact' }}>
                 {translations.footer.contact[language]}
-              </Link>
+              </RouterLink>
+            </FooterLink>
+            <FooterLink>
+              <RouterLink to="/privacy">
+                {translations.footer.privacy[language]}
+              </RouterLink>
             </FooterLink>
           </FooterLinks>
         </FooterColumn>
@@ -316,15 +301,6 @@ const Footer = () => {
       <Copyright>
         © {new Date().getFullYear()} CyberNōde. {translations.footer.copyright[language]}
       </Copyright>
-      
-      <Link to="home" spy={true} smooth={true} duration={500}>
-        <ScrollToTop
-          whileHover={{ y: -5 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <FaArrowUp />
-        </ScrollToTop>
-      </Link>
     </FooterSection>
   );
 };

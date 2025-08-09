@@ -7,11 +7,11 @@ const translations = {
       en: 'Services'
     },
     portfolio: {
-      hu: 'Portfólió',
+      hu: 'Munkáim',
       en: 'Portfolio'
     },
     about: {
-      hu: 'Rólunk',
+      hu: 'Rólam',
       en: 'About'
     },
     contact: {
@@ -23,7 +23,7 @@ const translations = {
       en: 'Free Consultation'
     },
     pricing: {
-      hu: 'Áraink',
+      hu: 'Árak',
       en: 'Pricing'
     }
   },
@@ -79,7 +79,7 @@ const translations = {
       en: 'Services'
     },
     mainSubtitleAccent: { // Used from your existing services.subtitle
-      hu: 'Amit Kínálunk',
+      hu: 'Amit Kínálok',
       en: 'What We Offer'
     },
     overallDescription: { 
@@ -487,7 +487,7 @@ const translations = {
       en: 'Custom Web Application'
     },
     contentManagement: {
-      hu: 'Alapszintű CMS integráció',
+      hu: 'Egyszerű CMS integráció',
       en: 'Basic CMS Integration'
     },
     multilingualBasic: {
@@ -499,11 +499,11 @@ const translations = {
       en: 'Multilingual Support (Up to 5 languages)'
     },
     seo: {
-      hu: 'Alapszintű SEO beállítás',
+      hu: 'Egyszerű SEO beállítás',
       en: 'Basic SEO Setup'
     },
     seoAdvanced: {
-      hu: 'Fejlett SEO optimalizálás',
+      hu: 'SEO optimalizálás',
       en: 'Advanced SEO Optimization'
     },
     contact: {
@@ -515,11 +515,11 @@ const translations = {
       en: 'Google Analytics Integration'
     },
     bookingBasic: {
-      hu: 'Alapszintű foglalási rendszer',
+      hu: 'Foglalási rendszer',
       en: 'Basic Booking System'
     },
     bookingFull: {
-      hu: 'Fejlett foglalási rendszer',
+      hu: 'Foglalási rendszer',
       en: 'Advanced Booking System'
     },
     designRevisions: {
@@ -547,8 +547,8 @@ const translations = {
       en: 'Need a Custom Solution?'
     },
     customText: {
-      hu: 'Megértjük, hogy minden vállalkozásnak egyedi igényei vannak. Lépjen kapcsolatba velünk személyre szabott ajánlatért, amely az Ön speciális követelményeihez igazodik.',
-      en: 'We understand that every business has unique needs. Contact us for a personalized quote tailored to your specific requirements.'
+      hu: 'Minden vállalkozásnak egyedi igényei vannak. Lépjen kapcsolatba személyre szabott ajánlatért, ami az Ön speciális követelményeihez igazodik.',
+      en: 'Every business has unique needs. Get in touch for a personalized quote tailored to your specific requirements.'
     },
     getStarted: {
       hu: 'Kezdjük el',
@@ -721,7 +721,7 @@ const translations = {
       en: 'Message Sent!'
     },
     successText: {
-      hu: 'Köszönjük, hogy kapcsolatba lépett velünk. 24-48 órán belül válaszolunk a projektjével kapcsolatban.',
+      hu: 'Köszönöm üzenetét. 24-48 órán belül válaszolunk a projektjével kapcsolatban.',
       en: 'Thank you for reaching out. I\'ll get back to you within 24-48 hours to discuss your project.'
     }
   },
@@ -729,7 +729,7 @@ const translations = {
   // Footer translations (preserved)
   footer: {
     aboutText: {
-      hu: 'Egyedi webes megoldásokat készítünk vállalkozásoknak, amelyek ki akarnak tűnni. Magyarországon székelve, európai ügyfeleket szolgálunk ki.',
+      hu: 'Egyedi webes megoldásokat készítek vállalkozásoknak, amik ki akarnak tűnni. Magyarországon székelve, európai ügyfeleket szolgálok ki.',
       en: 'Creating custom web solutions for businesses that want to stand out. Based in Hungary, serving clients across Europe.'
     },
     quickLinks: {
@@ -759,6 +759,10 @@ const translations = {
     pricing: {
       hu: 'Áraink',
       en: 'Pricing'
+    },
+    privacy: {
+      hu: 'Adatkezelési tájékoztató',
+      en: 'Privacy Policy'
     },
     contactInfo: {
       hu: 'Kapcsolati Információk',
@@ -891,6 +895,138 @@ const translations = {
           en: 'Going live with your project and providing ongoing maintenance as needed.'
         }
       }
+    }
+  }
+  ,
+  // Legal pages
+  legal: {
+    privacyPolicyTitle: {
+      hu: 'Adatkezelési tájékoztató',
+      en: 'Privacy Policy'
+    },
+    intro: {
+      hu: 'Ez az adatkezelési tájékoztató leírja, hogyan kezeljük az Ön személyes adatait, amikor a weboldalt használja vagy kapcsolatba lép velünk.',
+      en: 'This Privacy Policy explains how we process your personal data when you use this website or contact us.'
+    },
+    controllerTitle: {
+      hu: 'Adatkezelő',
+      en: 'Data Controller'
+    },
+    controllerText: {
+      hu: 'CyberNōde – Kapcsolat: juszuf_1@icloud.com. Székhely: Budapest, Magyarország.',
+      en: 'CyberNōde – Contact: juszuf_1@icloud.com. Location: Budapest, Hungary.'
+    },
+    dataWeCollectTitle: {
+      hu: 'Milyen adatokat kezelünk',
+      en: 'What Data We Collect'
+    },
+    dataWeCollect: {
+      items: {
+        nameEmail: {
+          hu: 'Név és e-mail cím, ha e-mailt küld nekünk (mailto link).',
+          en: 'Name and email address when you email us (mailto link).'
+        },
+        messageContent: {
+          hu: 'Az üzenet tartalma és az Ön által önként megadott információk.',
+          en: 'Message content and any information you voluntarily provide.'
+        },
+        technical: {
+          hu: 'Alapvető technikai adatok (pl. böngésző típusa, eszköz), amelyeket a böngésző küld. Sütiket és nyomkövetőket jelenleg nem használunk.',
+          en: 'Basic technical data (e.g., browser type, device) sent by your browser. We currently do not use cookies or trackers.'
+        }
+      }
+    },
+    purposesTitle: {
+      hu: 'Adatkezelés céljai',
+      en: 'Purposes of Processing'
+    },
+    purposes: {
+      items: {
+        respond: {
+          hu: 'Kapcsolattartás és válasz az üzeneteire.',
+          en: 'To correspond with you and respond to your inquiries.'
+        },
+        businessComms: {
+          hu: 'Üzleti kommunikáció és ügyfélkapcsolat-kezelés.',
+          en: 'Business communications and client relationship management.'
+        },
+        security: {
+          hu: 'Biztonság és visszaélések megelőzése.',
+          en: 'Security and abuse prevention.'
+        }
+      }
+    },
+    legalBasisTitle: {
+      hu: 'Jogi alap',
+      en: 'Legal Basis'
+    },
+    legalBasisText: {
+      hu: 'Az adatkezelés jogalapja az Ön hozzájárulása és/vagy jogos érdek (GDPR 6. cikk (1) a) és f)).',
+      en: 'Processing is based on your consent and/or our legitimate interest (GDPR Art. 6(1)(a) and (f)).'
+    },
+    retentionTitle: {
+      hu: 'Megőrzési idő',
+      en: 'Retention'
+    },
+    retentionText: {
+      hu: 'Az adatokat a szükséges ideig őrizzük meg, jellemzően a kommunikáció lezárásáig, illetve a jogszabályi kötelezettségeknek megfelelően.',
+      en: 'We retain data for as long as necessary, typically until communications conclude, and as required by law.'
+    },
+    sharingTitle: {
+      hu: 'Adatmegosztás',
+      en: 'Sharing'
+    },
+    sharingText: {
+      hu: 'Személyes adatait nem értékesítjük. Harmadik félnek csak szükség esetén és jogalap mellett adjuk át (pl. tárhelyszolgáltató).',
+      en: 'We do not sell your data. We share it with third parties only when necessary and lawful (e.g., hosting provider).'
+    },
+    rightsTitle: {
+      hu: 'Az Ön jogai',
+      en: 'Your Rights'
+    },
+    rights: {
+      items: {
+        access: {
+          hu: 'Hozzáférés és tájékoztatás kérése adataihoz.',
+          en: 'Request access to your data.'
+        },
+        rectification: {
+          hu: 'Helyesbítés kérése pontatlan adatok esetén.',
+          en: 'Request rectification of inaccurate data.'
+        },
+        erasure: {
+          hu: 'Törlés kérése a jogszabályi feltételek mellett.',
+          en: 'Request erasure subject to legal conditions.'
+        },
+        restrict: {
+          hu: 'Az adatkezelés korlátozásának kérése.',
+          en: 'Request restriction of processing.'
+        },
+        object: {
+          hu: 'Tiltakozás az adatkezelés ellen jogos érdek esetén.',
+          en: 'Object to processing based on legitimate interests.'
+        },
+        complaint: {
+          hu: 'Panasztétel a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (NAIH).',
+          en: 'Lodge a complaint with your local data protection authority.'
+        }
+      }
+    },
+    cookiesTitle: {
+      hu: 'Sütik',
+      en: 'Cookies'
+    },
+    cookiesText: {
+      hu: 'Jelenleg nem használunk nem esszenciális sütiket vagy nyomkövetőket. A nyelv és téma beállításai a böngésző helyi tárhelyében (localStorage) tárolódnak.',
+      en: 'We currently do not use non-essential cookies or trackers. Language and theme preferences are stored in your browser’s localStorage.'
+    },
+    contactTitle: {
+      hu: 'Kapcsolat az adatvédelemmel kapcsolatban',
+      en: 'Contact Regarding Privacy'
+    },
+    contactText: {
+      hu: 'Adatvédelmi kérdésekben az alábbi e-mail címen érhet el: juszuf_1@icloud.com',
+      en: 'For privacy matters, contact: juszuf_1@icloud.com'
     }
   }
 };
