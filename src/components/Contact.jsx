@@ -156,73 +156,153 @@ const FormLabel = styled.label`
 
 const FormInput = styled.input`
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid ${props => props.theme === 'dark' ? 'white' : 'black'};
+  padding: 1rem;
+  border: var(--border-medium) var(--color-accent3);
   font-size: 1rem;
-  background: var(--color-neutral);
+  background: var(--color-bg);
   color: var(--color-text);
-  transition: border-color 0.3s;
-  border-radius: 6px;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius-md);
+  min-height: 48px; /* Better touch target */
   
   &:focus {
     outline: none;
-    border-color: var(--color-accent2);
+    border-color: var(--color-accent1);
+    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.2rem; /* More generous padding on mobile */
+    font-size: 1.05rem; /* Slightly larger text on mobile */
+    min-height: 52px;
   }
 `;
 
 const FormTextarea = styled.textarea`
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid ${props => props.theme === 'dark' ? 'white' : 'black'};
+  padding: 1rem;
+  border: var(--border-medium) var(--color-accent3);
   font-size: 1rem;
-  background: var(--color-neutral);
+  background: var(--color-bg);
   color: var(--color-text);
   resize: vertical;
   min-height: 150px;
-  transition: border-color 0.3s;
-  border-radius: 6px;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-body);
+  line-height: 1.5;
   
   &:focus {
     outline: none;
-    border-color: var(--color-accent2);
+    border-color: var(--color-accent1);
+    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+    font-size: 1.05rem;
+    min-height: 120px; /* Slightly smaller on mobile to save space */
+  }
+`;
+
+const SelectWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--color-accent1);
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  
+  &:hover::after {
+    border-top-color: var(--color-accent2);
   }
 `;
 
 const FormSelect = styled.select`
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid ${props => props.theme === 'dark' ? 'white' : 'black'};
+  padding: 1rem 3rem 1rem 1rem; /* Extra right padding for arrow */
+  border: var(--border-medium) var(--color-accent3);
   font-size: 1rem;
-  background: var(--color-neutral);
+  background: var(--color-bg);
   color: var(--color-text);
-  transition: border-color 0.3s;
-  border-radius: 6px;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius-md);
+  min-height: 48px;
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
   
   &:focus {
     outline: none;
-    border-color: var(--color-accent2);
+    border-color: var(--color-accent1);
+    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+  }
+  
+  &:focus + &::after {
+    border-top-color: var(--color-accent1);
+  }
+  
+  /* Ensure options are styled properly */
+  option {
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.2rem 3.5rem 1.2rem 1.2rem;
+    font-size: 1.05rem;
+    min-height: 52px;
   }
 `;
 
 const SubmitButton = styled(motion.button)`
-  padding: 1rem 2rem;
+  padding: 1.2rem 2.5rem;
   background: var(--color-accent1);
-  color: white;
-  border: var(--border-thick);
+  color: var(--color-bg);
+  border: var(--border-subtle) transparent;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-heading);
+  min-height: 52px;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   
-  &:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: ${props => props.theme === 'dark' ? '5px 5px 0px 0px rgba(100,100,100,0.8)' : '5px 5px 0px 0px rgba(0,0,0,1)'};
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    background: var(--color-accent2);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
   }
   
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.4rem 2rem;
+    font-size: 1.05rem;
+    min-height: 56px;
+    width: 100%; /* Full width on mobile */
   }
 `;
 
@@ -399,22 +479,24 @@ const Contact = () => {
                 
                 <FormGroup>
                   <FormLabel htmlFor="projectType">{translations.contact.projectType[language]}</FormLabel>
-                  <FormSelect
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    required
-                    theme={theme}
-                  >
-                    <option value="">{translations.contact.projectTypeOptions.select[language]}</option>
-                    <option value="website">{translations.contact.projectTypeOptions.website[language]}</option>
-                    <option value="booking">{translations.contact.projectTypeOptions.booking[language]}</option>
-                    <option value="dashboard">{translations.contact.projectTypeOptions.dashboard[language]}</option>
-                    <option value="multilingual">{translations.contact.projectTypeOptions.multilingual[language]}</option>
-                    <option value="maintenance">{translations.contact.projectTypeOptions.maintenance[language]}</option>
-                    <option value="other">{translations.contact.projectTypeOptions.other[language]}</option>
-                  </FormSelect>
+                  <SelectWrapper>
+                    <FormSelect
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      required
+                      theme={theme}
+                    >
+                      <option value="">{translations.contact.projectTypeOptions.select[language]}</option>
+                      <option value="website">{translations.contact.projectTypeOptions.website[language]}</option>
+                      <option value="booking">{translations.contact.projectTypeOptions.booking[language]}</option>
+                      <option value="dashboard">{translations.contact.projectTypeOptions.dashboard[language]}</option>
+                      <option value="multilingual">{translations.contact.projectTypeOptions.multilingual[language]}</option>
+                      <option value="maintenance">{translations.contact.projectTypeOptions.maintenance[language]}</option>
+                      <option value="other">{translations.contact.projectTypeOptions.other[language]}</option>
+                    </FormSelect>
+                  </SelectWrapper>
                 </FormGroup>
                 
                 <FormGroup>

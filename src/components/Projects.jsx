@@ -3,7 +3,8 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaExternalLinkAlt, FaUtensils, FaCar, FaPlane, FaCodeBranch, FaCalendarAlt, FaGlobe } from 'react-icons/fa';
+import { useSwipeable } from 'react-swipeable';
+import { FaExternalLinkAlt, FaUtensils, FaCar, FaPlane, FaCodeBranch, FaCalendarAlt, FaGlobe, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
@@ -81,34 +82,134 @@ const FilterContainer = styled.div`
 `;
 
 const FilterButton = styled.button`
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.4rem;
   background: ${props => props.active ? 'var(--color-accent1)' : 'transparent'};
-  color: ${props => props.active ? 'white' : 'var(--color-text)'};
-  border: var(--border-thick);
-  border-radius: 8px;
+  color: ${props => props.active ? 'var(--color-bg)' : 'var(--color-text)'};
+  border: var(--border-medium) ${props => props.active ? 'var(--color-accent1)' : 'var(--color-accent3)'};
+  border-radius: var(--border-radius-md);
   font-family: var(--font-heading);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 48px; /* Better touch target */
   
   svg {
     font-size: 1rem;
   }
   
   &:hover {
-    background: ${props => props.active ? 'var(--color-accent1)' : 'var(--color-accent3)'};
-    transform: translateY(-3px);
+    background: ${props => props.active ? 'var(--color-accent2)' : 'var(--color-accent3)'};
+    transform: translateY(-2px);
+    border-color: var(--color-accent1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1rem 1.2rem; /* Larger touch targets on mobile */
+    font-size: 0.9rem;
+    min-height: 52px;
   }
 `;
 
-// Improved staggered layout styling
+// Improved staggered layout styling with mobile swipe support
 const ProjectsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6rem;
+  
+  @media (max-width: 768px) {
+    display: none; /* Hide desktop layout on mobile */
+  }
+`;
+
+// Mobile swipe container
+const MobileSwipeContainer = styled.div`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
+
+const MobileProjectsSlider = styled(motion.div)`
+  display: flex;
+  width: ${props => props.$totalProjects * 100}%;
+  transform: translateX(-${props => props.$currentIndex * (100 / props.$totalProjects)}%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+const MobileProjectSlide = styled.div`
+  width: ${props => 100 / props.$totalProjects}%;
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+`;
+
+const MobileNavigation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+`;
+
+const MobileNavButton = styled.button`
+  background: var(--color-accent1);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-accent2);
+    transform: translateY(-2px);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  svg {
+    font-size: 1.2rem;
+  }
+`;
+
+const MobileDots = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const MobileDot = styled.button`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: ${props => props.$active ? 'var(--color-accent1)' : 'var(--color-accent3)'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--color-accent1);
+  }
 `;
 
 const ProjectRow = styled(motion.div)`
@@ -152,6 +253,12 @@ const ProjectImageContainer = styled.div`
   z-index: 1;
   padding: 0;
   transition: all 0.4s ease;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
 `;
 
 const ProjectImage = styled.div`
@@ -160,12 +267,14 @@ const ProjectImage = styled.div`
   height: 420px;
   border-radius: 16px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 16px;
+    display: block;
   }
   
   &::after {
@@ -178,7 +287,15 @@ const ProjectImage = styled.div`
   }
   
   @media (max-width: 768px) {
-    height: 350px;
+    height: 250px;
+    border-radius: var(--border-radius-md);
+    margin: 0 auto;
+    max-width: 100%;
+    
+    img {
+      object-fit: contain;
+      background: var(--color-neutral);
+    }
   }
 `;
 
@@ -234,6 +351,10 @@ const ProjectContent = styled.div`
   text-align: left;
   direction: ltr;
   align-self: center;
+  
+  @media (max-width: 768px) {
+    padding: 0 0.5rem 1rem;
+  }
 `;
 
 const ProjectTitle = styled.h3`
@@ -369,7 +490,7 @@ const projectsData = [
       en: "Modern tourism website featuring custom design and an interactive contact form for a travel agency specializing in unique Hungarian experiences.",
       hu: "Modern turisztikai weboldal egyedi dizájnnal és interaktív kapcsolatfelvételi űrlappal egy utazási iroda számára, amely egyedi magyar élményekre specializálódott."
     },
-    image: " http://localhost:3000/portfoliowebsite/buviptur.png",
+    image: `${process.env.PUBLIC_URL}/buviptur.png`,
     category: "tourism",
     icon: <FaPlane />,
     categoryName: {
@@ -398,7 +519,7 @@ const projectsData = [
       en: "Comprehensive website for a business offering airport parking, car wash, tire service, and car maintenance with a fully interactive real-time booking system.",
       hu: "Átfogó weboldal egy vállalkozás számára, amely reptéri parkolást, autómosást, gumiszervízt és autókarbantartást kínál teljes mértékben interaktív, valós idejű foglalási rendszerrel."
     },
-    image: " http://localhost:3000/portfoliowebsite/zima.png",
+    image: `${process.env.PUBLIC_URL}/zima.png`,
     category: "automotive",
     icon: <FaCar />,
     categoryName: {
@@ -427,7 +548,7 @@ const projectsData = [
       en: "Innovative web application that generates personalized recipes based on available ingredients, helping users reduce food waste and discover new dishes.",
       hu: "Innovatív webalkalmazás, amely személyre szabott recepteket generál a rendelkezésre álló hozzávalók alapján, segítve a felhasználókat az élelmiszer-pazarlás csökkentésében és új ételek felfedezésében."
     },
-    image: " http://localhost:3000/portfoliowebsite/frigo.png",
+    image: `${process.env.PUBLIC_URL}/frigo.png`,
     category: "webapp",
     icon: <FaUtensils />,
     categoryName: {
@@ -458,6 +579,7 @@ const categories = [
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
+  const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
   const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
   const [ref, inView] = useInView({
@@ -469,6 +591,32 @@ const Projects = () => {
   const filteredProjects = filter === "all" 
     ? projectsData 
     : projectsData.filter(project => project.category === filter);
+  
+  // Mobile swipe handlers
+  const handleSwipeLeft = () => {
+    if (currentMobileIndex < filteredProjects.length - 1) {
+      setCurrentMobileIndex(currentMobileIndex + 1);
+    }
+  };
+  
+  const handleSwipeRight = () => {
+    if (currentMobileIndex > 0) {
+      setCurrentMobileIndex(currentMobileIndex - 1);
+    }
+  };
+  
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
+    trackMouse: true,
+    trackTouch: true,
+    preventScrollOnSwipe: true,
+  });
+  
+  // Reset mobile index when filter changes
+  React.useEffect(() => {
+    setCurrentMobileIndex(0);
+  }, [filter]);
   
   return (
     <ProjectsSection id="projects" ref={ref}>
@@ -496,7 +644,8 @@ const Projects = () => {
           ))}
         </FilterContainer>
         
-        <ProjectsWrapper>
+        {/* Desktop Layout */}
+        <ProjectsWrapper className="desktop-projects">
           {filteredProjects.map((project, index) => (
             <ProjectRow
               key={project.id}
@@ -548,6 +697,90 @@ const Projects = () => {
             </ProjectRow>
           ))}
         </ProjectsWrapper>
+        
+        {/* Mobile Swipe Layout */}
+        <MobileSwipeContainer {...swipeHandlers}>
+          <MobileProjectsSlider 
+            $currentIndex={currentMobileIndex}
+            $totalProjects={filteredProjects.length}
+          >
+            {filteredProjects.map((project, index) => (
+              <MobileProjectSlide 
+                key={project.id}
+                $totalProjects={filteredProjects.length}
+              >
+                <ProjectRow theme={theme} style={{ display: 'grid', margin: 0 }}>
+                  <ProjectImageContainer>
+                    <CategoryTag>
+                      {project.icon} {project.categoryName[language]}
+                    </CategoryTag>
+                    <ProjectImage>
+                      <img src={project.image} alt={project.title[language]} />
+                    </ProjectImage>
+                  </ProjectImageContainer>
+                  
+                  <ProjectContent>
+                    <ProjectTitle>{project.title[language]}</ProjectTitle>
+                    <ProjectDescription>{project.description[language]}</ProjectDescription>
+                    
+                    <ProjectChallenge theme={theme}>
+                      <h4><FaCalendarAlt /> {translations.projects.challengeSolutionTitle[language]}</h4>
+                      <p><strong>{translations.projects.problemLabel[language]}:</strong> {project.problem[language]}</p>
+                      <p><strong>{translations.projects.solutionLabel[language]}:</strong> {project.solution[language]}</p>
+                    </ProjectChallenge>
+                    
+                    <TechnologiesList>
+                      {project.technologies.map((tech, index) => (
+                        <Technology 
+                          key={index}
+                          color={index % 3 === 0 ? 'accent1' : index % 3 === 1 ? 'accent2' : 'accent3'}
+                        >
+                          {tech}
+                        </Technology>
+                      ))}
+                    </TechnologiesList>
+                    
+                    <ViewButton 
+                      href={project.demoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      {translations.projects.viewCaseStudy[language]} <FaExternalLinkAlt />
+                    </ViewButton>
+                  </ProjectContent>
+                </ProjectRow>
+              </MobileProjectSlide>
+            ))}
+          </MobileProjectsSlider>
+          
+          <MobileNavigation>
+            <MobileNavButton 
+              onClick={handleSwipeRight}
+              disabled={currentMobileIndex === 0}
+            >
+              <FaChevronLeft />
+            </MobileNavButton>
+            
+            <MobileDots>
+              {filteredProjects.map((_, index) => (
+                <MobileDot
+                  key={index}
+                  $active={index === currentMobileIndex}
+                  onClick={() => setCurrentMobileIndex(index)}
+                />
+              ))}
+            </MobileDots>
+            
+            <MobileNavButton 
+              onClick={handleSwipeLeft}
+              disabled={currentMobileIndex === filteredProjects.length - 1}
+            >
+              <FaChevronRight />
+            </MobileNavButton>
+          </MobileNavigation>
+        </MobileSwipeContainer>
       </ProjectsContainer>
     </ProjectsSection>
   );

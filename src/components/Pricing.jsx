@@ -23,6 +23,11 @@ const PricingContainer = styled.div`
   padding: 0 20px;
   position: relative;
   z-index: 2;
+  
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 0 1rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -53,25 +58,35 @@ const PricingGrid = styled.div`
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    padding: 0 10px;
+    padding: 0;
+    gap: 2rem;
   }
 `;
 
 const PricingCard = styled(motion.div)`
   background: ${props => props.highlighted ? 'var(--color-accent3)' : 'var(--color-neutral)'};
-  border: ${props => props.highlighted ? '2px solid var(--color-accent1)' : 'var(--border-thick) var(--border-color)'};
-  border-radius: 8px;
+  border: ${props => props.highlighted ? 'var(--border-medium) var(--color-accent1)' : 'var(--border-subtle) var(--color-accent3)'};
+  border-radius: var(--border-radius-lg);
   padding: 1.8rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    border-color: var(--color-accent1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
   }
 `;
 
@@ -148,20 +163,37 @@ const FeatureText = styled.span`
 
 const CTAButton = styled(motion.div)`
   width: 100%;
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   background: ${props => props.primary ? 'var(--color-accent1)' : 'transparent'};
-  color: ${props => props.primary ? 'white' : 'var(--color-text)'};
-  border: var(--border-thick) var(--border-color);
-  border-radius: 4px;
+  color: ${props => props.primary ? 'var(--color-bg)' : 'var(--color-text)'};
+  border: ${props => props.primary ? 'var(--border-subtle) transparent' : 'var(--border-medium) var(--color-accent1)'};
+  border-radius: var(--border-radius-md);
   font-weight: 600;
   font-family: var(--font-heading);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   &:hover {
-    background: ${props => props.primary ? 'var(--color-accent1)' : 'var(--color-accent3)'};
-    transform: translateY(-3px);
+    background: ${props => props.primary ? 'var(--color-accent2)' : 'var(--color-accent3)'};
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    border-color: var(--color-accent1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.4rem 1rem;
+    min-height: 56px;
+    font-size: 1.05rem;
   }
 `;
 
@@ -262,7 +294,7 @@ const Pricing = () => {
           >
             <PlanName>{translations.pricing.basicPlan[language]}</PlanName>
             <PlanPrice>
-              <span className="price">189.000</span>
+              <span className="price">200.000</span>
               <span className="currency">Ft</span>
             </PlanPrice>
             
@@ -299,6 +331,18 @@ const Pricing = () => {
                 <FaCheck />
                 <FeatureText>{translations.pricing.designRevisions[language]}</FeatureText>
               </Feature>
+              <Feature>
+                <FaCheck />
+                <FeatureText>{translations.pricing.googleBusiness[language]}</FeatureText>
+              </Feature>
+              <Feature>
+                <FaCheck />
+                <FeatureText>{translations.pricing.gdprCompliance[language]}</FeatureText>
+              </Feature>
+              <Feature>
+                <FaCheck />
+                <FeatureText>{translations.pricing.hostingSetup[language]}</FeatureText>
+              </Feature>
             </FeaturesList>
             
             <StyledLink to="contact" spy={true} smooth={true} duration={500}>
@@ -320,8 +364,7 @@ const Pricing = () => {
           >
             <PlanName>{translations.pricing.businessPlan[language]}</PlanName>
             <PlanPrice>
-              <span className="price">349.000</span>
-              <span className="currency">Ft</span>
+              <span className="price">{translations.pricing.customPrice[language]}</span>
             </PlanPrice>
             
             <MaintenanceFee theme={theme}>
@@ -329,7 +372,7 @@ const Pricing = () => {
                 <FaPlus size={12} />
                 <span>{translations.pricing.maintenance[language]}</span>
               </div>
-              <div className="maintenance-price">29.000 Ft / {translations.pricing.month[language]}</div>
+              <div className="maintenance-price">{translations.pricing.customPrice[language]}</div>
             </MaintenanceFee>
             
             <PlanDescription>

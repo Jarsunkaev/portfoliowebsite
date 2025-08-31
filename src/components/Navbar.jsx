@@ -87,7 +87,7 @@ const Nav = styled(motion.nav)`
 const Logo = styled(motion.div)`
   font-family: var(--font-heading);
   font-size: ${props => props.$isScrolled ? '1.5rem' : '1.8rem'};
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-text);
   position: relative;
   display: inline-block;
@@ -98,30 +98,21 @@ const Logo = styled(motion.div)`
     left: 0;
     bottom: -4px;
     width: ${props => {
-      // Start with 10% width at top of page, 100% at bottom
-      const minWidth = 0.1; // 10% of text width
+      const minWidth = 0.2; // Start with 20% width
       const maxWidth = 1;   // 100% of text width
       const width = minWidth + (maxWidth - minWidth) * (props.$scrollProgress || 0);
       return `${width * 100}%`;
     }};
-    height: 3px;
-    background: var(--color-accent1);
+    height: 4px; /* Slightly thicker for better visibility */
+    background: linear-gradient(90deg, var(--color-accent1), var(--color-accent2));
     border-radius: 2px;
-    /* Smoother transition with cubic-bezier timing function */
     transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-    will-change: width; /* Optimize for animation */
+    will-change: width;
   }
   
-  // Keep hover effect when not scrolling
-  &:not(:hover)::after {
-    /* Slightly faster transition when scrolling */
-    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-  
-  // Hover effect overrides the scroll-based width
   &:hover::after {
     width: 100% !important;
-    /* Slightly slower, more deliberate hover transition */
+    background: var(--color-accent1);
     transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -129,6 +120,8 @@ const Logo = styled(motion.div)`
     font-size: ${props => props.$isScrolled ? '1.3rem' : '1.5rem'};
   }
 `;
+
+
 
 // Desktop menu
 const MenuItems = styled.div`
@@ -179,24 +172,31 @@ const MenuItem = styled(motion.div)`
 `;
 
 const ConsultButton = styled(motion.a)`
-  background: var(--color-accent3);
-  color: var(--color-text);
-  padding: ${props => props.$isScrolled ? '8px 16px' : '10px 20px'};
-  border: var(--border-thick) var(--border-color);
-  font-weight: 700;
-  box-shadow: var(--shadow-neobrutalist) var(--shadow-color);
+  background: var(--color-accent1);
+  color: var(--color-bg);
+  padding: ${props => props.$isScrolled ? '10px 18px' : '12px 22px'};
+  border: var(--border-subtle) transparent;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   cursor: pointer;
   text-decoration: none;
-  border-radius: 14px;
+  border-radius: var(--border-radius-md);
   font-size: ${props => props.$isScrolled ? '0.9rem' : '1rem'};
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 0.5rem;
+  min-height: 44px; /* Better touch target */
+  display: flex;
+  align-items: center;
   
   &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px 0px var(--shadow-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
     background: var(--color-accent2);
-    color: white;
+    color: white !important; /* Force white text on hover */
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -207,7 +207,17 @@ const MobileConsultButton = styled(ConsultButton)`
   display: flex;
   justify-content: center;
   margin: 1rem auto;
-  padding: 12px 24px;
+  padding: 16px 24px;
+  background: var(--color-accent1);
+  color: var(--color-bg) !important; /* Force light text color */
+  font-weight: 600;
+  z-index: 1003;
+  position: relative;
+  
+  &:hover {
+    background: var(--color-accent2);
+    color: var(--color-bg) !important;
+  }
   
   @media (max-width: 480px) {
     width: 90%;
@@ -220,9 +230,20 @@ const MenuToggle = styled(motion.div)`
   cursor: pointer;
   z-index: 1001;
   color: var(--color-text);
-  padding: 0.5rem;
-  border-radius: 50%;
+  padding: 0.75rem; /* Larger touch target */
+  border-radius: var(--border-radius-md);
   margin-left: 0.5rem;
+  min-width: 48px; /* Minimum touch target size */
+  min-height: 48px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--color-accent3);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
   
   @media (max-width: 768px) {
     display: flex;
@@ -239,13 +260,14 @@ const MobileMenuPanel = styled(motion.div)`
   width: 100%;
   height: 100vh;
   background: var(--color-bg);
-  z-index: 999;
+  z-index: 1002;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  overflow-y: auto; /* Allow scrolling on small devices */
+  overflow-y: auto;
+  pointer-events: auto;
   
   /* Safe area for notched phones */
   padding-top: calc(2rem + env(safe-area-inset-top));
@@ -259,18 +281,29 @@ const MobileMenuItem = styled(motion.div)`
   font-size: 1.5rem;
   width: 100%;
   text-align: center;
+  z-index: 1003;
+  position: relative;
   
   a {
     color: var(--color-text);
     text-decoration: none;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 1.5rem;
     position: relative;
     border-radius: 12px;
     transition: all 0.3s ease;
     display: block;
+    cursor: pointer;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
       background: var(--color-neutral);
+    }
+    
+    &:active {
+      background: var(--color-accent3);
     }
   }
 `;
@@ -436,12 +469,12 @@ const Navbar = () => {
   
   return (
     <NavContainer $isScrolled={isScrolled}>
-      <Nav
-        variants={navVariants}
-        initial="hidden"
-        animate="visible"
-        $isScrolled={isScrolled}
-      >
+        <Nav
+          variants={navVariants}
+          initial="hidden"
+          animate="visible"
+          $isScrolled={isScrolled}
+        >
         <Logo
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -546,7 +579,7 @@ const Navbar = () => {
                   position: 'absolute', 
                   top: '20px', 
                   right: '20px', 
-                  zIndex: 1002 
+                  zIndex: 1004 
                 }}
               >
                 <MenuToggle 
@@ -600,7 +633,7 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-    </NavContainer>
+      </NavContainer>
   );
 };
 

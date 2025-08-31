@@ -1,32 +1,33 @@
 // src/components/About.jsx - Simple with just a faint electrical circuit background
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { ThemeContext } from './ThemeContext';
-import { useLanguage } from './LanguageContext';
-import translations from '../translations';
-import { FaCheck, FaClock, FaCode, FaComments } from 'react-icons/fa';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { ThemeContext } from "./ThemeContext";
+import { useLanguage } from "./LanguageContext";
+import translations from "../translations";
+import { FaCheck, FaClock, FaCode, FaComments } from "react-icons/fa";
 
 const AboutSection = styled.section`
   padding: 120px 0;
   background-color: var(--color-neutral);
   position: relative;
-  background-image: url("/img/circuit-pattern-${props => props.theme === 'dark' ? 'dark' : 'light'}.svg");
+  background-image: ${(props) => 
+    `url("${process.env.PUBLIC_URL}/img/circuit-pattern-${props.theme === "dark" ? "dark" : "light"}.svg")`};
   background-size: 1200px;
   background-position: center;
   background-repeat: repeat;
   background-attachment: fixed;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: var(--color-neutral);
-    opacity: ${props => props.theme === 'dark' ? 0.94 : 0.97};
+    opacity: ${(props) => (props.theme === "dark" ? 0.94 : 0.97)};
   }
 `;
 
@@ -42,11 +43,11 @@ const SectionTitle = styled.h2`
   font-size: 3.5rem;
   margin-bottom: 2.5rem;
   text-align: center;
-  
+
   span {
     color: var(--color-accent1);
   }
-  
+
   @media (max-width: 768px) {
     grid-area: title;
   }
@@ -56,10 +57,10 @@ const AboutContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3.5rem;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    grid-template-areas: 
+    grid-template-areas:
       "title"
       "image"
       "content";
@@ -75,11 +76,11 @@ const AboutText = styled(motion.div)`
     color: var(--color-text);
     letter-spacing: 0.02em;
   }
-  
+
   p:last-child {
     margin-bottom: 0;
   }
-  
+
   @media (max-width: 768px) {
     grid-area: content;
   }
@@ -97,19 +98,19 @@ const AboutImage = styled(motion.div)`
   justify-content: center;
   box-shadow: var(--shadow-neobrutalist);
   transition: transform 0.3s ease;
-  
+
   @media (max-width: 768px) {
     grid-area: image;
     margin: 0 auto 2.5rem;
     height: 350px;
     max-width: 300px;
   }
-  
+
   &:hover {
     transform: translate(-5px, -5px);
     box-shadow: 10px 10px 0px 0px var(--shadow-color);
   }
-  
+
   img {
     width: auto;
     max-width: 100%;
@@ -117,11 +118,11 @@ const AboutImage = styled(motion.div)`
     object-fit: contain;
     transition: transform 0.8s ease;
   }
-  
+
   &:hover img {
     transform: scale(1.02);
   }
-  
+
   @media (max-width: 768px) {
     height: 340px;
     margin-top: 1rem;
@@ -130,7 +131,7 @@ const AboutImage = styled(motion.div)`
 
 const ValueProposition = styled(motion.div)`
   margin-top: 3.5rem;
-  background: ${props => props.theme === 'dark' ? '#2A2A2A' : 'white'};
+  background: ${(props) => (props.theme === "dark" ? "#2A2A2A" : "white")};
   border: var(--border-thick);
   border-radius: 12px;
   padding: 2.5rem;
@@ -140,12 +141,12 @@ const ValueProposition = styled(motion.div)`
   margin-left: 0;
   margin-right: 0;
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: translate(-5px, -5px);
     box-shadow: 10px 10px 0px 0px var(--shadow-color);
   }
-  
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -158,9 +159,9 @@ const ValueTitle = styled.h3`
   color: var(--color-text);
   position: relative;
   display: inline-block;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -8px;
@@ -174,7 +175,7 @@ const ValueGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  
+
   @media (max-width: 580px) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -186,7 +187,7 @@ const ValueItem = styled.div`
   align-items: flex-start;
   gap: 1.2rem;
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
   }
@@ -211,7 +212,7 @@ const ValueContent = styled.div`
     color: var(--color-text);
     font-family: var(--font-heading);
   }
-  
+
   p {
     font-size: 1rem;
     line-height: 1.6;
@@ -235,9 +236,9 @@ const ProcessTitle = styled.h3`
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -252,12 +253,12 @@ const ProcessSteps = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  
+
   @media (max-width: 992px) {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
-  
+
   @media (max-width: 580px) {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -265,52 +266,25 @@ const ProcessSteps = styled.div`
 `;
 
 const ProcessStep = styled(motion.div)`
-  background: ${props => props.theme === 'dark' ? '#2A2A2A' : 'white'};
-  border: var(--border-thick);
-  border-radius: 12px;
+  background: ${(props) => (props.theme === "dark" ? "#2A2A2A" : "white")};
+  border: var(--border-subtle) var(--color-accent3);
+  border-radius: var(--border-radius-md);
   padding: 2.5rem 1.5rem;
   text-align: center;
-  box-shadow: var(--shadow-neobrutalist);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  
+
   &:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 10px 10px 0px 0px var(--shadow-color);
-  }
-  
-  /* Connected line between steps */
-  @media (min-width: 993px) {
-    &:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 48px;
-      right: -30px;
-      width: 30px;
-      height: 2px;
-      background-color: var(--color-accent1);
-      z-index: 2;
-    }
-  }
-  
-  /* Make line appear below on tablet */
-  @media (min-width: 581px) and (max-width: 992px) {
-    &:nth-child(odd):not(:nth-last-child(-n+2))::after {
-      content: '';
-      position: absolute;
-      top: 48px;
-      right: -30px;
-      width: 30px;
-      height: 2px;
-      background-color: var(--color-accent1);
-      z-index: 2;
-    }
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    border-color: var(--color-accent1);
   }
 `;
 
 const StepNumber = styled.div`
   background: var(--color-accent1);
-  color: white;
+  color: var(--color-bg);
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -320,9 +294,17 @@ const StepNumber = styled.div`
   font-weight: 700;
   font-size: 1.4rem;
   margin: 0 auto 1.5rem;
-  border: 2px solid black;
+  border: 3px solid var(--color-accent3);
   position: relative;
   z-index: 3;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
+  transition: all 0.3s ease;
+
+  ${ProcessStep}:hover & {
+    background: var(--color-accent2);
+    border-color: var(--color-accent1);
+    transform: scale(1.1);
+  }
 `;
 
 const StepTitle = styled.h4`
@@ -343,67 +325,92 @@ const About = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
-  
+
   // Define values and process steps
   const values = [
     {
       icon: <FaCode />,
-      title: translations.about.values.quality.title[language] || "Quality Code",
-      description: translations.about.values.quality.description[language] || "Clean, well-documented code that's built to last and easy to maintain."
+      title:
+        translations.about.values.quality.title[language] || "Quality Code",
+      description:
+        translations.about.values.quality.description[language] ||
+        "Clean, well-documented code that's built to last and easy to maintain.",
     },
     {
       icon: <FaClock />,
-      title: translations.about.values.timely.title[language] || "Timely Delivery",
-      description: translations.about.values.timely.description[language] || "Projects delivered on schedule with regular updates throughout development."
+      title:
+        translations.about.values.timely.title[language] || "Timely Delivery",
+      description:
+        translations.about.values.timely.description[language] ||
+        "Projects delivered on schedule with regular updates throughout development.",
     },
     {
       icon: <FaComments />,
-      title: translations.about.values.communication.title[language] || "Clear Communication",
-      description: translations.about.values.communication.description[language] || "Regular updates in plain language, with quick response times."
+      title:
+        translations.about.values.communication.title[language] ||
+        "Clear Communication",
+      description:
+        translations.about.values.communication.description[language] ||
+        "Regular updates in plain language, with quick response times.",
     },
     {
       icon: <FaCheck />,
-      title: translations.about.values.attention.title[language] || "Attention to Detail",
-      description: translations.about.values.attention.description[language] || "Careful testing and polishing to ensure every aspect is perfect."
-    }
+      title:
+        translations.about.values.attention.title[language] ||
+        "Attention to Detail",
+      description:
+        translations.about.values.attention.description[language] ||
+        "Careful testing and polishing to ensure every aspect is perfect.",
+    },
   ];
-  
+
   const processSteps = [
     {
       number: 1,
-      title: translations.about.process.discovery.title[language] || "Discovery",
-      description: translations.about.process.discovery.description[language] || "Understanding your business, goals, and specific project requirements."
+      title:
+        translations.about.process.discovery.title[language] || "Discovery",
+      description:
+        translations.about.process.discovery.description[language] ||
+        "Understanding your business, goals, and specific project requirements.",
     },
     {
       number: 2,
       title: translations.about.process.planning.title[language] || "Planning",
-      description: translations.about.process.planning.description[language] || "Creating a detailed roadmap with timeline, features, and technical specifications."
+      description:
+        translations.about.process.planning.description[language] ||
+        "Creating a detailed roadmap with timeline, features, and technical specifications.",
     },
     {
       number: 3,
-      title: translations.about.process.development.title[language] || "Development",
-      description: translations.about.process.development.description[language] || "Building your website or application with regular progress updates."
+      title:
+        translations.about.process.development.title[language] || "Development",
+      description:
+        translations.about.process.development.description[language] ||
+        "Building your website or application with regular progress updates.",
     },
     {
       number: 4,
-      title: translations.about.process.launch.title[language] || "Launch & Support",
-      description: translations.about.process.launch.description[language] || "Going live with your project and providing ongoing maintenance as needed."
-    }
+      title:
+        translations.about.process.launch.title[language] || "Launch & Support",
+      description:
+        translations.about.process.launch.description[language] ||
+        "Going live with your project and providing ongoing maintenance as needed.",
+    },
   ];
-  
+
   // Determine the appropriate title based on language
-  const sectionTitle = language === 'en' ? 'About Me' : 'Rólam';
-  
+  const sectionTitle = language === "en" ? "About Me" : "Rólam";
+
   return (
     <AboutSection id="about" ref={ref} theme={theme}>
       <AboutContainer>
         <SectionTitle>
           <span>{sectionTitle}</span>
         </SectionTitle>
-        
+
         <AboutContent>
           <AboutText
             initial={{ opacity: 0, y: 30 }}
@@ -411,27 +418,24 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             {translations.about.description[language]
-              .split('\n\n')
+              .split("\n\n")
               .map((paragraph, index) => (
-                <p key={index}>
-                  {paragraph}
-                </p>
-              ))
-            }
-            
+                <p key={index}>{paragraph}</p>
+              ))}
+
             <ValueProposition
               theme={theme}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <ValueTitle>{translations.about.valuesTitle[language] || "Mitől vagyok különleges"}</ValueTitle>
+              <ValueTitle>
+                {translations.about.valuesTitle[language] ||
+                  "Mitől vagyok különleges"}
+              </ValueTitle>
               <ValueGrid>
                 {values.map((value, index) => (
-                  <ValueItem 
-                    key={index} 
-                    theme={theme}
-                  >
+                  <ValueItem key={index} theme={theme}>
                     <ValueIcon>{value.icon}</ValueIcon>
                     <ValueContent>
                       <h4>{value.title}</h4>
@@ -442,25 +446,30 @@ const About = () => {
               </ValueGrid>
             </ValueProposition>
           </AboutText>
-          
+
           <AboutImage
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <img src="http://localhost:3000/portfoliowebsite/me.jpeg" alt="Web developer working" />
+            <img
+              src={`${process.env.PUBLIC_URL}/me.jpeg`}
+              alt="Web developer working"
+            />
           </AboutImage>
         </AboutContent>
-        
+
         <WorkProcess
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <ProcessTitle>{translations.about.processTitle[language] || "Munkafolyamatom"}</ProcessTitle>
+          <ProcessTitle>
+            {translations.about.processTitle[language] || "Munkafolyamatom"}
+          </ProcessTitle>
           <ProcessSteps>
             {processSteps.map((step, index) => (
-              <ProcessStep 
+              <ProcessStep
                 key={index}
                 theme={theme}
                 initial={{ opacity: 0, y: 30 }}

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#4A5D23" />
     <meta
       name="description"
       content="CyberNōde - Innovative Web Development Solutions"
@@ -14,24 +14,78 @@
     <!-- For SVG favicon support -->
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <title>CyberNōde - Web Development & Digital Solutions</title>
+    
+    <!-- Prevent FOUC with initial styles -->
+    <style>
+      /* Critical CSS to prevent flash of unstyled content */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background-color: #FEFEFE;
+        color: #2C3E2D;
+        overflow-x: hidden;
+        font-weight: 400;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      #root {
+        min-height: 100vh;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      /* Show content once React has loaded */
+      #root.loaded {
+        opacity: 1;
+      }
+      
+      /* Loading spinner */
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 3px solid #E8DCC0;
+        border-top: 3px solid #4A5D23;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="loading-spinner"></div>
     <div id="root"></div>
-  </body>
-</html>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
+    <script>
+      // Remove loading spinner and show content once React loads
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const spinner = document.querySelector('.loading-spinner');
+          const root = document.getElementById('root');
+          if (spinner) spinner.style.display = 'none';
+          if (root) root.classList.add('loaded');
+        }, 100);
+      });
+    </script>
   </body>
 </html>

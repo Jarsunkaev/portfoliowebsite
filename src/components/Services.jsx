@@ -40,7 +40,7 @@ const ServicesContainer = styled.div`
 
 const SectionTitle = styled.h2`
   font-size: 3.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   text-align: center;
   
   span {
@@ -63,10 +63,12 @@ const SectionTitle = styled.h2`
   
   @media (max-width: 768px) {
     font-size: 2.8rem;
+    margin-bottom: 2.5rem;
   }
   
   @media (max-width: 480px) {
     font-size: 2.4rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -97,28 +99,39 @@ const ServicesGrid = styled(motion.div)`
 // Modern, sleek service card - less card-like, more content-focused
 const ServiceCard = styled(motion.div)`
   background: ${props => props.theme === 'dark' 
-    ? 'linear-gradient(135deg, rgba(42, 42, 42, 0.4) 0%, rgba(30, 30, 30, 0.6) 100%)' 
-    : 'linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(248, 250, 252, 0.8) 100%)'};
-  border-radius: 20px;
+    ? 'var(--color-neutral)' 
+    : 'var(--color-bg)'};
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   position: relative;
-  backdrop-filter: blur(20px);
-  border: 1px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.03)'};
+  border: var(--border-subtle) var(--color-accent3);
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    border-color: var(--color-accent1);
+  }
+  
+  /* Better touch feedback on mobile */
+  &:active {
+    transform: translateY(-2px);
   }
   
   @media (max-width: 768px) {
-    border-radius: 16px;
-    margin: 0 5px;
+    border-radius: var(--border-radius-md);
+    margin: 0 2px;
     
     &:hover {
       transform: translateY(-4px);
+    }
+    
+    /* Add subtle press effect for mobile */
+    &:active {
+      transform: scale(0.98);
     }
   }
 `;
@@ -127,10 +140,10 @@ const CardInner = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   
   @media (max-width: 768px) {
-    padding: 1.2rem 1rem;
+    padding: 1.5rem 1.2rem; /* More generous padding on mobile */
   }
 `;
 
@@ -365,9 +378,6 @@ const ServiceCardComponent = ({ service, theme, language }) => {
           </HeaderContent>
         </CardHeader>
         <CardContent>
-          <ServiceDescription>
-            {getTranslation(`services.${service.descriptionKey}`, language, translations)}
-          </ServiceDescription>
           {service.features && service.features.length > 0 && (
             <FeaturesList>
               {service.features.map((feature, index) => (
@@ -378,7 +388,6 @@ const ServiceCardComponent = ({ service, theme, language }) => {
               ))}
             </FeaturesList>
           )}
-
         </CardContent>
       </CardInner>
     </ServiceCard>

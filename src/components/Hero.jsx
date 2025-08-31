@@ -61,7 +61,7 @@ const TextContainer = styled.div`
 const Title = styled.h1`
   font-size: clamp(2rem, 7vw, 4.2rem);
   line-height: 1.1;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.75rem; /* Reduced from 1.25rem */
   word-wrap: break-word;
@@ -210,40 +210,50 @@ const StyledLink = styled(Link)`
 const ButtonContainer = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
-  margin: -0.5rem 0 0; /* Negative margin to pull buttons upward */
+  margin: 1rem 0 0;
   padding: 0 2rem;
   width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
   gap: 1rem;
-  position: relative; /* Added for z-index to work */
-  z-index: 2; /* Ensure buttons stay above other elements */
+  position: relative;
+  z-index: 2;
   
   @media (max-width: 768px) {
     padding: 0 1.5rem;
     justify-content: center;
-    margin: -0.25rem 0 0; /* Slight negative margin on mobile too */
+    margin: 1.5rem 0 0;
     grid-area: button;
-    flex-wrap: wrap;
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+    gap: 1.2rem; /* More spacing on small screens */
   }
 `;
 
 const PrimaryButton = styled(motion.button)`
   background: var(--color-accent1);
-  color: white;
-  padding: 14px 28px;
-  font-weight: bold;
-  border: var(--border-thick);
-  box-shadow: var(--shadow-neobrutalist);
+  color: var(--color-bg);
+  padding: 16px 32px;
+  font-weight: 600;
+  border: var(--border-subtle) transparent;
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   cursor: pointer;
   font-family: var(--font-heading);
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  border-radius: 16px;
+  letter-spacing: 0.3px;
+  border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   width: 100%;
+  min-height: 52px; /* Better touch target */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   svg {
     font-size: 1rem;
@@ -251,36 +261,45 @@ const PrimaryButton = styled(motion.button)`
   }
   
   &:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px 0px var(--shadow-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
+    background: var(--color-accent2);
     
     svg {
       transform: translateX(4px);
     }
   }
   
+  &:active {
+    transform: translateY(0);
+  }
+  
   @media (max-width: 768px) {
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 18px 28px; /* Larger touch targets on mobile */
+    font-size: 1.05rem;
+    min-height: 56px;
   }
 `;
 
 const SecondaryButton = styled(motion.button)`
   background: transparent;
   color: var(--color-text);
-  padding: 14px 28px;
-  font-weight: bold;
-  border: var(--border-thick);
-  box-shadow: var(--shadow-neobrutalist);
+  padding: 16px 32px;
+  font-weight: 600;
+  border: var(--border-medium) var(--color-accent1);
+  box-shadow: var(--shadow-soft) var(--shadow-color);
   cursor: pointer;
   font-family: var(--font-heading);
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  border-radius: 16px;
+  letter-spacing: 0.3px;
+  border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   width: 100%;
+  min-height: 52px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   svg {
     font-size: 1rem;
@@ -288,18 +307,24 @@ const SecondaryButton = styled(motion.button)`
   }
   
   &:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px 0px var(--shadow-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) var(--shadow-color);
     background: var(--color-accent3);
+    border-color: var(--color-accent2);
     
     svg {
       transform: translateX(4px);
     }
   }
   
+  &:active {
+    transform: translateY(0);
+  }
+  
   @media (max-width: 768px) {
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 18px 28px;
+    font-size: 1.05rem;
+    min-height: 56px;
   }
 `;
 
