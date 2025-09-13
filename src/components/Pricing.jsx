@@ -202,27 +202,6 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
-const BackgroundShape = styled.div`
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: ${props => props.theme === 'dark' ? 'rgba(95, 136, 160, 0.03)' : 'rgba(79, 109, 122, 0.03)'};
-  border-radius: 50%;
-  top: -300px;
-  left: -200px;
-  z-index: 1;
-`;
-
-const BackgroundShape2 = styled.div`
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: ${props => props.theme === 'dark' ? 'rgba(130, 144, 217, 0.03)' : 'rgba(113, 126, 195, 0.03)'};
-  border-radius: 50%;
-  bottom: -150px;
-  right: -50px;
-  z-index: 1;
-`;
 
 const CustomPricing = styled.div`
   margin-top: 4rem;
@@ -273,9 +252,6 @@ const Pricing = () => {
 
   return (
     <PricingSection id="pricing" ref={ref}>
-      <BackgroundShape theme={theme} />
-      <BackgroundShape2 theme={theme} />
-      
       <PricingContainer>
         <SectionTitle>
           {translations.pricing.title[language]} <span>{translations.pricing.titleHighlight[language]}</span>

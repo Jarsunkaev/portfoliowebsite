@@ -16,18 +16,6 @@ const ProjectsSection = styled.section`
   overflow: hidden;
 `;
 
-const BackgroundAccent = styled.div`
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: ${props => props.theme === 'dark' ? 'rgba(95, 136, 160, 0.05)' : 'rgba(79, 109, 122, 0.05)'};
-  top: ${props => props.top || '0'};
-  left: ${props => props.left || 'auto'};
-  right: ${props => props.right || 'auto'};
-  bottom: ${props => props.bottom || 'auto'};
-  z-index: -1;
-`;
 
 const ProjectsContainer = styled.div`
   width: 90%;
@@ -620,10 +608,6 @@ const Projects = () => {
   
   return (
     <ProjectsSection id="projects" ref={ref}>
-      {/* Background accents */}
-      <BackgroundAccent theme={theme} top="-250px" left="5%" />
-      <BackgroundAccent theme={theme} bottom="100px" right="5%" />
-      
       <ProjectsContainer>
         <SectionTitle>
           {language === 'hu' ? 'Munkáim' : 'My'} <span>{language === 'hu' ? '' : 'Portfolio'}</span>

@@ -26,6 +26,10 @@ const translations = {
       hu: "Árak",
       en: "Pricing",
     },
+    faq: {
+      hu: "GYIK",
+      en: "FAQ",
+    },
   },
 
   // Hero section translations with enhanced marketing copy (preserved)
@@ -308,6 +312,20 @@ const translations = {
         hu: "Testreszabott foglalási megoldások időpontokhoz, szolgáltatásokhoz és eseményekhez, automatizált értesítésekkel és fizetési lehetőségekkel.",
         en: "Custom booking solutions for appointments, services, and events, with automated notifications and payment options.",
       },
+      challengeSolution: {
+        title: {
+          hu: "Kihívás & Megoldás",
+          en: "Challenge & Solution",
+        },
+        problem: {
+          hu: "Komplex szolgáltatásütemezés kezelése több szolgáltatástípuson keresztül, a dupla foglalások megelőzése és a személyzeti erőforrások optimalizálása mellett.",
+          en: "Managing complex service scheduling across multiple service types while preventing double bookings and optimizing staff resources.",
+        },
+        solution: {
+          hu: "Kifinomult foglalási rendszer tervezése valós idejű elérhetőséggel, szolgáltatási időszámításokkal és automatizált visszaigazolásokkal. Admin platform automatikus rendeléskezeléssel, ügyféladatbázis kezeléssel és részletes jelentésekkel.",
+          en: "Sophisticated booking system design with real-time availability, service time calculations, and automated confirmations. Admin platform with automated order management, customer database handling, and detailed reporting.",
+        },
+      },
       features: {
         realTimeAvailability: {
           hu: "Valós Idejű Elérhetőségi Naptár",
@@ -332,6 +350,30 @@ const translations = {
         groupBookings: {
           hu: "Csoportos Foglalások és Kezelés",
           en: "Group Bookings & Management",
+        },
+        adminPlatform: {
+          hu: "Admin Platform Automatizált Rendszerkezeléssel",
+          en: "Admin Platform with Automated System Management",
+        },
+        orderAutomation: {
+          hu: "Automatizált Rendeléskezelés és Űrlapfeldolgozás",
+          en: "Automated Order Management and Form Processing",
+        },
+        customerDatabase: {
+          hu: "Ügyféladatbázis és Kapcsolattartás Kezelés",
+          en: "Customer Database and Contact Management",
+        },
+        detailedReporting: {
+          hu: "Részletes Jelentések és Analitika",
+          en: "Detailed Reports and Analytics",
+        },
+        staffOptimization: {
+          hu: "Személyzeti Erőforrások Optimalizálása",
+          en: "Staff Resource Optimization",
+        },
+        doubleBookingPrevention: {
+          hu: "Dupla Foglalások Megelőzése",
+          en: "Double Booking Prevention",
         },
       },
     },
@@ -577,6 +619,174 @@ const translations = {
       hu: "Kapcsolat",
       en: "Contact Us",
     },
+  },
+
+  // FAQ section translations
+  faq: {
+    title: {
+      hu: "Gyakran Ismételt",
+      en: "Frequently Asked",
+    },
+    titleHighlight: {
+      hu: "Kérdések",
+      en: "Questions",
+    },
+    subtitle: {
+      hu: "Itt megtalálja a leggyakrabban felmerülő kérdéseket a weboldal készítésével és karbantartásával kapcsolatban.",
+      en: "Find answers to the most common questions about website development and maintenance.",
+    },
+    questions: {
+      hu: [
+        {
+          question: "Mennyi idő alatt készül el egy weboldal?",
+          answer: "A fejlesztési idő függ a projekt összetettségétől. Egy egyszerű 5 oldalas weboldal 2-3 hét alatt elkészül, egy komplex e-kereskedelmi oldal vagy egyedi alkalmazás pedig 6-12 hétet vehet igénybe. A pontos időt a projekt megbeszélésén határozzuk meg együtt."
+        },
+        {
+          question: "Mi az a reszponzív dizájn és miért fontos?",
+          answer: "A reszponzív dizájn azt jelenti, hogy a weboldal automatikusan alkalmazkodik minden eszköz méretéhez, legyen az mobiltelefon, tablet, laptop vagy asztali számítógép. Ez fontos, mert a felhasználók több mint 60%-a mobilon böngészi a weboldalakat, és a Google is ezt preferálja a keresési eredményekben."
+        },
+        {
+          question: "Mit jelent az alap SEO és mit tartalmaz?",
+          answer: "Az alap SEO (Search Engine Optimization) a weboldal keresőoptimalizálását jelenti. Tartalmazza a megfelelő címek és leírások beállítását, a gyors betöltési időt, a mobilbarát dizájnt, a helyes HTML struktúrát, és a Google Analytics integrációt. Ez segít, hogy a weboldal jobb helyen jelenjen meg a Google keresési eredményeiben."
+        },
+        {
+          question: "Hogyan zajlik a közös munka?",
+          answer: "A fejlesztés során rendszeresen tájékoztatom a haladásról, és lehetőséget biztosítok a visszajelzésekre. Használom a modern projektmenedzsment eszközöket, ahol láthatja a fejlesztés állapotát, és közvetlenül kommunikálhatunk. Minden lépést együtt tervezünk meg."
+        },
+        {
+          question: "Mi történik, ha valamit módosítani kell a weboldalon?",
+          answer: "A weboldal átadása után 30 napig ingyenesen módosítom a tartalmat. Ezután a karbantartási csomag részeként vagy külön díjért foglalkozom a módosításokkal. A kisebb szöveges változtatások általában 1-2 nap alatt elkészülnek."
+        },
+        {
+          question: "Kell-e külön tárhelyet vagy domaint vásárolnom?",
+          answer: "Nem, nem kell! Segítek a megfelelő tárhely és domain kiválasztásában, és beállítom ezeket. A tárhely általában 3-5 ezer forint/év, a domain pedig 2-3 ezer forint/év. Ezeket közvetlenül fizeti, így teljes kontrollja van felettük."
+        },
+        {
+          question: "Hogyan frissül a weboldal tartalma?",
+          answer: "A weboldal tartalmának frissítése a weboldal struktúrájától függ. Ha szeretné, beállíthatom egy tartalomkezelő rendszert, amelyen keresztül könnyedén frissítheti a tartalmat. Ha nem szeretne foglalkozni vele, én is frissíthetem a tartalmat a karbantartási csomag keretében."
+        },
+        {
+          question: "Mi a teendő, ha elromlik valami a weboldalon?",
+          answer: "Ne izguljon! A karbantartási csomag részeként 24 órán belül javítom a problémákat. Ha nincs karbantartási csomagja, akkor is gyorsan segítek, a sürgős problémákat általában 1-2 nap alatt megoldom. Mindig elérhető vagyok telefonon vagy emailben."
+        },
+        {
+          question: "Hogy működik a karbantartás?",
+          answer: "A karbantartás tartalmazza a rendszeres biztonsági frissítéseket, a teljesítmény optimalizálást, a biztonsági mentéseket, és a hibajavításokat. Rendszeresen ellenőrzöm a weboldal működését, és proaktívan javítom a problémákat, mielőtt azok hatással lennének a látogatókra."
+        },
+        {
+          question: "Milyen adatokat kell megadnom az induláshoz?",
+          answer: "Szükségem van a vállalkozás alapvető információira (név, tevékenység, elérhetőségek), a weboldal tartalmára (szövegek, képek), és a célokra. Ha van már logó vagy márkaidentitás, azokat használhatjuk. A többi részben segítek, például a tartalom írásában vagy a megfelelő képforrások megtalálásában. Logótervezést és fotózást nem vállalok."
+        }
+      ],
+      en: [
+        {
+          question: "How long does it take to build a website?",
+          answer: "Development time depends on project complexity. A simple 5-page website takes 2-3 weeks, while a complex e-commerce site or custom application can take 6-12 weeks. We'll figure out the exact timeline together during our project discussion."
+        },
+        {
+          question: "What is responsive design and why is it important?",
+          answer: "Responsive design means the website automatically adapts to any device size, whether it's a mobile phone, tablet, laptop, or desktop computer. This is important because over 60% of users browse websites on mobile, and Google also prefers this in search results."
+        },
+        {
+          question: "What does basic SEO mean and what does it include?",
+          answer: "Basic SEO (Search Engine Optimization) means optimizing the website for search engines. It includes setting proper titles and descriptions, fast loading times, mobile-friendly design, correct HTML structure, and Google Analytics integration. This helps the website appear better in Google search results."
+        },
+        {
+          question: "How does our collaboration work?",
+          answer: "During development, I regularly update you on progress and provide opportunities for feedback. I use modern project management tools where you can see development status and we can communicate directly. We plan every step together."
+        },
+        {
+          question: "What happens if something needs to be changed on the website?",
+          answer: "After website delivery, I make content changes free for 30 days. After that, I handle modifications as part of the maintenance package or for a separate fee. Minor text changes usually take 1-2 days."
+        },
+        {
+          question: "Do I need to buy separate hosting or domain?",
+          answer: "No, you don't! I help you choose the right hosting and domain and set them up. Hosting is usually 3-5 thousand HUF/year, domain is 2-3 thousand HUF/year. You pay these directly, so you have full control over them."
+        },
+        {
+          question: "How is the website content updated?",
+          answer: "Website content updates depend on the website structure. If you prefer, I can set up a content management system that allows you to easily update content. If you don't want to deal with it, I can also update content as part of the maintenance package."
+        },
+        {
+          question: "What to do if something breaks on the website?",
+          answer: "Don't worry! As part of the maintenance package, I fix problems within 24 hours. If you don't have a maintenance package, I still help quickly, urgent problems are usually solved within 1-2 days. I'm always available by phone or email."
+        },
+        {
+          question: "How does maintenance work?",
+          answer: "Maintenance includes regular security updates, performance optimization, backups, and bug fixes. I regularly check website functionality and proactively fix problems before they affect visitors."
+        },
+        {
+          question: "What information do I need to provide to get started?",
+          answer: "I need basic business information (name, activity, contact details), website content (texts, images), and goals. If you already have a logo or brand identity, we can use those. I help with the rest, like content writing or finding the right image sources. I don't do logo design or photography."
+        }
+      ]
+    },
+    quickWinTitle: {
+      hu: "Gyors",
+      en: "Quick",
+    },
+    quickWinTitleHighlight: {
+      hu: "Szolgáltatások",
+      en: "Win Services",
+    },
+    quickWinSubtitle: {
+      hu: "Ezek a kiegészítő szolgáltatások segítenek a weboldal hatékonyságának növelésében és a vállalkozás online jelenlétének erősítésében.",
+      en: "These additional services help increase website effectiveness and strengthen your business's online presence.",
+    },
+    quickWinServices: {
+      hu: [
+        {
+          title: "Google Cégem / Google My Business beállítás",
+          description: "Professzionális Google Cégem profil létrehozása és optimalizálása, hogy könnyebben megtalálják Önt a helyi keresésekben."
+        },
+        {
+          title: "Egyszerű Google Analytics telepítés",
+          description: "Részletes látogatási statisztikák beállítása, hogy követni tudja a weboldal teljesítményét és a látogatók viselkedését."
+        },
+        {
+          title: "GDPR alapbeállítás",
+          description: "Cookie banner, adatvédelmi tájékoztató sablon és egyéb jogi dokumentumok beállítása a GDPR megfelelőség érdekében."
+        },
+        {
+          title: "Alap weboldal karbantartás",
+          description: "Rendszeres frissítések, biztonsági javítások és teljesítmény optimalizálás a weboldal zökkenőmentes működéséhez."
+        },
+        {
+          title: "E-mail/űrlap integráció",
+          description: "Kapcsolatfelvételi űrlapok beállítása, amelyek automatikusan továbbítják az üzeneteket az Ön e-mail címére."
+        },
+        {
+          title: "SEO alapbeállítások",
+          description: "Címek, leírások és metaadatok optimalizálása a keresőmotorokban való jobb megjelenésért."
+        }
+      ],
+      en: [
+        {
+          title: "Google My Business Setup",
+          description: "Creating and optimizing a professional Google My Business profile so you can be easily found in local searches."
+        },
+        {
+          title: "Simple Google Analytics Installation",
+          description: "Setting up detailed visitor statistics so you can track website performance and visitor behavior."
+        },
+        {
+          title: "GDPR Basic Setup",
+          description: "Setting up cookie banner, privacy policy template, and other legal documents for GDPR compliance."
+        },
+        {
+          title: "Basic Website Maintenance",
+          description: "Regular updates, security patches, and performance optimization for smooth website operation."
+        },
+        {
+          title: "Email/Form Integration",
+          description: "Setting up contact forms that automatically forward messages to your email address."
+        },
+        {
+          title: "SEO Basic Setup",
+          description: "Optimizing titles, descriptions, and metadata for better appearance in search engines."
+        }
+      ]
+    }
   },
 
   // Contact section translations (preserved)
@@ -931,8 +1141,8 @@ const translations = {
       en: "Data Controller",
     },
     controllerText: {
-      hu: "CyberNōde – Kapcsolat: juszuf_1@icloud.com. Székhely: Budapest, Magyarország.",
-      en: "CyberNōde – Contact: juszuf_1@icloud.com. Location: Budapest, Hungary.",
+      hu: "BitCanvas – Kapcsolat: juszuf_1@icloud.com. Székhely: Budapest, Magyarország.",
+      en: "BitCanvas – Contact: juszuf_1@icloud.com. Location: Budapest, Hungary.",
     },
     dataWeCollectTitle: {
       hu: "Milyen adatokat kezelünk",

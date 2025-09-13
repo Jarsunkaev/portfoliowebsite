@@ -104,7 +104,7 @@ const Logo = styled(motion.div)`
       return `${width * 100}%`;
     }};
     height: 4px; /* Slightly thicker for better visibility */
-    background: linear-gradient(90deg, var(--color-accent1), var(--color-accent2));
+    background: var(--color-accent1);
     border-radius: 2px;
     transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: width;
@@ -464,6 +464,7 @@ const Navbar = () => {
     { name: translations.navbar.portfolio[language], target: 'projects' },
     { name: translations.navbar.pricing[language], target: 'pricing' },
     { name: translations.navbar.about[language], target: 'about' },
+    { name: translations.navbar.faq[language], target: 'faq' },
     { name: translations.navbar.contact[language], target: 'contact' }
   ];
   
@@ -491,7 +492,7 @@ const Navbar = () => {
           }}
           style={{ cursor: 'pointer' }}
         >
-          CyberNōde
+          BitCanvas
         </Logo>
         
         <MenuItems>

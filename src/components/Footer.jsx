@@ -74,9 +74,17 @@ const SocialLink = styled(motion.a)`
   transition: all 0.2s ease;
   border: 2px solid white;
   
+  svg {
+    color: #1a1e2a !important;
+  }
+  
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    
+    svg {
+      color: #1a1e2a !important;
+    }
   }
 `;
 
@@ -185,7 +193,7 @@ const Footer = () => {
     <FooterSection theme={theme}>
       <FooterContainer>
         <FooterColumn>
-          <Logo>CyberNōde</Logo>
+          <Logo>BitCanvas</Logo>
           <FooterText>
             {translations.footer.aboutText[language]}
           </FooterText>
@@ -299,7 +307,7 @@ const Footer = () => {
       </FooterContainer>
       
       <Copyright>
-        © {new Date().getFullYear()} CyberNōde. {translations.footer.copyright[language]}
+        © {new Date().getFullYear()} BitCanvas. {translations.footer.copyright[language]}
       </Copyright>
     </FooterSection>
   );

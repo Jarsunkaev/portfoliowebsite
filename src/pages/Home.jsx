@@ -6,6 +6,7 @@ import Services from '../components/Services';
 import Projects from '../components/Projects';
 import Pricing from '../components/Pricing';
 import About from '../components/About';
+import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 
 const Home = () => {
@@ -40,6 +41,7 @@ const Home = () => {
       <Projects />
       <Pricing />
       <About />
+      <FAQ />
       <Contact />
     </>
   );
