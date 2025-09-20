@@ -246,7 +246,7 @@ const BlogList = () => {
         title="Blog - Webfejlesztési Tippek & Trendek"
         description="Maradjon naprakész a legújabb webfejlesztési trendekkel, tippekkel és betekintésekkel tőlem. Személyes tapasztalataim a modern web technológiákról, SEO-ról és e-kereskedelmi megoldásokról."
         keywords="webfejlesztés blog, programozási tippek, web design trendek, SEO betekintések, e-kereskedelmi fejlesztés, magyar webfejlesztés"
-        url="https://bitcanvas.dev/blog"
+        url="https://bitcanvas.hu/blog"
       />
       
       <BlogContainer>

@@ -6,7 +6,7 @@ const SEO = ({
   description = "Professzionális webfejlesztési szolgáltatások egyedi weboldalakkal, e-kereskedelmi megoldásokkal, fizetési integrációval és admin platformokkal. Szakértő fejlesztés modern vállalkozásoknak.",
   keywords = "webfejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés",
   image = "/Bitcanvas.png",
-  url = "https://bitcanvas.dev",
+  url = "https://bitcanvas.hu",
   type = "website",
   author = "BitCanvas",
   publishedTime,
@@ -71,8 +71,8 @@ const SEO = ({
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "BitCanvas",
-          "url": "https://bitcanvas.dev",
-          "logo": "https://bitcanvas.dev/Bitcanvas.png",
+          "url": "https://bitcanvas.hu",
+          "logo": "https://bitcanvas.hu/Bitcanvas.png",
           "description": "Professzionális webfejlesztési szolgáltatások egyedi weboldalakkal, e-kereskedelmi megoldásokkal, fizetési integrációval és admin platformokkal.",
           "contactPoint": {
             "@type": "ContactPoint",
@@ -99,12 +99,12 @@ const SEO = ({
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "BitCanvas",
-          "url": "https://bitcanvas.dev",
+          "url": "https://bitcanvas.hu",
           "description": "Professzionális webfejlesztési szolgáltatások",
           "inLanguage": "hu",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://bitcanvas.dev/search?q={search_term_string}",
+            "target": "https://bitcanvas.hu/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         })}
