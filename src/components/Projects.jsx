@@ -330,6 +330,10 @@ const CategoryTag = styled.div`
       right: auto;
     }
   }
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ProjectContent = styled.div`

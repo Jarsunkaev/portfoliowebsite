@@ -4,6 +4,8 @@ import GlobalStyles from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import BlogList from './components/BlogList';
+import BlogPost from './components/BlogPost';
 import { LanguageProvider } from './components/LanguageContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Footer from './components/Footer';
@@ -12,6 +14,9 @@ import AnimatedBackground from './components/AnimatedBackground';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
+import SEO from './components/SEO';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 function App() {
   useEffect(() => {
@@ -31,7 +36,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <HelmetProvider>
+      <SEO />
+      <GoogleAnalytics />
       <ThemeProvider>
         <LanguageProvider>
           <GlobalStyles />
@@ -49,6 +56,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
               </Routes>
               <Footer />
               <BackToTopButton />
@@ -56,7 +65,7 @@ function App() {
           </AnimatePresence>
         </LanguageProvider>
       </ThemeProvider>
-    </>
+    </HelmetProvider>
   );
 }
 

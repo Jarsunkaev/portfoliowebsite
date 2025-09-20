@@ -17,7 +17,7 @@ import '@fontsource/inter/600.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/portfoliowebsite">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>

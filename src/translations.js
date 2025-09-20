@@ -30,6 +30,10 @@ const translations = {
       hu: "GYIK",
       en: "FAQ",
     },
+    blog: {
+      hu: "Blog",
+      en: "Blog",
+    },
   },
 
   // Hero section translations with enhanced marketing copy (preserved)
@@ -1044,7 +1048,7 @@ const translations = {
           en: "Quality Code",
         },
         description: {
-          hu: "Tiszta, jól dokumentált kód, amely tartós és könnyen karbantartható.",
+          hu: "Tiszta, jól dokumentált és könnyebben karbantartható kód.",
           en: "Clean, well-documented code that's built to last and easy to maintain.",
         },
       },

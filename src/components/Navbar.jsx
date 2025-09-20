@@ -206,7 +206,7 @@ const MobileConsultButton = styled(ConsultButton)`
   text-align: center;
   display: flex;
   justify-content: center;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   padding: 16px 24px;
   background: var(--color-accent1);
   color: var(--color-bg) !important; /* Force light text color */
@@ -265,18 +265,18 @@ const MobileMenuPanel = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5rem;
   overflow-y: auto;
   pointer-events: auto;
   
   /* Safe area for notched phones */
-  padding-top: calc(2rem + env(safe-area-inset-top));
-  padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  padding-top: calc(1.5rem + env(safe-area-inset-top));
+  padding-bottom: calc(3rem + env(safe-area-inset-bottom));
 `;
 
 // Mobile menu item styling
 const MobileMenuItem = styled(motion.div)`
-  margin: 1.2rem 0;
+  margin: 0.3rem 0;
   font-weight: 600;
   font-size: 1.5rem;
   width: 100%;
@@ -287,13 +287,13 @@ const MobileMenuItem = styled(motion.div)`
   a {
     color: var(--color-text);
     text-decoration: none;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.2rem;
     position: relative;
     border-radius: 12px;
     transition: all 0.3s ease;
     display: block;
     cursor: pointer;
-    min-height: 48px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -467,6 +467,9 @@ const Navbar = () => {
     { name: translations.navbar.faq[language], target: 'faq' },
     { name: translations.navbar.contact[language], target: 'contact' }
   ];
+
+  // Blog navigation item (separate from scroll targets)
+  const blogItem = { name: translations.navbar.blog[language], path: '/blog' };
   
   return (
     <NavContainer $isScrolled={isScrolled}>
@@ -523,6 +526,20 @@ const Navbar = () => {
               )}
             </MenuItem>
           ))}
+          
+          {/* Blog Link */}
+          <MenuItem
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            $isScrolled={isScrolled}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 + navItems.length * 0.1 }}
+          >
+            <RouterLink to={blogItem.path}>
+              {blogItem.name}
+            </RouterLink>
+          </MenuItem>
           
           <ConsultButton 
             href="#contact" 
@@ -614,6 +631,13 @@ const Navbar = () => {
                   )}
                 </MobileMenuItem>
               ))}
+              
+              {/* Blog Link in Mobile Menu */}
+              <MobileMenuItem variants={menuItemVariants}>
+                <RouterLink to={blogItem.path} onClick={() => setIsMenuOpen(false)}>
+                  {blogItem.name}
+                </RouterLink>
+              </MobileMenuItem>
               
               <MobileMenuItem variants={menuItemVariants}>
                 <MobileConsultButton 

@@ -6,13 +6,39 @@ import { useInView } from 'react-intersection-observer';
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 
 const FAQSection = styled.section`
   padding: 120px 0;
   position: relative;
   z-index: 1;
   overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    filter: blur(60px);
+    opacity: 0.25;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  &::before {
+    width: 280px;
+    height: 280px;
+    top: -60px;
+    left: -80px;
+    background: radial-gradient(circle at 30% 30%, var(--color-accent3), transparent 60%);
+  }
+
+  &::after {
+    width: 320px;
+    height: 320px;
+    bottom: -80px;
+    right: -100px;
+    background: radial-gradient(circle at 70% 70%, var(--color-accent2), transparent 60%);
+  }
 `;
 
 
@@ -56,7 +82,7 @@ const SectionSubtitle = styled.p`
 const FAQList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   max-width: 800px;
   margin: 0 auto;
 `;
@@ -68,10 +94,21 @@ const FAQItem = styled(motion.div)`
   overflow: hidden;
   box-shadow: var(--shadow-soft) var(--shadow-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  position: relative;
+
   &:hover {
     border-color: var(--color-accent1);
     box-shadow: var(--shadow-medium) var(--shadow-color);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(120deg, transparent 0%, transparent 60%, rgba(0,0,0,0.06) 100%);
+    opacity: 0.2;
   }
 `;
 
@@ -100,6 +137,19 @@ const QuestionButton = styled.button`
   }
 `;
 
+const QuestionLabel = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+const Chevron = styled(motion.span)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+`;
+
 const QuestionBorder = styled.div`
   height: 1px;
   background: var(--color-accent3);
@@ -114,6 +164,7 @@ const QuestionBorder = styled.div`
 
 const AnswerContainer = styled(motion.div)`
   overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), transparent 40%);
 `;
 
 const Answer = styled.div`
@@ -238,11 +289,23 @@ const FAQ = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
             >
-              <QuestionButton onClick={() => toggleItem(index)}>
-                <span>{item.question}</span>
-                {openItems[index] ? <FaChevronUp /> : <FaChevronDown />}
+              <QuestionButton
+                onClick={() => toggleItem(index)}
+                aria-expanded={!!openItems[index]}
+                aria-controls={`faq-panel-${index}`}
+              >
+                <QuestionLabel>
+                  {item.question}
+                </QuestionLabel>
+                <Chevron
+                  initial={false}
+                  animate={{ rotate: openItems[index] ? 180 : 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <FaChevronDown />
+                </Chevron>
               </QuestionButton>
               
               <QuestionBorder $isOpen={openItems[index]} />
@@ -250,6 +313,7 @@ const FAQ = () => {
               <AnimatePresence>
                 {openItems[index] && (
                   <AnswerContainer
+                    id={`faq-panel-${index}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}

@@ -12,7 +12,7 @@ const SwitcherContainer = styled(motion.div)`
   cursor: pointer;
   
   @media (max-width: 768px) {
-    margin: 1.5rem 0;
+    margin: 0.5rem 0;
     justify-content: center;
   }
 `;
