@@ -561,7 +561,7 @@ const projectsData = [
     },
     technologies: ["Next.js", "Firebase", "Stripe", "Recipe API", "Auth0"],
     features: ["Ingredient Scanning", "Recipe Filtering", "Favorites Collection", "Premium Subscription"],
-    demoUrl: "https://frigo-recipes.com"
+    demoUrl: "https://frigo-app.com"
   }
 ];
 

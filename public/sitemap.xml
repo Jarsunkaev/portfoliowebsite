@@ -52,6 +52,28 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- New Blog Posts (2025) -->
+  <url>
+    <loc>https://www.bitcanvas.hu/blog/weboldal-keszites-arak-2025-ben-mit-kell-tudni</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bitcanvas.hu/blog/honlap-fejlesztes-lepesei-tervezestol-inditasig</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bitcanvas.hu/blog/google-cegem-es-harmadik-feltol-szarmazo-integraciok-hogyan-noveld-a-latogatottsagot</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Service Pages (anchor links) -->
   <url>
     <loc>https://www.bitcanvas.hu/#services</loc>
