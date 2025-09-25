@@ -252,12 +252,17 @@ const RelatedPostCard = styled(Link)`
     background: var(--color-accent1);
     color: var(--color-bg);
     transform: translateY(-2px);
+    
+    h4 {
+      color: var(--color-bg);
+    }
   }
   
   h4 {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
   }
   
   p {
