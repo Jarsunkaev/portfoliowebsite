@@ -43,16 +43,16 @@ const translations = {
       en: "Custom Web Solutions",
     },
     title: {
-      hu: "Fejlessze Vállalkozását",
-      en: "Elevate Your Business",
+      hu: "Professzionális Weboldal Készítés",
+      en: "Professional Website Development",
     },
     titleHighlight: {
-      hu: "Digitális Megoldásokkal",
-      en: "With Digital Innovation",
+      hu: "Honlap Fejlesztés Szolgáltatások",
+      en: "Website Development Services",
     },
     description: {
-      hu: "Hozzon létre hatékony online jelenlétet egyedi weboldalakkal és alkalmazásokkal, amelyek lenyűgözik az ügyfeleit és fellendítik vállalkozását.",
-      en: "Create a powerful online presence with custom websites and applications that impress your clients and drive business growth.",
+      hu: "Egyedi weboldal készítés és honlap fejlesztés szolgáltatásokkal hozzon létre hatékony online jelenlétet. Professzionális weblap készítés, amely lenyűgözi az ügyfeleit és fellendíti vállalkozását.",
+      en: "Create a powerful online presence with custom website development services. Professional web development that impresses your clients and drives business growth.",
     },
     clients: {
       hu: "Már bizalmat szavaztak nekünk az <span>Egészségügy</span>, <span>Turizmus</span> és <span>Kisvállalkozások</span> területén",
@@ -93,8 +93,8 @@ const translations = {
       en: "What We Offer",
     },
     overallDescription: {
-      hu: "Csúcsminőségű digitális megoldásokat szállítunk, amelyek az Ön üzleti igényeire szabva javítják online jelenlétét és elősegítik a növekedést.",
-      en: "We deliver cutting-edge digital solutions tailored to your business needs, enhancing your online presence and driving growth.",
+      hu: "Professzionális weboldal készítés és honlap fejlesztés szolgáltatásokat nyújtunk, amelyek az Ön üzleti igényeire szabva javítják online jelenlétét és elősegítik a növekedést. Egyedi weblap készítés modern technológiákkal.",
+      en: "We deliver professional website development and web development services tailored to your business needs, enhancing your online presence and driving growth. Custom web development with modern technologies.",
     },
     keyFeatures: {
       hu: "Főbb Jellemzők",
@@ -133,8 +133,8 @@ const translations = {
         en: "Custom Web Development",
       },
       description: {
-        hu: "Egyedi, nagy teljesítményű weboldalakat és webalkalmazásokat készítünk, amelyek az Ön specifikus üzleti céljaihoz és márkaidentitásához igazodnak.",
-        en: "Crafting unique, high-performance websites and web applications tailored to your specific business goals and brand identity.",
+        hu: "Professzionális weboldal készítés és honlap fejlesztés szolgáltatásokat nyújtunk. Egyedi, nagy teljesítményű weblap készítés és webalkalmazások, amelyek az Ön specifikus üzleti céljaihoz és márkaidentitásához igazodnak.",
+        en: "Professional website development and web development services. Crafting unique, high-performance web development and web applications tailored to your specific business goals and brand identity.",
       },
       features: {
         responsive: {

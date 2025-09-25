@@ -78,41 +78,57 @@ const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Your actual GA4 tracking ID
 
 ## 🎯 Target Keywords for BitCanvas
 
-### Primary Keywords:
+### Primary Hungarian Keywords:
+- "weboldal készítés" (website creation)
+- "weblap készítés" (webpage creation) 
+- "honlap készítés" (website creation)
+- "weboldal fejlesztés" (website development)
+- "honlap fejlesztés" (website development)
+- "weblap fejlesztés" (webpage development)
+
+### Long-tail Hungarian Keywords:
+- "egyedi weboldal készítés" (custom website creation)
+- "professzionális honlap fejlesztés" (professional website development)
+- "e-kereskedelmi weboldal készítés" (e-commerce website creation)
+- "reszponzív weboldal készítés" (responsive website creation)
+- "modern weblap készítés" (modern webpage creation)
+
+### Local Hungarian Keywords:
+- "Budapest weboldal készítés" (Budapest website creation)
+- "Magyarország honlap fejlesztés" (Hungary website development)
+- "Budapest weblap készítés" (Budapest webpage creation)
+- "magyar weboldal készítés" (Hungarian website creation)
+
+### English Keywords (for international reach):
 - "web development services"
 - "custom website development"
 - "e-commerce development"
 - "React development services"
 - "web application development"
 
-### Long-tail Keywords:
-- "custom web development services for small business"
-- "e-commerce website development with payment integration"
-- "responsive web design services"
-- "modern web application development"
-- "professional web development company"
-
-### Local Keywords (if targeting local market):
-- "web development services [your city]"
-- "custom website development [your city]"
-- "web design agency [your city]"
-
 ## 📝 Content Calendar Suggestions
 
 ### Month 1:
-- "The Future of Web Development: Trends to Watch in 2025" ✅
-- "Building Scalable E-commerce Solutions" ✅
-- "SEO Best Practices for Modern Web Applications" ✅
+- "A Webfejlesztés Jövője: Trendek 2025-ben" ✅
+- "Skálázható E-kereskedelmi Megoldások Építése" ✅
+- "SEO Legjobb Gyakorlatok Modern Webalkalmazásokhoz" ✅
 
 ### Month 2:
-- "React vs Vue vs Angular: Which Framework to Choose?"
-- "E-commerce Payment Gateway Integration Guide"
-- "Website Performance Optimization Techniques"
+- "Weboldal Készítés: React vs Vue vs Angular - Melyik Keretrendszert Válasszam?"
+- "E-kereskedelmi Fizetési Átjáró Integráció Útmutató"
+- "Weboldal Teljesítmény Optimalizálási Technikák"
 
 ### Month 3:
-- "Mobile-First Web Design: Best Practices"
-- "Content Management Systems: WordPress vs Custom Solutions"
-- "Web Security: Protecting Your Website from Common Threats"
+- "Mobil-First Weboldal Dizájn: Legjobb Gyakorlatok"
+- "Tartalomkezelő Rendszerek: WordPress vs Egyedi Megoldások"
+- "Web Biztonság: Weboldal Védelme a Gyakori Fenyegetésektől"
+
+### Hungarian Content Suggestions:
+- "Honlap Készítés Budapesten: Teljes Útmutató"
+- "Weboldal Készítés Árak 2025-ben: Mit Kell Tudni"
+- "Egyedi Weboldal vs Sablon: Melyiket Válasszam?"
+- "Weblap Készítés SEO Optimalizálással"
+- "Honlap Fejlesztés Lépései: Tervezéstől Indításig"
 
 ## 🔧 Additional SEO Features to Consider
 

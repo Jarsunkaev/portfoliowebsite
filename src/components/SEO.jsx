@@ -2,9 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ 
-  title = "BitCanvas - Webfejlesztés & Digitális Megoldások",
-  description = "Professzionális webfejlesztési szolgáltatások egyedi weboldalakkal, e-kereskedelmi megoldásokkal, fizetési integrációval és admin platformokkal. Szakértő fejlesztés modern vállalkozásoknak.",
-  keywords = "webfejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés",
+  title = "BitCanvas - Weboldal Készítés & Honlap Fejlesztés",
+  description = "Professzionális weboldal készítés és honlap fejlesztés szolgáltatások. Egyedi weblap készítés, e-kereskedelmi megoldások, fizetési integráció és admin platformok. Szakértő fejlesztés modern vállalkozásoknak Magyarországon.",
+  keywords = "weboldal készítés, weblap készítés, honlap készítés, weboldal fejlesztés, honlap fejlesztés, weblap fejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés, Budapest weboldal készítés",
   image = "/Bitcanvas.png",
   url = "https://www.bitcanvas.hu",
   type = "website",
@@ -73,7 +73,7 @@ const SEO = ({
           "name": "BitCanvas",
           "url": "https://www.bitcanvas.hu",
           "logo": "https://www.bitcanvas.hu/Bitcanvas.png",
-          "description": "Professzionális webfejlesztési szolgáltatások egyedi weboldalakkal, e-kereskedelmi megoldásokkal, fizetési integrációval és admin platformokkal.",
+          "description": "Professzionális weboldal készítés és honlap fejlesztés szolgáltatások. Egyedi weblap készítés, e-kereskedelmi megoldások, fizetési integráció és admin platformok.",
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "customer service",
@@ -100,7 +100,7 @@ const SEO = ({
           "@type": "WebSite",
           "name": "BitCanvas",
           "url": "https://www.bitcanvas.hu",
-          "description": "Professzionális webfejlesztési szolgáltatások",
+          "description": "Professzionális weboldal készítés és honlap fejlesztés szolgáltatások",
           "inLanguage": "hu",
           "potentialAction": {
             "@type": "SearchAction",

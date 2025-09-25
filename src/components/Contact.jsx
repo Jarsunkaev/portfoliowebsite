@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLinkedin, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+// Removed EmailJS import - using Web3Forms instead
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
@@ -336,29 +337,97 @@ const Contact = () => {
     });
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        projectType: '',
-        budget: '',
-        timeline: '',
-        message: ''
-      });
+    try {
+      // Web3Forms - No API key needed! Just get your access key from web3forms.com
+      const accessKey = '2407e661-806d-4ba6-bd20-505f4ae49c40'; // Your Web3Forms access key
       
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
+      // Prepare form data for Web3Forms
+      const formDataToSend = new FormData();
+      formDataToSend.append('access_key', accessKey);
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('project_type', formData.projectType);
+      formDataToSend.append('budget', formData.budget);
+      formDataToSend.append('timeline', formData.timeline);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('language', language);
+      formDataToSend.append('subject', `New Contact Form Submission from ${formData.name}`);
+      formDataToSend.append('from_name', formData.name);
+      formDataToSend.append('reply_to', formData.email);
+      
+      // Create a well-formatted plain text message
+      const formattedMessage = `
+=== NEW CONTACT FORM SUBMISSION ===
+
+CONTACT INFORMATION:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Language: ${language === 'hu' ? 'Hungarian' : 'English'}
+
+PROJECT DETAILS:
+Project Type: ${formData.projectType || 'Not specified'}
+Budget: ${formData.budget || 'Not specified'}
+Timeline: ${formData.timeline || 'Not specified'}
+
+MESSAGE:
+${formData.message}
+
+---
+This message was sent from your BitCanvas contact form.
+Reply directly to this email to respond to ${formData.name}.
+      `;
+      
+      // Replace the message with formatted version
+      formDataToSend.set('message', formattedMessage);
+      
+      // Add confirmation email for sender - using correct Web3Forms parameters
+      formDataToSend.append('auto_respond', 'true');
+      formDataToSend.append('auto_respond_subject', language === 'hu' ? 'Köszönjük üzenetét - BitCanvas' : 'Thank you for your message - BitCanvas');
+      formDataToSend.append('auto_respond_message', language === 'hu' 
+        ? `Kedves ${formData.name}!\n\nKöszönjük, hogy kapcsolatba lépett velünk. Hamarosan válaszolunk üzenetére.\n\nÜdvözlettel,\nBitCanvas Csapat`
+        : `Dear ${formData.name}!\n\nThank you for reaching out to us. We will get back to you soon.\n\nBest regards,\nBitCanvas Team`
+      );
+
+      // Send email using Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          message: ''
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setIsSubmitting(false);
+      // You could add error state handling here
+      alert(language === 'hu' ? 'Hiba történt az üzenet küldése során. Kérjük, próbálja újra.' : 'An error occurred while sending the message. Please try again.');
+    }
   };
   
   return (
