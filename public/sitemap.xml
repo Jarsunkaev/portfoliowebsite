@@ -8,7 +8,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://bitcanvas.hu/</loc>
+    <loc>https://www.bitcanvas.hu/</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,7 +16,7 @@
   
   <!-- Privacy Policy -->
   <url>
-    <loc>https://bitcanvas.hu/privacy</loc>
+    <loc>https://www.bitcanvas.hu/privacy</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -24,7 +24,7 @@
   
   <!-- Blog -->
   <url>
-    <loc>https://bitcanvas.hu/blog</loc>
+    <loc>https://www.bitcanvas.hu/blog</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -32,21 +32,21 @@
   
   <!-- Blog Posts -->
   <url>
-    <loc>https://bitcanvas.hu/blog/miert-segit-weboldal-novelni-vallalkozast</loc>
+    <loc>https://www.bitcanvas.hu/blog/miert-segit-weboldal-novelni-vallalkozast</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/blog/seo-mi-ez-es-miert-szamit</loc>
+    <loc>https://www.bitcanvas.hu/blog/seo-mi-ez-es-miert-szamit</loc>
     <lastmod>2025-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/blog/egyedi-weboldal-vs-site-builder</loc>
+    <loc>https://www.bitcanvas.hu/blog/egyedi-weboldal-vs-site-builder</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -54,42 +54,42 @@
   
   <!-- Service Pages (anchor links) -->
   <url>
-    <loc>https://bitcanvas.hu/#services</loc>
+    <loc>https://www.bitcanvas.hu/#services</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/#projects</loc>
+    <loc>https://www.bitcanvas.hu/#projects</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/#pricing</loc>
+    <loc>https://www.bitcanvas.hu/#pricing</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/#about</loc>
+    <loc>https://www.bitcanvas.hu/#about</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/#contact</loc>
+    <loc>https://www.bitcanvas.hu/#contact</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://bitcanvas.hu/#faq</loc>
+    <loc>https://www.bitcanvas.hu/#faq</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -48,7 +48,11 @@ const SectionTitle = styled.h2`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 

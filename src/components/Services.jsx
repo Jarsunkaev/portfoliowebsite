@@ -62,12 +62,12 @@ const SectionTitle = styled.h2`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 8vw, 2.8rem);
     margin-bottom: 2.5rem;
   }
   
   @media (max-width: 480px) {
-    font-size: 2.4rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
   }
 `;
@@ -216,21 +216,6 @@ const CardTitle = styled.h3`
   display: flex;
   align-items: center;
   min-height: 100%;
-`;
-
-const ServiceDescription = styled.p`
-  margin: 0 0 2rem 0;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  font-size: 1rem;
-  opacity: 0.85;
-  overflow-wrap: break-word;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
 `;
 
 const FeaturesList = styled.ul`

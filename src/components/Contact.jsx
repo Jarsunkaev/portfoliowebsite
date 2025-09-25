@@ -19,12 +19,20 @@ const ContactContainer = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
   
   span {
     color: var(--color-accent2);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 

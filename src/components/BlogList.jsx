@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaCalendarAlt, FaClock, FaUser, FaTag, FaSearch } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaUser, FaSearch } from 'react-icons/fa';
 import { blogPosts } from '../data/blogData';
 import SEO from './SEO';
 
@@ -22,13 +22,17 @@ const BlogHeader = styled.div`
   
   h1 {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 1rem;
     
     @media (max-width: 768px) {
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 2rem;
     }
   }
   
@@ -89,23 +93,6 @@ const SearchBox = styled.div`
     left: 0.75rem;
     color: var(--color-text-secondary);
     font-size: 1rem;
-  }
-`;
-
-const FilterButton = styled.button`
-  padding: 0.75rem 1.5rem;
-  border: 2px solid ${props => props.$active ? 'var(--color-accent1)' : 'var(--color-neutral)'};
-  background: ${props => props.$active ? 'var(--color-accent1)' : 'transparent'};
-  color: ${props => props.$active ? 'var(--color-bg)' : 'var(--color-text)'};
-  border-radius: var(--border-radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    border-color: var(--color-accent1);
-    background: var(--color-accent1);
-    color: var(--color-bg);
   }
 `;
 
@@ -246,7 +233,7 @@ const BlogList = () => {
         title="Blog - Webfejlesztési Tippek & Trendek"
         description="Maradjon naprakész a legújabb webfejlesztési trendekkel, tippekkel és betekintésekkel tőlem. Személyes tapasztalataim a modern web technológiákról, SEO-ról és e-kereskedelmi megoldásokról."
         keywords="webfejlesztés blog, programozási tippek, web design trendek, SEO betekintések, e-kereskedelmi fejlesztés, magyar webfejlesztés"
-        url="https://bitcanvas.hu/blog"
+        url="https://www.bitcanvas.hu/blog"
       />
       
       <BlogContainer>

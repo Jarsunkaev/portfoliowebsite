@@ -35,11 +35,16 @@ const NavContainer = styled(motion.div)`
   pointer-events: none;
   
   @media (max-width: 768px) {
-    padding: ${props => props.$isScrolled ? '10px' : '16px'} 3%;
+    padding: ${props => props.$isScrolled ? '8px' : '12px'} 3%;
+    /* Ensure navbar stays at top on mobile */
+    top: 0 !important;
+    transform: none !important;
   }
   
   @media (max-width: 480px) {
-    padding: 0;
+    padding: 8px 2%;
+    top: 0 !important;
+    transform: none !important;
   }
 `;
 
@@ -75,12 +80,20 @@ const Nav = styled(motion.nav)`
   @media (max-width: 768px) {
     padding: ${props => props.$isScrolled ? '0.6rem 1.2rem' : '0.8rem 1.5rem'};
     height: ${props => props.$isScrolled ? '60px' : '70px'};
+    border-radius: 16px;
+    /* Ensure navbar stays at top on mobile */
+    position: relative;
+    top: 0;
+    transform: none;
   }
   
   @media (max-width: 480px) {
-    border-radius: 0 0 16px 16px;
+    border-radius: 16px;
     padding: 0.8rem 1.2rem;
     height: 60px;
+    position: relative;
+    top: 0;
+    transform: none;
   }
 `;
 
@@ -206,13 +219,14 @@ const MobileConsultButton = styled(ConsultButton)`
   text-align: center;
   display: flex;
   justify-content: center;
-  margin: 0.5rem auto;
-  padding: 16px 24px;
+  margin: 0.3rem auto;
+  padding: 14px 20px;
   background: var(--color-accent1);
   color: var(--color-bg) !important; /* Force light text color */
   font-weight: 600;
   z-index: 1003;
   position: relative;
+  font-size: 1rem;
   
   &:hover {
     background: var(--color-accent2);
@@ -221,6 +235,7 @@ const MobileConsultButton = styled(ConsultButton)`
   
   @media (max-width: 480px) {
     width: 90%;
+    padding: 12px 18px;
   }
 `;
 
@@ -265,20 +280,20 @@ const MobileMenuPanel = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   overflow-y: auto;
   pointer-events: auto;
   
   /* Safe area for notched phones */
-  padding-top: calc(1.5rem + env(safe-area-inset-top));
-  padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 `;
 
 // Mobile menu item styling
 const MobileMenuItem = styled(motion.div)`
-  margin: 0.3rem 0;
+  margin: 0.1rem 0;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   width: 100%;
   text-align: center;
   z-index: 1003;
@@ -287,13 +302,13 @@ const MobileMenuItem = styled(motion.div)`
   a {
     color: var(--color-text);
     text-decoration: none;
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1rem;
     position: relative;
     border-radius: 12px;
     transition: all 0.3s ease;
     display: block;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -441,18 +456,22 @@ const Navbar = () => {
     };
   }, []);
   
-  // Close mobile menu when clicking outside
+  // Close mobile menu when clicking outside and disable scrolling
   useEffect(() => {
     if (isMenuOpen) {
+      // Prevent body scroll when menu is open
       document.body.style.overflow = 'hidden';
     } else {
+      // Restore scroll when menu is closed
       document.body.style.overflow = 'unset';
     }
     
     return () => {
+      // Cleanup on unmount
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
+
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

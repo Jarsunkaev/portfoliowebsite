@@ -1,9 +1,8 @@
 // src/components/FAQ.jsx
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
 import { FaChevronDown } from 'react-icons/fa';
@@ -66,7 +65,11 @@ const SectionTitle = styled.h2`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 
@@ -194,7 +197,11 @@ const QuickWinTitle = styled.h3`
   }
   
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -250,7 +257,6 @@ const ServiceDescription = styled.p`
 
 
 const FAQ = () => {
-  const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
   const [ref, inView] = useInView({
     triggerOnce: true,

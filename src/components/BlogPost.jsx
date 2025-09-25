@@ -76,13 +76,21 @@ const PostImage = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
   background-image: url(${props => props.$imageUrl});
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
+  }
 `;
 
 const PostContent = styled.div`

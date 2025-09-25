@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://bitcanvas.hu/sitemap.xml
+Sitemap: https://www.bitcanvas.hu/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

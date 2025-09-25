@@ -393,43 +393,6 @@ const Hero = () => {
       <HeroContent>
         <MobileContentWrapper>
           <TextContainer>
-            <motion.div 
-              className="floating-element element-badge"
-              style={{
-                background: 'var(--color-accent3)',
-                borderRadius: '20px',
-                padding: '8px 16px',
-                display: 'inline-block',
-                marginBottom: '1rem',
-                border: 'var(--border-thick)',
-                boxShadow: 'var(--shadow-neobrutalist)',
-                fontWeight: 'bold'
-              }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ 
-                opacity: 1, 
-                y: 0,
-                transition: { 
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1]
-                }
-              }}
-              transition={{ 
-                delay: 0.4,
-                duration: 0.8,
-                ease: "easeInOut"
-              }}
-              whileHover={{ 
-                y: -3,
-                transition: { 
-                  duration: 0.4,
-                  yoyo: Infinity,
-                  ease: "easeInOut"
-                } 
-              }}
-            >
-              {translations.hero.badge[language]}
-            </motion.div>
             
             <div ref={titleRef}>
               <Title>
