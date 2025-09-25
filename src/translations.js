@@ -43,12 +43,12 @@ const translations = {
       en: "Custom Web Solutions",
     },
     title: {
-      hu: "Professzionális Weboldal Készítés",
-      en: "Professional Website Development",
+      hu: "Fejlessze Vállalkozását",
+      en: "Elevate Your Business",
     },
     titleHighlight: {
-      hu: "Honlap Fejlesztés Szolgáltatások",
-      en: "Website Development Services",
+      hu: "Digitális Megoldásokkal",
+      en: "With Digital Innovation",
     },
     description: {
       hu: "Egyedi weboldal készítés és honlap fejlesztés szolgáltatásokkal hozzon létre hatékony online jelenlétet. Professzionális weblap készítés, amely lenyűgözi az ügyfeleit és fellendíti vállalkozását.",
