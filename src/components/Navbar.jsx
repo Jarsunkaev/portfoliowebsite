@@ -35,16 +35,21 @@ const NavContainer = styled(motion.div)`
   pointer-events: none;
   
   @media (max-width: 768px) {
-    padding: ${props => props.$isScrolled ? '8px' : '12px'} 3%;
-    /* Ensure navbar stays at top on mobile */
+    padding: 12px 3%;
+    /* Ensure navbar stays at top on mobile - disable all transforms */
     top: 0 !important;
     transform: none !important;
+    position: fixed !important;
+    /* Disable scroll-based animations on mobile */
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
   }
   
   @media (max-width: 480px) {
     padding: 8px 2%;
     top: 0 !important;
     transform: none !important;
+    position: fixed !important;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
   }
 `;
 
@@ -78,13 +83,15 @@ const Nav = styled(motion.nav)`
   pointer-events: auto;
   
   @media (max-width: 768px) {
-    padding: ${props => props.$isScrolled ? '0.6rem 1.2rem' : '0.8rem 1.5rem'};
-    height: ${props => props.$isScrolled ? '60px' : '70px'};
+    padding: 0.8rem 1.5rem;
+    height: 70px;
     border-radius: 16px;
-    /* Ensure navbar stays at top on mobile */
+    /* Ensure navbar stays at top on mobile - disable all transforms */
     position: relative;
-    top: 0;
-    transform: none;
+    top: 0 !important;
+    transform: none !important;
+    /* Disable scroll-based animations on mobile */
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
   }
   
   @media (max-width: 480px) {
@@ -92,8 +99,9 @@ const Nav = styled(motion.nav)`
     padding: 0.8rem 1.2rem;
     height: 60px;
     position: relative;
-    top: 0;
-    transform: none;
+    top: 0 !important;
+    transform: none !important;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
   }
 `;
 
@@ -403,10 +411,19 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== isScrolledState.current) {
-        setIsScrolled(isScrolled);
-        isScrolledState.current = isScrolled;
+      // Only apply scroll effects on desktop
+      if (window.innerWidth > 768) {
+        const isScrolled = window.scrollY > 10;
+        if (isScrolled !== isScrolledState.current) {
+          setIsScrolled(isScrolled);
+          isScrolledState.current = isScrolled;
+        }
+      } else {
+        // On mobile, always keep navbar in "scrolled" state for consistency
+        if (!isScrolledState.current) {
+          setIsScrolled(true);
+          isScrolledState.current = true;
+        }
       }
     };
 
@@ -426,16 +443,23 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      const progress = Math.min(scrollY / documentHeight, 1);
-      
-      setScrollProgress(progress);
-      if (scrollY > 50) {
-        setIsScrolled(true);
+      // Only apply scroll effects on desktop
+      if (window.innerWidth > 768) {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const progress = Math.min(scrollY / documentHeight, 1);
+        
+        setScrollProgress(progress);
+        if (scrollY > 50) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
       } else {
-        setIsScrolled(false);
+        // On mobile, keep progress at 0 and scrolled state true
+        setScrollProgress(0);
+        setIsScrolled(true);
       }
     };
     
