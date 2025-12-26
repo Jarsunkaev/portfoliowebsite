@@ -1,108 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#4A5D23" />
-    <meta
-      name="description"
-      content="Professzionális weboldal készítés és honlap fejlesztés szolgáltatások. Egyedi weblap készítés, e-kereskedelmi megoldások, fizetési integráció és admin platformok. Szakértő fejlesztés modern vállalkozásoknak Magyarországon."
-    />
-    <meta name="keywords" content="weboldal készítés, weblap készítés, honlap készítés, weboldal fejlesztés, honlap fejlesztés, weblap fejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés, Budapest weboldal készítés" />
-    
-    <!-- Favicon links - comprehensive set for all browsers and devices -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-    
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-    <title>BitCanvas - Weboldal Készítés & Honlap Fejlesztés</title>
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9HBWFLZQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-HY9HBWFLZQ');
-    </script>
-    
-    <!-- Prevent FOUC with initial styles -->
-    <style>
-      /* Critical CSS to prevent flash of unstyled content */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#4A5D23" />
+  <meta name="description"
+    content="Professzionális weboldal készítés és honlap fejlesztés szolgáltatások. Egyedi weblap készítés, e-kereskedelmi megoldások, fizetési integráció és admin platformok. Szakértő fejlesztés modern vállalkozásoknak Magyarországon." />
+  <meta name="keywords"
+    content="weboldal készítés, weblap készítés, honlap készítés, weboldal fejlesztés, honlap fejlesztés, weblap fejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés, Budapest weboldal készítés" />
+
+  <!-- Favicon links - comprehensive set for all browsers and devices -->
+  <!-- Favicon links - using new logo -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/logo_new.png" sizes="500x500" />
+  <link rel="apple-touch-icon" href="/logo_new.png" />
+
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+  <title>BitCanvas - Weboldal Készítés & Honlap Fejlesztés</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9HBWFLZQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-HY9HBWFLZQ');
+  </script>
+
+  <!-- Prevent FOUC with initial styles -->
+  <style>
+    /* Critical CSS to prevent flash of unstyled content */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background-color: #FEFEFE;
+      color: #2C3E2D;
+      overflow-x: hidden;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    #root {
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Show content once React has loaded */
+    #root.loaded {
+      opacity: 1;
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 3px solid #E8DCC0;
+      border-top: 3px solid #4A5D23;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 9999;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
       }
-      
-      html {
-        scroll-behavior: smooth;
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
       }
-      
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        background-color: #FEFEFE;
-        color: #2C3E2D;
-        overflow-x: hidden;
-        font-weight: 400;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      
-      #root {
-        min-height: 100vh;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-      
-      /* Show content once React has loaded */
-      #root.loaded {
-        opacity: 1;
-      }
-      
-      /* Loading spinner */
-      .loading-spinner {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        border: 3px solid #E8DCC0;
-        border-top: 3px solid #4A5D23;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        z-index: 9999;
-      }
-      
-      @keyframes spin {
-        0% { transform: translate(-50%, -50%) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg); }
-      }
-    </style>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="loading-spinner"></div>
-    <div id="root"></div>
-    
-    <script>
-      // Remove loading spinner and show content once React loads
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-          const spinner = document.querySelector('.loading-spinner');
-          const root = document.getElementById('root');
-          if (spinner) spinner.style.display = 'none';
-          if (root) root.classList.add('loaded');
-        }, 100);
-      });
-    </script>
-  </body>
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div class="loading-spinner"></div>
+  <div id="root"></div>
+
+  <script>
+    // Remove loading spinner and show content once React loads
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        const spinner = document.querySelector('.loading-spinner');
+        const root = document.getElementById('root');
+        if (spinner) spinner.style.display = 'none';
+        if (root) root.classList.add('loaded');
+      }, 100);
+    });
+  </script>
+</body>
+
 </html>
