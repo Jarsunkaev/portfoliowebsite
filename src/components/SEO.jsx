@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({ 
   title = "BitCanvas - Weboldal Készítés & Honlap Fejlesztés",
   description = "Professzionális weboldal készítés és honlap fejlesztés szolgáltatások. Egyedi weblap készítés, e-kereskedelmi megoldások, fizetési integráció és admin platformok. Szakértő fejlesztés modern vállalkozásoknak Magyarországon.",
-  keywords = "weboldal készítés, weblap készítés, honlap készítés, weboldal fejlesztés, honlap fejlesztés, weblap fejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés, Budapest weboldal készítés",
+  keywords = "weboldal készítés, weblap készítés, honlap készítés, weboldal fejlesztés, honlap fejlesztés, weblap fejlesztés, egyedi weboldalak, e-kereskedelmi megoldások, fizetési integráció, admin platformok, React fejlesztés, JavaScript, reszponzív design, SEO optimalizálás, magyar webfejlesztés, Budapest weboldal készítés, munkafolyamat automatizálás, üzleti automatizáció, workflow automation, kétnyelvű weboldal, többnyelvű honlap, nemzetközi piac",
   image = "/Bitcanvas.png",
   url = "https://www.bitcanvas.hu",
   type = "website",

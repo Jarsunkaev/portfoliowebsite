@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { ThemeContext } from './ThemeContext';
 import { useLanguage } from './LanguageContext';
 import translations from '../translations';
@@ -200,14 +200,25 @@ const Footer = () => {
           
           <SocialLinks>
             <SocialLink 
-              href="https://github.com/Jarsunkaev"
+              href="https://www.facebook.com/profile.php?id=61583781066396"
+              target="_blank"
+              rel="noopener noreferrer"
+              bg="var(--color-accent2)"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaFacebook />
+            </SocialLink>
+
+            <SocialLink 
+              href="https://www.instagram.com/bitcanvas.hu/"
               target="_blank"
               rel="noopener noreferrer"
               bg="var(--color-accent3)"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaGithub />
+              <FaInstagram />
             </SocialLink>
             
             <SocialLink 
@@ -222,7 +233,7 @@ const Footer = () => {
             </SocialLink>
             
             <SocialLink 
-              href="mailto:contact@yourdevworks.com"
+              href="mailto:jarsunkaev@gmail.com"
               bg="var(--color-accent2)"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

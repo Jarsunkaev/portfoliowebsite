@@ -417,6 +417,42 @@ const translations = {
         },
       },
     },
+    workflowAutomation: {
+      title: {
+        hu: "Munkafolyamat Automatizálás",
+        en: "Workflow Automation",
+      },
+      description: {
+        hu: "Automatizálja ismétlődő üzleti folyamatait egyedi fejlesztésű szoftverekkel, hogy időt és költséget takarítson meg, miközben csökkenti a hibalehetőségeket.",
+        en: "Automate repetitive business processes with custom-developed software to save time and costs while reducing errors.",
+      },
+      features: {
+        processAudit: {
+          hu: "Folyamat Audit és Tervezés",
+          en: "Process Audit & Planning",
+        },
+        customScripts: {
+          hu: "Egyedi Szkriptek és Botok",
+          en: "Custom Scripts & Bots",
+        },
+        apiIntegrations: {
+          hu: "API Integrációk (CRM, Számlázó)",
+          en: "API Integrations (CRM, Billing)",
+        },
+        dataSync: {
+          hu: "Automatikus Adatszinkronizáció",
+          en: "Automatic Data Sync",
+        },
+        notifications: {
+          hu: "Automatikus Értesítések és Riportok",
+          en: "Automated Notifications & Reports",
+        },
+        costReduction: {
+          hu: "Költségcsökkentés és Hatékonyság",
+          en: "Cost Reduction & Efficiency",
+        },
+      },
+    },
   },
 
   // Projects section translations (preserved)

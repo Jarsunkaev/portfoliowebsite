@@ -1,5 +1,6 @@
 // src/components/FAQ.jsx
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -280,15 +281,31 @@ const FAQ = () => {
 
   return (
     <FAQSection id="faq" ref={ref}>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqData.map(item => ({
+              "@type": "Question",
+              "name": item.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
       <FAQContainer>
         <SectionTitle>
           {translations.faq.title[language]} <span>{translations.faq.titleHighlight[language]}</span>
         </SectionTitle>
-        
+
         <SectionSubtitle>
           {translations.faq.subtitle[language]}
         </SectionSubtitle>
-        
+
         <FAQList>
           {faqData.map((item, index) => (
             <FAQItem
@@ -313,9 +330,9 @@ const FAQ = () => {
                   <FaChevronDown />
                 </Chevron>
               </QuestionButton>
-              
+
               <QuestionBorder $isOpen={openItems[index]} />
-              
+
               <AnimatePresence>
                 {openItems[index] && (
                   <AnswerContainer
@@ -332,16 +349,16 @@ const FAQ = () => {
             </FAQItem>
           ))}
         </FAQList>
-        
+
         <QuickWinSection>
           <QuickWinTitle>
             {translations.faq.quickWinTitle[language]} <span>{translations.faq.quickWinTitleHighlight[language]}</span>
           </QuickWinTitle>
-          
+
           <QuickWinSubtitle>
             {translations.faq.quickWinSubtitle[language]}
           </QuickWinSubtitle>
-          
+
           <ServicesGrid>
             {quickWinData.map((service, index) => (
               <ServiceCard

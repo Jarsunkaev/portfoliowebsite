@@ -682,13 +682,101 @@ export const blogPosts = [
       description: "Megtudhatod, hogyan használd ki a Google Cégem és egyéb harmadik féltől származó integrációk erejét a látogatottság és lead generálás növelésére.",
       keywords: "Google Cégem optimalizálás, lead generálás, harmadik féltől származó integrációk, marketing automatizálás, vállalkozás online jelenlét"
     }
+  },
+  {
+    id: 7,
+    title: "Munkafolyamat Automatizálás: Hogyan Spórolj Időt és Pénzt?",
+    slug: "munkafolyamat-automatizalas-ido-penz-sporolas",
+    excerpt: "Fedezd fel, hogyan szabadíthatod fel értékes idődet és csökkentheted költségeidet az ismétlődő feladatok automatizálásával.",
+    content: `
+      <h2>Mi az a munkafolyamat automatizálás?</h2>
+      <p>A munkafolyamat automatizálás (workflow automation) olyan technológia, amely szabályok és logika alapján végzi el azokat a feladatokat, amelyeket korábban emberek végeztek manuálisan. Gondolj csak az automatikus számlázásra, az email válaszokra vagy az adatok szinkronizálására két rendszer között.</p>
+      
+      <h2>Miért éri meg befektetni?</h2>
+      <p>Sok vállalkozó attól tart, hogy az automatizálás bonyolult és drága. Valójában azonban ez az egyik leggyorsabban megtérülő befektetés.</p>
+      <ul>
+        <li><strong>Időmegtakarítás:</strong> A repetitív feladatok (pl. adatbevitel) alól felszabaduló kollégák értékesebb munkát végezhetnek.</li>
+        <li><strong>Hibák csökkentése:</strong> A szoftverek nem fáradnak el és nem gépelik el az adatokat.</li>
+        <li><strong>Gyorsabb kiszolgálás:</strong> Az ügyfelek azonnali válaszokat és visszaigazolásokat kapnak.</li>
+      </ul>
+
+      <h2>Gyakorlati példák</h2>
+      <p>Íme néhány terület, ahol azonnali eredményeket érhetsz el:</p>
+      
+      <h3>1. Értékesítés és CRM</h3>
+      <p>Amikor egy érdeklődő kitölti a weboldalad űrlapját, az adatok automatikusan bekerülhetnek a CRM rendszeredbe, és a rendszer azonnal küldhet egy üdvözlő emailt, sőt, értesítheti az értékesítőt is.</p>
+
+      <h3>2. Pénzügyek</h3>
+      <p>Összekötheted a webshopodat a számlázóprogramoddal (pl. Számlázz.hu, Billingo), így a számlák emberi beavatkozás nélkül készülnek el és kerülnek kiküldésre.</p>
+
+      <h2>Hogyan kezdj hozzá?</h2>
+      <p>Nem kell mindent egyszerre automatizálni. Érdemes egy folyamat audittal kezdeni: írd össze azokat a feladatokat, amelyek sok időt visznek el és mechanikusak. Mi segítünk megtalálni ezekre a legköltséghatékonyabb megoldást, legyen szó egyedi szkriptekről vagy kész szoftverek integrációjáról.</p>
+    `,
+    author: "BitCanvas",
+    publishedAt: "2025-01-28",
+    updatedAt: "2025-01-28",
+    readTime: "5 perc olvasás",
+    category: "Üzleti Megoldások",
+    tags: ["Automatizálás", "Hatékonyság", "Költségcsökkentés", "Workflow"],
+    featured: false,
+    image: "/construction1.png",
+    seo: {
+      title: "Munkafolyamat Automatizálás: Spórolj Időt és Pénzt | BitCanvas",
+      description: "Ismerd meg, hogyan növelheted vállalkozásod hatékonyságát automatizált munkafolyamatokkal. Kevesebb hiba, több profit.",
+      keywords: "munkafolyamat automatizálás, workflow automation, üzleti folyamatok, automatizáció"
+    }
+  },
+  {
+    id: 8,
+    title: "Kétnyelvű Weboldalak: Miért Éri Meg a Befektetést?",
+    slug: "ketnyelvu-weboldal-elonyok-es-megterules",
+    excerpt: "Szeretnél külföldi piacokra lépni? Egy kétnyelvű weboldal az első és legfontosabb lépés a nemzetközi növekedés felé.",
+    content: `
+      <h2>Miért korlátoznád magad egyetlen piacra?</h2>
+      <p>Magyarország egy kis piac. Ha a terméked vagy szolgáltatásod nemzetközileg is értelmezhető, hatalmas lehetőségektől esel el, ha a weboldalad csak magyarul érhető el. Az angol nyelvű tartalommal gyakorlatilag az egész világot megcélozhatod.</p>
+
+      <h2>A kétnyelvűség előnyei</h2>
+      
+      <h3>1. Bizalom és professzionalizmus</h3>
+      <p>Egy többnyelvű weboldal azonnal azt sugallja, hogy a vállalkozásod komoly, nemzetközi színvonalat képvisel. Ez még a hazai ügyfelek szemében is növeli a bizalmat.</p>
+
+      <h3>2. SEO előnyök</h3>
+      <p>Ha az oldalad tartalma több nyelven is elérhető, akkor a Google több nyelven is indexeli azt. Ez azt jelenti, hogy kétszer annyi keresési kifejezésre jelenhetsz meg a találatok között.</p>
+
+      <h3>3. Versenyelőny</h3>
+      <p>Sok hazai kkv még mindig csak magyar nyelvű oldallal rendelkezik. Ha te angolul (vagy németül, stb.) is kommunikálsz, azzal azonnal versenyelőnybe kerülsz.</p>
+
+      <h2>Mire figyelj a fejlesztéskor?</h2>
+      <p>A kétnyelvűsítés nem csak fordítást jelent. Fontos a technikai megvalósítás is:</p>
+      <ul>
+        <li><strong>Hreflang címkék:</strong> Ezek jelzik a Google-nek, hogy melyik tartalom milyen nyelven van.</li>
+        <li><strong>URL struktúra:</strong> Tiszta, logikus felépítés (pl. bitcanvas.hu/en).</li>
+        <li><strong>Nyelvválasztó:</strong> Jól látható és könnyen használható legyen.</li>
+      </ul>
+
+      <h2>Összegzés</h2>
+      <p>A weboldalad kétnyelvűsítése egyszeri fejlesztési költség, amely hosszú távon folyamatosan hozza az új lehetőségeket. Ha növekedni szeretnél, ez az egyik legjobb befektetés.</p>
+    `,
+    author: "BitCanvas",
+    publishedAt: "2025-01-29",
+    updatedAt: "2025-01-29",
+    readTime: "4 perc olvasás",
+    category: "Webfejlesztés",
+    tags: ["Kétnyelvű Weboldal", "Nemzetközi Piac", "Export", "Növekedés"],
+    featured: false,
+    image: "/bilingual.jpg",
+    seo: {
+      title: "Kétnyelvű Weboldalak Előnyei és Megtérülése | BitCanvas",
+      description: "Miért érdemes többnyelvű weboldalt készíteni? Hogyan segíti ez a nemzetközi terjeszkedést és a hitelesség növelését?",
+      keywords: "kétnyelvű weboldal, többnyelvű honlap, angol weboldal, nemzetközi piac"
+    }
   }
 ];
 
 export const categories = [
-  { name: "Webfejlesztés", slug: "webfejlesztes", count: 2 },
+  { name: "Webfejlesztés", slug: "webfejlesztes", count: 3 },
   { name: "SEO", slug: "seo", count: 1 },
-  { name: "Üzleti Megoldások", slug: "uzleti-megoldasok", count: 2 },
+  { name: "Üzleti Megoldások", slug: "uzleti-megoldasok", count: 3 },
   { name: "Marketing", slug: "marketing", count: 1 },
   { name: "Technológia", slug: "technologia", count: 0 },
   { name: "E-kereskedelmi Megoldások", slug: "e-kereskedelmi-megoldasok", count: 0 }

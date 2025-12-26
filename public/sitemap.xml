@@ -74,6 +74,20 @@
     <priority>0.7</priority>
   </url>
   
+  <url>
+    <loc>https://www.bitcanvas.hu/blog/munkafolyamat-automatizalas-ido-penz-sporolas</loc>
+    <lastmod>2025-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bitcanvas.hu/blog/ketnyelvu-weboldal-elonyok-es-megterules</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Service Pages (anchor links) -->
   <url>
     <loc>https://www.bitcanvas.hu/#services</loc>

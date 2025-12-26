@@ -13,7 +13,9 @@ import {
   FaCog,
   FaCheck,
   FaCreditCard,
-  FaUserCog
+  FaUserCog,
+  FaRobot,
+  FaGlobe
 } from 'react-icons/fa';
 
 // Enhanced styling for a more modern and sleek layout
@@ -98,8 +100,8 @@ const ServicesGrid = styled(motion.div)`
 
 // Modern, sleek service card - less card-like, more content-focused
 const ServiceCard = styled(motion.div)`
-  background: ${props => props.theme === 'dark' 
-    ? 'var(--color-neutral)' 
+  background: ${props => props.theme === 'dark'
+    ? 'var(--color-neutral)'
     : 'var(--color-bg)'};
   border-radius: var(--border-radius-lg);
   overflow: hidden;
@@ -163,8 +165,8 @@ const CardHeader = styled.div`
 const ServiceIcon = styled.div`
   font-size: 1.5rem;
   color: var(--color-accent1);
-  background: ${props => props.theme === 'dark' 
-    ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.05) 100%)' 
+  background: ${props => props.theme === 'dark'
+    ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.05) 100%)'
     : 'linear-gradient(135deg, rgba(113, 126, 195, 0.1) 0%, rgba(113, 126, 195, 0.03) 100%)'};
   width: 3rem;
   height: 3rem;
@@ -178,9 +180,9 @@ const ServiceIcon = styled.div`
   
   ${ServiceCard}:hover & {
     transform: scale(1.05);
-    background: ${props => props.theme === 'dark' 
-      ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.25) 0%, rgba(130, 144, 217, 0.1) 100%)' 
-      : 'linear-gradient(135deg, rgba(113, 126, 195, 0.15) 0%, rgba(113, 126, 195, 0.05) 100%)'};
+    background: ${props => props.theme === 'dark'
+    ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.25) 0%, rgba(130, 144, 217, 0.1) 100%)'
+    : 'linear-gradient(135deg, rgba(113, 126, 195, 0.15) 0%, rgba(113, 126, 195, 0.05) 100%)'};
   }
   
   @media (max-width: 768px) {
@@ -251,9 +253,9 @@ const Feature = styled.li`
   }
   
   &:hover {
-    background: ${props => props.theme === 'dark' 
-      ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.08) 100%)' 
-      : 'linear-gradient(135deg, rgba(113, 126, 195, 0.1) 0%, rgba(113, 126, 195, 0.05) 100%)'};
+    background: ${props => props.theme === 'dark'
+    ? 'linear-gradient(135deg, rgba(130, 144, 217, 0.15) 0%, rgba(130, 144, 217, 0.08) 100%)'
+    : 'linear-gradient(135deg, rgba(113, 126, 195, 0.1) 0%, rgba(113, 126, 195, 0.05) 100%)'};
     transform: translateY(-2px);
     border-color: var(--color-accent1);
     
@@ -294,7 +296,14 @@ const servicesData = [
     id: 6, icon: <FaCalendarAlt />, titleKey: 'bookingSystems.title', descriptionKey: 'bookingSystems.description', categories: ['apps', 'websites'],
     features: ['bookingSystems.features.realTimeAvailability', 'bookingSystems.features.onlinePayments', 'bookingSystems.features.automatedReminders', 'bookingSystems.features.calendarSync', 'bookingSystems.features.customizableForms', 'bookingSystems.features.groupBookings']
   },
-
+  {
+    id: 7, icon: <FaRobot />, titleKey: 'workflowAutomation.title', descriptionKey: 'workflowAutomation.description', categories: ['apps', 'websites', 'business'],
+    features: ['workflowAutomation.features.processAudit', 'workflowAutomation.features.customScripts', 'workflowAutomation.features.apiIntegrations', 'workflowAutomation.features.dataSync', 'workflowAutomation.features.notifications', 'workflowAutomation.features.costReduction']
+  },
+  {
+    id: 8, icon: <FaGlobe />, titleKey: 'multilingualSites.title', descriptionKey: 'multilingualSites.description', categories: ['websites', 'business'],
+    features: ['multilingualSites.features.contentTranslation', 'multilingualSites.features.languageSwitcher', 'multilingualSites.features.localizedSEO', 'multilingualSites.features.rtlSupport', 'multilingualSites.features.regionalFormatting', 'multilingualSites.features.easyManagement']
+  },
 ];
 
 const getTranslation = (path, language, translationsData) => {
@@ -303,9 +312,9 @@ const getTranslation = (path, language, translationsData) => {
     let result = translationsData;
     for (const key of keys) {
       result = result[key];
-      if (result === undefined) { return keys[keys.length -1]; }
+      if (result === undefined) { return keys[keys.length - 1]; }
     }
-    return result[language] || result['en'] || keys[keys.length -1];
+    return result[language] || result['en'] || keys[keys.length - 1];
   } catch (error) {
     console.error(`Translation error for path ${path}:`, error);
     const keys = path.split('.');
@@ -339,13 +348,13 @@ const cardItemVariants = {
 };
 
 const ServiceCardComponent = ({ service, theme, language }) => {
-  // Skip rendering the multilingual website service
-  if (service.titleKey === 'multilingualWebsites.title') {
+  // Skip rendering if service is null (safety check)
+  if (!service) {
     return null;
   }
-  
+
   return (
-    <ServiceCard 
+    <ServiceCard
       theme={theme}
       variants={cardItemVariants}
       initial="initial"
@@ -382,20 +391,21 @@ const ServiceCardComponent = ({ service, theme, language }) => {
 const Services = () => {
   const { theme } = useContext(ThemeContext);
   const { language } = useLanguage();
-  
+
   const { ref: sectionRef, inView: sectionInView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
-  // Remove the multilingual websites service
-  const filteredServices = servicesData.filter(service => service.titleKey !== 'multilingualWebsites.title');
-  
+
+
+  // Use all services
+  const filteredServices = servicesData;
+
   const titleVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } },
   };
-  
+
   return (
     <ServicesSection id="services" ref={sectionRef}>
       <ServicesContainer>
@@ -404,7 +414,7 @@ const Services = () => {
             {language === 'hu' ? 'Szolgáltatások' : 'Services'}
           </SectionTitle>
         </motion.div>
-        
+
         <ServicesGrid
           variants={servicesGridVariants}
           initial="initial"
@@ -412,7 +422,7 @@ const Services = () => {
         >
           <AnimatePresence mode="wait">
             {filteredServices.map(service => (
-              <ServiceCardComponent 
+              <ServiceCardComponent
                 key={service.id}
                 service={service}
                 theme={theme}
