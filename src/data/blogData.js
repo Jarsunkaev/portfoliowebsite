@@ -228,8 +228,8 @@ export const blogPosts = [
       
       <h2>2025-ös trendek, amik befolyásolhatják az árakat</h2>
       
-      <h3>Mesterséges intelligencia integráció</h3>
-      <p>AI-alapú chatbottok és személyre szabott tartalom növelheti a fejlesztési költségeket, de jelentősen javíthatja a felhasználói élményt.</p>
+      <h3>Intelligens technológiák integrációja</h3>
+      <p>Smart megoldások, chatbottok és személyre szabott tartalom növelheti a fejlesztési költségeket, de jelentősen javíthatja a felhasználói élményt.</p>
       
       <h3>Progressive Web App (PWA) funkciók</h3>
       <p>Mobilalkalmazás-szerű élmény weboldalon belül, ami növelheti a fejlesztési költségeket, de jelentősen javíthatja a felhasználói engagementet.</p>

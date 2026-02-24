@@ -260,13 +260,15 @@ const ProjectImage = styled.div`
   border-radius: 16px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
+  background: var(--color-neutral);
   
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: ${props => props.$fit || 'cover'};
     border-radius: 16px;
     display: block;
+    background: var(--color-neutral);
   }
   
   &::after {
@@ -294,7 +296,7 @@ const ProjectImage = styled.div`
 const CategoryTag = styled.div`
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
   background: rgba(255, 255, 255, 0.95);
   color: #000;
   padding: 0.7rem 1.4rem;
@@ -320,18 +322,15 @@ const CategoryTag = styled.div`
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   }
   
-  ${ProjectRow}:nth-child(even) & {
-    left: auto;
-    right: 20px;
-  }
+
   
   @media (max-width: 992px) {
-    left: 20px;
-    right: auto;
+    right: 20px;
+    left: auto;
     
     ${ProjectRow}:nth-child(even) & {
-      left: 20px;
-      right: auto;
+      right: 20px;
+      left: auto;
     }
   }
   
@@ -503,7 +502,8 @@ const projectsData = [
     },
     technologies: ["Svelte", "Node.js", "Express", "i18n", "GSAP"],
     features: ["Custom Design", "Responsive Interface", "Contact Form", "SEO Optimization"],
-    demoUrl: "https://buviptur.com"
+    demoUrl: "https://buviptur.com",
+    fit: "cover"
   },
   {
     id: 2,
@@ -532,36 +532,38 @@ const projectsData = [
     },
     technologies: ["Svelte", "Node.js", "Google Sheets", "i18n", "Google Calendar"],
     features: ["Real-time Booking", "Service Management", "Customer Dashboard", "Admin Panel"],
-    demoUrl: "https://zima-auto.com"
+    demoUrl: "https://zima-auto.com",
+    fit: "cover"
   },
   {
     id: 3,
     title: {
-      en: "Frigo Recipe Generator",
-      hu: "Frigo Receptgenerátor"
+      en: "Frigo Smart Kitchen Assistant",
+      hu: "Frigo Okos Konyhai Asszisztens"
     },
     description: {
-      en: "Innovative web application that generates personalized recipes based on available ingredients, helping users reduce food waste and discover new dishes.",
-      hu: "Innovatív webalkalmazás, amely személyre szabott recepteket generál a rendelkezésre álló hozzávalók alapján, segítve a felhasználókat az élelmiszer-pazarlás csökkentésében és új ételek felfedezésében."
+      en: "Smart mobile application designed to minimize food waste and simplify meal planning using advanced computer vision to identify ingredients and match them with over 10,000 verified recipes.",
+      hu: "Intelligens mobilalkalmazás, amelyet az élelmiszerpazarlás minimalizálására és az étkezések tervezésének egyszerűsítésére fejlesztettek, fejlett számítógépes látással azonosítva az alapanyagokat."
     },
     image: `${process.env.PUBLIC_URL}/frigo.png`,
     category: "webapp",
     icon: <FaUtensils />,
     categoryName: {
-      en: "Web Application",
-      hu: "Webalkalmazás"
+      en: "Mobile Application",
+      hu: "Mobilalkalmazás"
     },
     problem: {
-      en: "Helping users decide what to cook with ingredients they already have at home, reducing food waste and inspiring culinary creativity.",
-      hu: "Segítség a felhasználóknak abban, hogy mit főzzenek az otthon már meglévő hozzávalókból, csökkentve az élelmiszer-pazarlást és inspirálva a konyhai kreativitást."
+      en: "Reducing household food waste and solving the daily 'what to cook' dilemma while helping users save time and money on groceries.",
+      hu: "A háztartási élelmiszerpazarlás csökkentése és a napi 'mit főzzek' dilemma megoldása, miközben időt és pénzt takarít meg a felhasználóknak."
     },
     solution: {
-      en: "Created an intelligent recipe suggestion system that matches available ingredients with possible recipes and offers premium subscription options.",
-      hu: "Intelligens receptajánló rendszer létrehozása, amely összehangolja a rendelkezésre álló hozzávalókat a lehetséges receptekkel, és prémium előfizetési lehetőségeket kínál."
+      en: "Developed an intelligent ecosystem with smart vision technology, automated shopping lists, and detailed nutrition tracking to empower sustainable and healthy cooking habits.",
+      hu: "Intelligens ökoszisztéma fejlesztése Smart Vision technológiával, automatizált bevásárlólistákkal és részletes tápanyagkövetéssel a fenntartható főzési szokásokért."
     },
-    technologies: ["Next.js", "Firebase", "Stripe", "Recipe API", "Auth0"],
-    features: ["Ingredient Scanning", "Recipe Filtering", "Favorites Collection", "Premium Subscription"],
-    demoUrl: "https://frigo-app.com"
+    technologies: ["React Native", "Swift", "Expo", "TypeScript"],
+    features: ["Smart Vision Technology", "Recipe Matching", "Nutrition Tracking", "Smart Shopping List"],
+    demoUrl: "https://frigo-app.com",
+    fit: "contain"
   }
 ];
 
@@ -570,7 +572,7 @@ const categories = [
   { id: "all", icon: <FaGlobe />, name: { en: "All Projects", hu: "Összes Projekt" } },
   { id: "tourism", icon: <FaPlane />, name: { en: "Tourism", hu: "Turizmus" } },
   { id: "automotive", icon: <FaCar />, name: { en: "Automotive", hu: "Autós" } },
-  { id: "webapp", icon: <FaCodeBranch />, name: { en: "Web Applications", hu: "Webalkalmazások" } }
+  { id: "webapp", icon: <FaCodeBranch />, name: { en: "Mobile Applications", hu: "Mobilalkalmazások" } }
 ];
 
 const Projects = () => {
@@ -582,25 +584,25 @@ const Projects = () => {
     triggerOnce: true,
     threshold: 0.1
   });
-  
+
   // Filter projects based on selected category
-  const filteredProjects = filter === "all" 
-    ? projectsData 
+  const filteredProjects = filter === "all"
+    ? projectsData
     : projectsData.filter(project => project.category === filter);
-  
+
   // Mobile swipe handlers
   const handleSwipeLeft = () => {
     if (currentMobileIndex < filteredProjects.length - 1) {
       setCurrentMobileIndex(currentMobileIndex + 1);
     }
   };
-  
+
   const handleSwipeRight = () => {
     if (currentMobileIndex > 0) {
       setCurrentMobileIndex(currentMobileIndex - 1);
     }
   };
-  
+
   const swipeHandlers = useSwipeable({
     onSwipedLeft: handleSwipeLeft,
     onSwipedRight: handleSwipeRight,
@@ -608,12 +610,12 @@ const Projects = () => {
     trackTouch: true,
     preventScrollOnSwipe: true,
   });
-  
+
   // Reset mobile index when filter changes
   React.useEffect(() => {
     setCurrentMobileIndex(0);
   }, [filter]);
-  
+
   return (
     <ProjectsSection id="projects" ref={ref}>
       <ProjectsContainer>
@@ -623,7 +625,7 @@ const Projects = () => {
         <SectionSubtitle>
           {translations.projects.subtitle[language]}
         </SectionSubtitle>
-        
+
         <FilterContainer>
           {categories.map(category => (
             <FilterButton
@@ -635,7 +637,7 @@ const Projects = () => {
             </FilterButton>
           ))}
         </FilterContainer>
-        
+
         {/* Desktop Layout */}
         <ProjectsWrapper className="desktop-projects">
           {filteredProjects.map((project, index) => (
@@ -650,24 +652,24 @@ const Projects = () => {
                 <CategoryTag>
                   {project.icon} {project.categoryName[language]}
                 </CategoryTag>
-                <ProjectImage>
+                <ProjectImage $fit={project.fit}>
                   <img src={project.image} alt={project.title[language]} />
                 </ProjectImage>
               </ProjectImageContainer>
-              
+
               <ProjectContent>
                 <ProjectTitle>{project.title[language]}</ProjectTitle>
                 <ProjectDescription>{project.description[language]}</ProjectDescription>
-                
+
                 <ProjectChallenge theme={theme}>
                   <h4><FaCalendarAlt /> {translations.projects.challengeSolutionTitle[language]}</h4>
                   <p><strong>{translations.projects.problemLabel[language]}:</strong> {project.problem[language]}</p>
                   <p><strong>{translations.projects.solutionLabel[language]}:</strong> {project.solution[language]}</p>
                 </ProjectChallenge>
-                
+
                 <TechnologiesList>
                   {project.technologies.map((tech, index) => (
-                    <Technology 
+                    <Technology
                       key={index}
                       color={index % 3 === 0 ? 'accent1' : index % 3 === 1 ? 'accent2' : 'accent3'}
                     >
@@ -675,10 +677,10 @@ const Projects = () => {
                     </Technology>
                   ))}
                 </TechnologiesList>
-                
-                <ViewButton 
-                  href={project.demoUrl} 
-                  target="_blank" 
+
+                <ViewButton
+                  href={project.demoUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
@@ -689,15 +691,15 @@ const Projects = () => {
             </ProjectRow>
           ))}
         </ProjectsWrapper>
-        
+
         {/* Mobile Swipe Layout */}
         <MobileSwipeContainer {...swipeHandlers}>
-          <MobileProjectsSlider 
+          <MobileProjectsSlider
             $currentIndex={currentMobileIndex}
             $totalProjects={filteredProjects.length}
           >
             {filteredProjects.map((project, index) => (
-              <MobileProjectSlide 
+              <MobileProjectSlide
                 key={project.id}
                 $totalProjects={filteredProjects.length}
               >
@@ -706,24 +708,24 @@ const Projects = () => {
                     <CategoryTag>
                       {project.icon} {project.categoryName[language]}
                     </CategoryTag>
-                    <ProjectImage>
+                    <ProjectImage $fit={project.fit}>
                       <img src={project.image} alt={project.title[language]} />
                     </ProjectImage>
                   </ProjectImageContainer>
-                  
+
                   <ProjectContent>
                     <ProjectTitle>{project.title[language]}</ProjectTitle>
                     <ProjectDescription>{project.description[language]}</ProjectDescription>
-                    
+
                     <ProjectChallenge theme={theme}>
                       <h4><FaCalendarAlt /> {translations.projects.challengeSolutionTitle[language]}</h4>
                       <p><strong>{translations.projects.problemLabel[language]}:</strong> {project.problem[language]}</p>
                       <p><strong>{translations.projects.solutionLabel[language]}:</strong> {project.solution[language]}</p>
                     </ProjectChallenge>
-                    
+
                     <TechnologiesList>
                       {project.technologies.map((tech, index) => (
-                        <Technology 
+                        <Technology
                           key={index}
                           color={index % 3 === 0 ? 'accent1' : index % 3 === 1 ? 'accent2' : 'accent3'}
                         >
@@ -731,10 +733,10 @@ const Projects = () => {
                         </Technology>
                       ))}
                     </TechnologiesList>
-                    
-                    <ViewButton 
-                      href={project.demoUrl} 
-                      target="_blank" 
+
+                    <ViewButton
+                      href={project.demoUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
@@ -746,15 +748,15 @@ const Projects = () => {
               </MobileProjectSlide>
             ))}
           </MobileProjectsSlider>
-          
+
           <MobileNavigation>
-            <MobileNavButton 
+            <MobileNavButton
               onClick={handleSwipeRight}
               disabled={currentMobileIndex === 0}
             >
               <FaChevronLeft />
             </MobileNavButton>
-            
+
             <MobileDots>
               {filteredProjects.map((_, index) => (
                 <MobileDot
@@ -764,8 +766,8 @@ const Projects = () => {
                 />
               ))}
             </MobileDots>
-            
-            <MobileNavButton 
+
+            <MobileNavButton
               onClick={handleSwipeLeft}
               disabled={currentMobileIndex === filteredProjects.length - 1}
             >
